@@ -1,0 +1,64 @@
+<!-- nav -->
+<nav class="fixed top-0 z-50 w-full border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700 sidebar-container">
+    <div class="flex flex-row h-16 justify-between">
+        <div class="flex items-center md:border-r-[1px] border-gray-200 md:w-[350px]">
+            <div class="flex-grow">
+                <a routerLink="/dashboard/home">
+                    <ng-icon name="ionHomeOutline" size="20" class="text-white mx-[12px] md:ml-3 h-full"></ng-icon>
+                </a>
+            </div>
+            <div class="flex items-center border-x md:border-x-0 border-gray-400 h-full">
+                <ng-icon name="ionSettingsOutline" size="20"
+                    class="text-white mx-[12px] md:mx-0 h-full md:mr-3"></ng-icon>
+            </div>
+            <button (click)="toggleSidebarMobile()" *ngIf="isSmallScreen">
+                <ng-icon name="ionReorderThreeOutline" size="20" class="text-white mx-[12px] md:hidden block"></ng-icon>
+            </button>
+        </div>
+        <div class="md:mr-3 md:mx-0 mx-[12px] h-full flex items-center">
+                
+        </div>
+    </div>
+</nav>
+
+<!-- side bar -->
+<aside id="logo-sidebar"
+    class="fixed top-0 left-0 z-40 md:w-[350px] pt-16 h-screen w-full transition-transform shadow-xl bg-white border-r border-gray-200"
+    [ngClass]="{'translate-y-0' : isSidebarMobileOpen, '-translate-x-full': !isSidebarMobileOpen && isSmallScreen}"
+    aria-label="Sidebar">
+    <div class="h-full overflow-y-auto bg-white">
+        <a routerLink="/dashboard/home" routerLinkActive="active">
+            <div class="md:px-0 py-[12px] menu-container flex items-center">
+                <ng-icon name="ionHomeOutline" size="20" class="text-black mx-[12px] md:ml-3 h-full"></ng-icon>
+                <span>Boards</span>
+            </div>
+        </a>
+        <div class="md:px-0 py-[12px]">
+            <span class="font-bold mx-[12px]">Workspace views</span>
+        </div>
+        <a routerLink="/dashboard/calendar" routerLinkActive="active">
+            <div class="md:px-0 py-[12px] menu-container flex items-center ">
+                <ng-icon name="ionCalendarClearOutline" size="20" class="text-black mx-[12px] md:ml-3 h-full"></ng-icon>
+                <span>Calendar</span>
+            </div>
+        </a>
+        <div class="md:px-0 py-[12px] flex justify-between">
+            <span class="font-bold mx-[12px]">Your boards</span>
+            <ng-icon name="ionAddOutline" size="20" class="text-black mx-[12px] md:mr-3 h-full"></ng-icon>
+        </div>
+        <a routerLink="/dashboard/board" routerLinkActive="active">
+            <div class="md:px-0 py-[12px] menu-container flex items-center ">
+                <div class="board-img mx-[12px] md:ml-3" style="background-image: url(assets/images/board/icon_1.jpg);">
+                </div>
+                <span>Gta 5 car</span>
+            </div>
+        </a>
+    </div>
+</aside>
+
+<!-- content -->
+<div class=" sm:ml-96 md:ml-[21rem]">
+    <div class="mt-14">
+        <router-outlet></router-outlet>
+    </div>
+</div>
