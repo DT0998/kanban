@@ -6,11 +6,17 @@ import { ionAddOutline, ionCloseOutline } from '@ng-icons/ionicons';
 import { BoardService } from '../../services/board/board.service';
 import { Card } from '../../models/card.model';
 import { List } from '../../models/list.model';
+import {
+  CdkDragDrop,
+  DragDropModule,
+  moveItemInArray,
+  transferArrayItem,
+} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-card',
   standalone: true,
-  imports: [NgIconComponent, FormsModule, CommonModule],
+  imports: [NgIconComponent, FormsModule, CommonModule, DragDropModule],
   providers: [
     provideIcons({
       ionAddOutline,
@@ -27,7 +33,7 @@ export class CardComponent {
   constructor(public boardService: BoardService) {
     this.cardTitle = '';
   }
-  
+
   getNextCardId(): number {
     // Find the maximum ID in the existing cards of the current list item
     const maxId = this.listItem.cards.reduce(
@@ -43,10 +49,8 @@ export class CardComponent {
       id: this.getNextCardId(), // Generate ID for the new card
       title: this.cardTitle,
     };
-
     this.listItem.cards.push(newCard);
     this.cardTitle = '';
-    console.log(this.listItem.cards);
   }
 
   updateCard() {
@@ -70,6 +74,30 @@ export class CardComponent {
       this.boardService.handleCloseCard();
     } else {
       this.boardService.handleOpenCard(index);
+    }
+  }
+
+  // Drag and Drop card item
+  drop(event: CdkDragDrop<Card[]>) {
+    console.log('event.container', event.container);
+    console.log('event.previousContainer', event.previousContainer);
+    if (event.previousContainer === event.container) {
+      console.log('Card moved within the same list');
+      // move same list
+      moveItemInArray(
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
+    } else {
+      // move different list
+      console.log('Card moved to a different list');
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
     }
   }
 }

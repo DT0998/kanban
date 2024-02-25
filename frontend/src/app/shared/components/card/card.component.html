@@ -1,10 +1,11 @@
-<ng-container *ngFor="let cardItem of listItem.cards; let i = index">
-    <div class="flex flex-row mt-[10px]">
+<ol id="{{listIndex}}" cdkDropList [cdkDropListData]="listItem.cards" (cdkDropListDropped)="drop($event)"
+    cdkDropListOrientation="vertical" #childList="cdkDropList">
+    <li class="flex flex-row mt-[10px]" *ngFor="let cardItem of listItem.cards;" cdkDrag [cdkDragData]="cardItem.title">
         <input
             class="font-bold bg-transparent px-[12px] py-[6px] w-full text-black outline-2 border-2 rounded-lg shadow-sm bg-white"
             placeholder="Enter card title..." type="text" [(ngModel)]="cardItem.title" />
-    </div>
-</ng-container>
+    </li>
+</ol>
 
 <div class="flex items-center mt-[10px] flex-col" *ngIf="boardService.openCardIndex === listIndex">
     <textarea

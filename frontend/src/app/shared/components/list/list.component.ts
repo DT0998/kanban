@@ -7,11 +7,18 @@ import { List } from '../../models/list.model';
 import { BoardService } from '../../services/board/board.service';
 import { HttpClient } from '@angular/common/http';
 import { CardComponent } from '../card/card.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-list',
   standalone: true,
-  imports: [NgIconComponent, FormsModule, CommonModule, CardComponent],
+  imports: [
+    NgIconComponent,
+    FormsModule,
+    CommonModule,
+    CardComponent,
+    DragDropModule,
+  ],
   providers: [
     provideIcons({
       ionAddOutline,
@@ -24,8 +31,7 @@ import { CardComponent } from '../card/card.component';
 export class ListComponent {
   public listTitle: string;
   public isFirstListInit = true;
-  public list: List[] = [];
-
+  public lists: List[] = [];
   public openCard = false;
   constructor(public boardService: BoardService, private http: HttpClient) {
     this.listTitle = '';
@@ -33,7 +39,7 @@ export class ListComponent {
 
   getNextId(): number {
     // Find the maximum ID in the existing list
-    const maxId = this.list.reduce(
+    const maxId = this.lists.reduce(
       (max, list) => (list.id > max ? list.id : max),
       0
     );
@@ -48,12 +54,13 @@ export class ListComponent {
       title: this.listTitle,
       cards: [],
     };
-    this.list.push(newList);
+    this.lists.push(newList);
     this.listTitle = '';
     this.boardService.handleCloseOverlayAndIcon();
-    if (this.list.length > 0) {
+    if (this.lists.length > 0) {
       this.isFirstListInit = false;
     }
+    console.log(this.lists);
   }
 
   updateList() {
@@ -72,8 +79,6 @@ export class ListComponent {
       this.boardService.handleOpenList();
     }
   }
-
- 
 
   handleCloseOverlayAndIcon(event: Event) {
     event.stopPropagation();
