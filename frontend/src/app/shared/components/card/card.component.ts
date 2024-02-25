@@ -79,10 +79,7 @@ export class CardComponent {
 
   // Drag and Drop card item
   drop(event: CdkDragDrop<Card[]>) {
-    console.log('event.container', event.container);
-    console.log('event.previousContainer', event.previousContainer);
     if (event.previousContainer === event.container) {
-      console.log('Card moved within the same list');
       // move same list
       moveItemInArray(
         event.container.data,
@@ -91,7 +88,6 @@ export class CardComponent {
       );
     } else {
       // move different list
-      console.log('Card moved to a different list');
       transferArrayItem(
         event.previousContainer.data,
         event.container.data,
