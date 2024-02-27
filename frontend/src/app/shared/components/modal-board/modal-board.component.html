@@ -1,0 +1,41 @@
+<div class="p-[12px]">
+    <!-- premium banner -->
+    <div class="relative p-[6px]">
+        <h2 class="text-center font-bold">Create board</h2>
+        <button class="flex absolute top-0 right-0 z-1 p-[6px]" (click)="closeModal()">
+            <ng-icon name="ionCloseOutline" size="20" class="text-black md:hidden block"></ng-icon>
+        </button>
+    </div>
+    <!-- screen preview -->
+    <div class="flex justify-center">
+        <div class="bg-black rounded w-[200px] h-[120px] bg-cover bg-center flex items-center justify-center">
+            <img src="../../../../assets/images/board/screen-mini.svg" alt="screen mini" />
+        </div>
+    </div>
+    <!-- background picker -->
+    <div>
+        <div class="mt-[12px]">
+            <label class="font-bold">Background</label>
+        </div>
+        <div>
+            <ul>
+                <li></li>
+            </ul>
+        </div>
+    </div>
+    <!-- board title -->
+    <form>
+        <div>
+            <label>Board title*</label>
+            <input
+                class="font-bold bg-transparent px-[12px] py-[6px] w-full text-black outline-none border-2 rounded-lg shadow-sm bg-white"
+                placeholder="Enter card title..." type="text" />
+        </div>
+        <span>Board title is required</span>
+        <button class="bg-blue-600 text-white px-[12px] py-[6px] rounded w-full mt-[16px]" disabled
+            type="submit">Create</button>
+    </form>
+    <div>
+        By using images from Unsplash, you agree to their license and Terms of Service
+    </div>
+</div>

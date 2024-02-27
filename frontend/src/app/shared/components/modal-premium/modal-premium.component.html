@@ -1,0 +1,32 @@
+<div class="p-[8px]">
+    <!-- premium banner -->
+    <div class="relative">
+        <img src="../../../../assets/images/modal/modal-bg.svg" alt="modal bg" />
+        <button class="absolute top-0 right-0 bg-gray-200 p-[6px] flex rounded-full z-1" (click)="closeModal()">
+            <ng-icon name="ionCloseOutline" size="20" class="text-black md:hidden block"></ng-icon>
+        </button>
+    </div>
+    <div class="flex flex-col items-center p-[25px] gap-4">
+        <!-- modal header -->
+        <div class="flex flex-col items-center">
+            <h3 class="font-bold">
+                Try Trello Premium for 1 month
+            </h3>
+            <p>Explore the best of Trello.</p>
+        </div>
+        <!-- modal body -->
+        <div>
+            <ul class="!list-disc">
+                <li>Unlimited boards</li>
+                <li>Advanced checklists</li>
+                <li>Admin and security features</li>
+                <li>Unlimited automations</li>
+                <li>And more!</li>
+            </ul>
+        </div>
+        <!-- modal footer -->
+        <div class="w-full">
+            <button class="bg-blue-600 text-white px-[12px] py-[6px] rounded w-full">Start Premium</button>
+        </div>
+    </div>
+</div>
