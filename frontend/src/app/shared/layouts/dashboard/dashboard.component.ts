@@ -92,8 +92,8 @@ export class DashboardComponent implements OnDestroy {
         right: this.modalBoard.nativeElement.getBoundingClientRect().right,
       };
       const dialogRef = this.dialog.open(ModalBoardComponent, {
-        width: this.isSmallScreen ? '100vw' : '340px',
-        maxWidth: this.isSmallScreen ? '100vw' : '340px',
+        width: this.isSmallScreen ? '100vw' : '304px',
+        maxWidth: this.isSmallScreen ? '100vw' : '304px',
         height: this.isSmallScreen ? '100%' : 'auto',
         hasBackdrop: false,
         data: positionData,
