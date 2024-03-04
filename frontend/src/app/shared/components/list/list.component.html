@@ -1,17 +1,16 @@
 <div class="flex flex-row md:px-[20px] overflow-x-auto h-full">
     <!-- render list -->
     <div class="flex h-full" cdkDropListGroup>
-            <div class="py-[20px] px-[10px]" *ngFor="let listItem of lists;let listIndex = index;">
-                <div
-                    class="md:p-4 p-4 text-white flex flex-col rounded-xl cursor-pointer w-[272px] mt-14 bg-neutral-100">
-                    <div class="flex flex-row">
-                        <textarea class="text-black px-[12px] py-[3px] w-full h-[32px] bg-neutral-100"
-                            [(ngModel)]="listItem.title"></textarea>
-                    </div>
-                    <!-- render card -->
-                    <app-card [listItem]="listItem" [listIndex]="listIndex"></app-card>
+        <div class="py-[20px] px-[10px]" *ngFor="let listItem of lists;">
+            <div class="md:p-4 p-4 text-white flex flex-col rounded-xl cursor-pointer w-[272px] mt-14 bg-neutral-100">
+                <div class="flex flex-row">
+                    <textarea class="text-black px-[12px] py-[3px] w-full h-[32px] bg-neutral-100"
+                        [(ngModel)]="listItem.title"></textarea>
                 </div>
+                <!-- render card -->
+                <app-card [listItem]="listItem" [listIndex]="listItem.id"></app-card>
             </div>
+        </div>
     </div>
     <div class="py-[20px] px-[10px]">
         <!-- open add list -->

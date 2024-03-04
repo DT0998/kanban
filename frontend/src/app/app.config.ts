@@ -7,21 +7,17 @@ import { provideStore } from '@ngrx/store';
 import {
   HttpClientModule,
   provideHttpClient,
-  withFetch,
   withInterceptors,
 } from '@angular/common/http';
 import { authInterceptor } from './shared/interceptors/auth.interceptor';
-import { AuthService } from './shared/services/auth/auth.service';
-import { CommonModule } from '@angular/common';
-import { NgIconComponent } from '@ng-icons/core';
-import { FormsModule } from '@angular/forms';
 import { ShareService } from './shared/services/share.service';
+import * as fromApp from './shared/store/store.reducer';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
     provideEffects(),
-    provideStore(),
+    provideStore(fromApp.appReducer),
     ...ShareService,
     importProvidersFrom(HttpClientModule),
     provideHttpClient(

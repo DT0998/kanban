@@ -9,7 +9,7 @@
     <!-- screen preview -->
     <div class="flex justify-center">
         <div class="rounded w-[200px] h-[120px] bg-cover bg-center flex items-center justify-center"
-            style="background-image: url(assets/images/board/modal/photo/bg-asuka.png);">
+            style="background-image: url({{this.selectedBackground?.preview_url}});">
             <img src="../../../../assets/images/board/screen-mini.svg" alt="screen mini" />
         </div>
     </div>
@@ -21,64 +21,44 @@
         <div>
             <!-- list photo -->
             <ul class="flex pb-[8px] justify-between">
-                <li class="h-[40px] w-[64px]">
-                    <button style="background-image: url(assets/images/board/modal/photo/bg-asuka.png);"
-                        class="h-full w-full bg-cover bg-center rounded"></button>
-                </li>
-                <li class="h-[40px] w-[64px]">
-                    <button style="background-image: url(assets/images/board/modal/photo/bg-nike-anime-girl.png);"
-                        class="h-full w-full bg-cover bg-center rounded"></button>
-                </li>
-                <li class="h-[40px] w-[64px]">
-                    <button style="background-image: url(assets/images/board/modal/photo/bg-anime-girl-sit.png);"
-                        class="h-full w-full bg-cover bg-center rounded"></button>
-                </li>
-                <li class="h-[40px] w-[64px]">
-                    <button style="background-image: url(assets/images/board/modal/photo/bg-ram.png);"
-                        class="h-full w-full bg-cover bg-center rounded"></button>
+                <li class="h-[40px] w-[64px] relative" *ngFor="let background of modalBackgroundPhotos">
+                    <button style="background-image: url({{background.preview_url}});"
+                        class="h-full w-full bg-cover bg-center rounded" (click)="selectBackground(background)">
+                    </button>
+                    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-1 backdrop-brightness-50 w-full h-full rounded flex items-center justify-center"
+                        *ngIf="isSelected(background)">
+                        <!-- icon check  -->
+                        <ng-icon name="ionCheckmark" size="15" class="text-white w-full h-full "></ng-icon>
+                    </div>
                 </li>
             </ul>
             <!-- list color -->
             <ul class="flex pb-[8px] justify-between">
-                <li class="h-[32px] w-[40px]">
-                    <button style="background-image: url(assets/images/board/modal/color/bg-blue.svg);"
-                        class="h-full w-full bg-cover bg-center rounded"></button>
-                        
-                </li>
-                <li class="h-[32px] w-[40px]">
-                    <button style="background-image: url(assets/images/board/modal/color/bg-orange.svg);"
-                        class="h-full w-full bg-cover bg-center rounded"></button>
-                </li>
-                <li class="h-[32px] w-[40px]">
-                    <button style="background-image: url(assets/images/board/modal/color/bg-purple.svg);"
-                        class="h-full w-full bg-cover bg-center rounded"></button>
-                </li>
-                <li class="h-[32px] w-[40px]">
-                    <button style="background-image: url(assets/images/board/modal/color/bg-pink.svg);"
-                        class="h-full w-full bg-cover bg-center rounded"></button>
-                </li>
-                <li class="h-[32px] w-[40px]">
-                    <button style="background-image: url(assets/images/board/modal/color/bg-brown.svg);"
-                        class="h-full w-full bg-cover bg-center rounded"></button>
-                </li>
-                <li class="h-[32px] w-[40px]">
-                    <button style="background-image: url(assets/images/board/modal/color/bg-green.svg);"
-                        class="h-full w-full bg-cover bg-center rounded"></button>
+                <li class="h-[32px] w-[40px] relative" *ngFor="let background of modalBackgroundColors">
+                    <button style="background-image: url({{background.preview_url}});"
+                        class="h-full w-full bg-cover bg-center rounded"
+                        (click)="selectBackground(background)"></button>
+                    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-1 backdrop-brightness-50 w-full h-full rounded flex items-center justify-center"
+                        *ngIf="isSelected(background)">
+                        <!-- icon check  -->
+                        <ng-icon name="ionCheckmark" size="15" class="text-white w-full h-full "></ng-icon>
+                    </div>
                 </li>
             </ul>
         </div>
     </div>
     <!-- board title -->
-    <form>
+    <form [formGroup]="boardForm" (ngSubmit)="handleCreateBoard()">
         <div>
             <label>Board title*</label>
             <input
-                class="font-bold bg-transparent px-[12px] py-[6px] w-full text-black outline-none border-2 rounded-lg shadow-sm bg-white"
-                placeholder="Enter card title..." type="text" />
+                class="font-bold bg-transparent px-[12px] py-[6px] w-full text-black border-2 rounded-lg shadow-sm bg-white"
+                placeholder="Enter card title..." type="text" formControlName="title"
+                [style.outline]="boardForm.valid ? 'none':'2px solid red'" />
         </div>
-        <span>Board title is required</span>
-        <button class="bg-blue-600 text-white px-[12px] py-[6px] rounded w-full mt-[16px]" disabled
-            type="submit">Create</button>
+        <span *ngIf="!boardForm.valid">Board title is required</span>
+        <button class="bg-blue-600 text-white px-[12px] py-[6px] rounded w-full mt-[16px]" disabled type="submit"
+            [disabled]="!boardForm.valid">Create</button>
     </form>
     <div>
         By using images from Unsplash, you agree to their license and Terms of Service

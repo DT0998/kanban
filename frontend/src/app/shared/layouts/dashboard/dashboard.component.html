@@ -16,8 +16,11 @@
             </button>
         </div>
         <!-- avatar -->
-        <div class="md:mr-3 md:mx-0 mx-[12px] h-full flex items-center">
-        </div>
+        <a routerLink="/dashboard/profile">
+            <div class="md:mr-3 md:mx-0 mx-[12px] h-full flex items-center">
+                <ng-icon name="ionPersonCircleOutline" size="20" class="text-white mx-[12px] md:hidden block"></ng-icon>
+            </div>
+        </a>
     </div>
 </nav>
 
@@ -45,6 +48,13 @@
                         <span>Calendar</span>
                     </div>
                 </a>
+                <a routerLink="/dashboard/history" routerLinkActive="active">
+                    <div class="md:px-0 py-[12px] menu-container flex items-center ">
+                        <ng-icon name="ionCalendarClearOutline" size="20"
+                            class="text-black mx-[12px] md:ml-3 h-full"></ng-icon>
+                        <span>History</span>
+                    </div>
+                </a>
                 <div class="md:px-0 py-[12px] flex justify-between">
                     <span class="font-bold mx-[12px]">Your boards</span>
                     <div #modalBoard>
@@ -54,14 +64,17 @@
                         </button>
                     </div>
                 </div>
-                <a routerLink="/dashboard/board" routerLinkActive="active">
-                    <div class="md:px-0 py-[12px] menu-container flex items-center ">
-                        <div class="board-img mx-[12px] md:ml-3"
-                            style="background-image: url(assets/images/board/icon/photo/icon-asuka.jpg);">
+                <!-- board list -->
+                <div *ngFor="let board of boardLists">
+                    <a [routerLink]="'/dashboard/board/' + board.background.id" routerLinkActive="active">
+                        <div class="md:px-0 py-[12px] menu-container flex items-center">
+                            <div class="board-img mx-[12px] md:ml-3"
+                                [style.background-image]="'url(' + board.background.icon + ')'">
+                            </div>
+                            <span class="line-clamp-1">{{ board.title }}</span>
                         </div>
-                        <span>test</span>
-                    </div>
-                </a>
+                    </a>
+                </div>
             </div>
             <!-- button premium -->
             <div class="p-[12px] border-t-2 border-slate-200">

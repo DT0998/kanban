@@ -3,6 +3,7 @@ import {
   ElementRef,
   HostListener,
   OnDestroy,
+  OnInit,
   ViewChild,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -14,11 +15,16 @@ import {
   ionCalendarClearOutline,
   ionAddOutline,
   ionBagCheckOutline,
+  ionPersonCircleOutline
 } from '@ng-icons/ionicons';
 import { RouterLink, RouterModule, RouterOutlet } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalPremiumComponent } from '../../components/modal-premium/modal-premium.component';
 import { ModalBoardComponent } from '../../components/modal-board/modal-board.component';
+import { Subscription, map } from 'rxjs';
+import * as fromApp from '../../store/store.reducer';
+import { Store } from '@ngrx/store';
+import { Board } from '../../models/board.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -40,20 +46,40 @@ import { ModalBoardComponent } from '../../components/modal-board/modal-board.co
       ionCalendarClearOutline,
       ionAddOutline,
       ionBagCheckOutline,
+      ionPersonCircleOutline
     }),
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
 })
-export class DashboardComponent implements OnDestroy {
+export class DashboardComponent implements OnInit, OnDestroy {
   @ViewChild('modalBoard') modalBoard!: ElementRef;
   isSidebarMobileOpen: boolean;
   isSmallScreen: boolean;
   isModalBoardOpen: boolean = false;
-  constructor(public dialog: MatDialog) {
+  subscription!: Subscription;
+  boardLists: Board[] = [];
+
+  constructor(public dialog: MatDialog, public store: Store<fromApp.AppState>) {
     this.isSidebarMobileOpen = false;
     this.isSmallScreen = false;
   }
+
+  ngOnInit(): void {
+    this.getBoardList();
+  }
+
+  getBoardList() {
+    // get the board list from the store
+    this.subscription = this.store
+      .select('board')
+      .pipe(map((boardState) => boardState?.boardList))
+      .subscribe((boardLists) => {
+        this.boardLists = boardLists;
+        console.log('Board list received:', boardLists);
+      });
+  }
+
   // detect window resize
   @HostListener('window:resize', ['$event'])
   onResize(event: Event): void {
@@ -111,5 +137,6 @@ export class DashboardComponent implements OnDestroy {
 
   ngOnDestroy(): void {
     this.dialog.closeAll();
+    this.subscription.unsubscribe();
   }
 }

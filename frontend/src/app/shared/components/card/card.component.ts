@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { ionAddOutline, ionCloseOutline } from '@ng-icons/ionicons';
@@ -12,6 +12,10 @@ import {
   moveItemInArray,
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
+import * as fromApp from '../../store/store.reducer';
+import * as BoardActions from '../../store/board/board.actions';
+import { Store } from '@ngrx/store';
+import { Subscription, map } from 'rxjs';
 
 @Component({
   selector: 'app-card',
@@ -26,13 +30,19 @@ import {
   templateUrl: './card.component.html',
   styleUrl: './card.component.scss',
 })
-export class CardComponent {
+export class CardComponent implements OnInit {
   @Input() listItem!: List;
   @Input() listIndex!: number;
+
   cardTitle: string;
-  constructor(public boardService: BoardService) {
+  constructor(
+    public boardService: BoardService,
+    public store: Store<fromApp.AppState>
+  ) {
     this.cardTitle = '';
   }
+
+  ngOnInit(): void {}
 
   getNextCardId(): number {
     // Find the maximum ID in the existing cards of the current list item
@@ -49,7 +59,10 @@ export class CardComponent {
       id: this.getNextCardId(), // Generate ID for the new card
       title: this.cardTitle,
     };
-    this.listItem.cards.push(newCard);
+    // Dispatch an action to add card inside list
+    this.store.dispatch(
+      new BoardActions.AddCard({ listId: this.listIndex, card: newCard })
+    );
     this.cardTitle = '';
   }
 
@@ -81,19 +94,19 @@ export class CardComponent {
   drop(event: CdkDragDrop<Card[]>) {
     if (event.previousContainer === event.container) {
       // move same list
-      moveItemInArray(
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
+      // moveItemInArray(
+      //   newCards,
+      //   event.previousIndex,
+      //   event.currentIndex
+      // );
     } else {
       // move different list
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
+      // transferArrayItem(
+      //   event.previousContainer.data,
+      //   newCards,
+      //   event.previousIndex,
+      //   event.currentIndex
+      // );
     }
   }
 }

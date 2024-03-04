@@ -7,11 +7,9 @@ contract Kanban{
 
 address public owner;
 
-
 constructor(){
         owner = msg.sender;
 }
-
 
 //Create Struct and Mappping for request, transaction & name
 

@@ -1,0 +1,4 @@
+<div class="board-detail-container h-full bg-cover" style="background-image: url({{board?.background?.background_url}});"
+    (click)="handleCloseOverlayAndIcon($event)">
+    <app-list [boardId]="board?.background?.id"></app-list>
+</div>

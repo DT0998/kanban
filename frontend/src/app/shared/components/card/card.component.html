@@ -1,4 +1,4 @@
-<ol id="{{listIndex}}" cdkDropList [cdkDropListData]="listItem.cards" (cdkDropListDropped)="drop($event)"
+<ol id="{{+listIndex}}" cdkDropList [cdkDropListData]="listItem.cards" (cdkDropListDropped)="drop($event)"
     cdkDropListOrientation="vertical" #childList="cdkDropList">
     <li class="flex flex-row mt-[10px]" *ngFor="let cardItem of listItem.cards;" cdkDrag [cdkDragData]="cardItem.title">
         <input
@@ -21,7 +21,7 @@
         </div>
     </div>
 </div>
-<div class="flex flex-row py-4" *ngIf="boardService.openCardIndex !== listIndex">
+<div class="flex flex-row pb-4" *ngIf="boardService.openCardIndex !== listIndex">
     <ng-icon name="ionAddOutline" size="24" class="text-black md:mr-3"></ng-icon>
     <p class="font-bold text-black" (click)="handleAddCardOpen($event, listIndex)">Add a card</p>
 </div>

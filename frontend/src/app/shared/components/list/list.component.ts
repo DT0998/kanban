@@ -1,5 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { ionAddOutline, ionCloseOutline } from '@ng-icons/ionicons';
@@ -8,6 +15,10 @@ import { BoardService } from '../../services/board/board.service';
 import { HttpClient } from '@angular/common/http';
 import { CardComponent } from '../card/card.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import * as fromApp from '../../store/store.reducer';
+import * as BoardActions from '../../store/board/board.actions';
+import { Store } from '@ngrx/store';
+import { Subscription, map } from 'rxjs';
 
 @Component({
   selector: 'app-list',
@@ -28,13 +39,32 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss',
 })
-export class ListComponent {
+export class ListComponent implements OnInit, OnDestroy, OnChanges {
+  @Input() boardId!: number | undefined;
   public listTitle: string;
   public isFirstListInit = true;
   public lists: List[] = [];
   public openCard = false;
-  constructor(public boardService: BoardService, private http: HttpClient) {
+  subscription!: Subscription;
+
+  constructor(
+    public boardService: BoardService,
+    private http: HttpClient,
+    public store: Store<fromApp.AppState>
+  ) {
     this.listTitle = '';
+  }
+
+  ngOnInit(): void {
+    this.getList();
+  }
+
+  // This lifecycle hook is called when any data-bound property of the component changes
+  ngOnChanges(changes: SimpleChanges): void {
+    // detect change input boardId
+    if (changes['boardId'] && !changes['boardId'].firstChange) {
+      this.getList();
+    }
   }
 
   getNextId(): number {
@@ -47,20 +77,35 @@ export class ListComponent {
     return maxId + 1;
   }
 
-  getList() {}
+  getList() {
+    // get the board list from the store
+    this.subscription = this.store
+      .select('board')
+      .pipe(map((boardState) => boardState?.boardList))
+      .subscribe((boardLists) => {
+        // find the board by id
+        const board = boardLists.find(
+          (board) => board.background.id === this.boardId
+        );
+        this.lists = board ? board.lists : [];
+      });
+  }
+
   addList() {
     const newList: List = {
       id: this.getNextId(),
       title: this.listTitle,
       cards: [],
     };
-    this.lists.push(newList);
+    // Dispatch an action to add list inside board
+    this.store.dispatch(
+      new BoardActions.AddList({ list: newList, boardId: this.boardId })
+    );
     this.listTitle = '';
     this.boardService.handleCloseOverlayAndIcon();
     if (this.lists.length > 0) {
       this.isFirstListInit = false;
     }
-    console.log(this.lists);
   }
 
   updateList() {
@@ -83,5 +128,9 @@ export class ListComponent {
   handleCloseOverlayAndIcon(event: Event) {
     event.stopPropagation();
     this.boardService.handleCloseOverlayAndIcon();
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

@@ -3,8 +3,9 @@ import { DashboardComponent } from './shared/layouts/dashboard/dashboard.compone
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { ProfileComponent } from './pages/profile/profile.component';
-import { BoardComponent } from './pages/board/board.component';
+import { BoardDetailComponent } from './pages/board-detail/board-detail.component';
 import { CalendarComponent } from './pages/calendar/calendar.component';
+import { HistoryComponent } from './pages/history/history.component';
 
 export const routes: Routes = [
   {
@@ -12,10 +13,11 @@ export const routes: Routes = [
     component: DashboardComponent,
     children: [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
-      { path: 'home', component: HomeComponent},
+      { path: 'home', component: HomeComponent },
       { path: 'profile', component: ProfileComponent },
       { path: 'calendar', component: CalendarComponent },
-      { path: 'board', component: BoardComponent },
+      { path: 'history', component: HistoryComponent },
+      { path: 'board/:id', component: BoardDetailComponent },
     ],
   },
   {

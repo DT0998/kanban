@@ -1,6 +1,8 @@
+import { ListBackground } from '../constants/modal-board.contanst';
+import { List } from './list.model';
+
 export interface Board {
-  id: number;
   title: string;
-  icon: string;
-  background: string;
+  background: ListBackground;
+  lists: List[];
 }
