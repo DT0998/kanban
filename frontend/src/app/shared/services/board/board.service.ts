@@ -1,25 +1,33 @@
 import { Injectable } from '@angular/core';
-import { Card } from '../../models/card.model';
+import { DashboardService } from '../dashboard/dashboard.service';
 
-Injectable({
+@Injectable({
   providedIn: 'root',
-});
+})
 export class BoardService {
   openList: boolean;
-  openCardIndex: number | null;
-  constructor() {
+  openCardIndex: string | null;
+  constructor(public dashboardService: DashboardService) {
     this.openList = false;
     this.openCardIndex = null;
   }
-  handleOpenList() {
-    this.openList = true;
+
+  handleOpenList(index: number, premium: boolean) {
+    this.openList = premium || index <= 4;
+    // limit the number of open cards for non-premium users
+    if (!premium && index > 4) {
+      this.dashboardService.openPremiumModal();
+    }
   }
-  handleOpenCard(index: number) { 
+
+  handleOpenCard(index: string) {
     this.openCardIndex = index;
   }
-  handleCloseCard() { 
+
+  handleCloseCard() {
     this.openCardIndex = null;
   }
+
   handleCloseOverlayAndIcon() {
     this.openList = false;
     this.openCardIndex = null;

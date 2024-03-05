@@ -15,7 +15,7 @@ const initialState: State = {
 function addListToBoard(
   boardList: Board[],
   list: List,
-  boardId: number
+  boardId: string
 ): Board[] {
   return boardList.map((board) => {
     if (board.background.id === boardId) {
@@ -32,7 +32,7 @@ function addListToBoard(
 function addCardToList(
   boardList: Board[],
   card: Card,
-  listId: number
+  listId: string
 ): Board[] {
   return boardList.map((board) => ({
     ...board,
@@ -49,8 +49,8 @@ function updatePositionCardList(
   previousCards: Card[],
   currentIndexCard: number,
   previousIndexCard: number,
-  currentListId: number | string,
-  previousListId: number | string,
+  currentListId: string,
+  previousListId: string,
   boardList: Board[]
 ): Board[] {
   if (currentListId === previousListId) {
@@ -64,7 +64,7 @@ function updatePositionCardList(
       ...board,
       lists: board.lists.map((list) =>
         // convert string to number
-        list.id === +currentListId
+        list.id === currentListId
           ? {
               ...list,
               cards: newCurrentCardList,
@@ -83,9 +83,9 @@ function updatePositionCardList(
     return boardList.map((board) => ({
       ...board,
       lists: board.lists.map((list) =>
-        list.id === +currentListId
+        list.id === currentListId
           ? { ...list, cards: newCurrentCardList }
-          : list.id === +previousListId
+          : list.id === previousListId
           ? { ...list, cards: newPreviousCardList }
           : list
       ),

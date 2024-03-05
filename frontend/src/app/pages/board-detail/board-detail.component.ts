@@ -9,6 +9,7 @@ import { Subscription, map } from 'rxjs';
 import { Board } from '../../shared/models/board.model';
 import * as fromApp from '../../shared/store/store.reducer';
 import { Store } from '@ngrx/store';
+import { selectBoardList } from '../../shared/store/board/board.selector';
 
 @Component({
   selector: 'app-board-detail',
@@ -20,7 +21,7 @@ import { Store } from '@ngrx/store';
 })
 export class BoardDetailComponent implements OnInit {
   openList: boolean;
-  boardId!: number;
+  boardId!: string;
   subscription!: Subscription;
   boardLists: Board[] = [];
   board!: Board | undefined;
@@ -39,19 +40,15 @@ export class BoardDetailComponent implements OnInit {
 
   getBoardDetail() {
     // get the board list from the store
-    this.subscription = this.store
-      .select('board')
-      .pipe(map((boardState) => boardState?.boardList))
-      .subscribe((boardLists) => {
+    this.store.select(selectBoardList).subscribe((boardLists: Board[]) => {
+      // find the board by id
+      this.route.params.subscribe((params) => {
+        this.boardId = params['id'];
         this.boardLists = boardLists;
+        this.board = this.boardLists.find(
+          (board) => board.background.id === this.boardId
+        );
       });
-    // find the board by id
-    this.route.params.subscribe((params) => {
-      this.boardId = +params['id'];
-      this.board = this.boardLists.find(
-        (board) => board.background.id === this.boardId
-      );
-      console.log('Board:', this.board);
     });
   }
 

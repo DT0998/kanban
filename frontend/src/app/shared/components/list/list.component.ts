@@ -18,7 +18,10 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import * as fromApp from '../../store/store.reducer';
 import * as BoardActions from '../../store/board/board.actions';
 import { Store } from '@ngrx/store';
-import { Subscription, map } from 'rxjs';
+import { selectPremium } from '../../store/premium/premium.selector';
+import { selectBoardList } from '../../store/board/board.selector';
+import { Board } from '../../models/board.model';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-list',
@@ -40,12 +43,13 @@ import { Subscription, map } from 'rxjs';
   styleUrl: './list.component.scss',
 })
 export class ListComponent implements OnInit, OnDestroy, OnChanges {
-  @Input() boardId!: number | undefined;
+  @Input() boardId!: string | undefined;
   public listTitle: string;
   public isFirstListInit = true;
   public lists: List[] = [];
   public openCard = false;
-  subscription!: Subscription;
+  premium!: boolean;
+  listsId!: number;
 
   constructor(
     public boardService: BoardService,
@@ -57,6 +61,7 @@ export class ListComponent implements OnInit, OnDestroy, OnChanges {
 
   ngOnInit(): void {
     this.getList();
+    this.getPremium();
   }
 
   // This lifecycle hook is called when any data-bound property of the component changes
@@ -67,33 +72,26 @@ export class ListComponent implements OnInit, OnDestroy, OnChanges {
     }
   }
 
-  getNextId(): number {
-    // Find the maximum ID in the existing list
-    const maxId = this.lists.reduce(
-      (max, list) => (list.id > max ? list.id : max),
-      0
-    );
-    // Increment the maximum ID to get the next available ID
-    return maxId + 1;
+  getPremium() {
+    // get the premium from the store
+    this.store.select(selectPremium).subscribe((premium: boolean) => {
+      this.premium = premium;
+    });
   }
 
   getList() {
-    // get the board list from the store
-    this.subscription = this.store
-      .select('board')
-      .pipe(map((boardState) => boardState?.boardList))
-      .subscribe((boardLists) => {
-        // find the board by id
-        const board = boardLists.find(
-          (board) => board.background.id === this.boardId
-        );
-        this.lists = board ? board.lists : [];
-      });
+    this.store.select(selectBoardList).subscribe((boardLists: Board[]) => {
+      // find the board by id
+      const board = boardLists.find(
+        (board) => board.background.id === String(this.boardId)
+      );
+      this.lists = board ? board.lists : [];
+    });
   }
 
   addList() {
     const newList: List = {
-      id: this.getNextId(),
+      id: uuidv4(),
       title: this.listTitle,
       cards: [],
     };
@@ -118,10 +116,11 @@ export class ListComponent implements OnInit, OnDestroy, OnChanges {
     }
   }
 
-  handleAddListOpen(event: Event, index?: number) {
+  handleAddListOpen(event: Event) {
+    console.log(this.lists);
     event.stopPropagation();
-    if (index === undefined) {
-      this.boardService.handleOpenList();
+    if (this.lists.length >= 0) {
+      this.boardService.handleOpenList(this.lists.length, this.premium);
     }
   }
 
@@ -130,7 +129,5 @@ export class ListComponent implements OnInit, OnDestroy, OnChanges {
     this.boardService.handleCloseOverlayAndIcon();
   }
 
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
+  ngOnDestroy(): void {}
 }

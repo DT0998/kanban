@@ -11,7 +11,7 @@
                 <ng-icon name="ionSettingsOutline" size="20"
                     class="text-white mx-[12px] md:mx-0 h-full md:mr-3"></ng-icon>
             </div>
-            <button (click)="toggleSidebarMobile()" *ngIf="isSmallScreen">
+            <button (click)="toggleSidebarMobile()" *ngIf="dashboardService.isSmallScreen">
                 <ng-icon name="ionReorderThreeOutline" size="20" class="text-white mx-[12px] md:hidden block"></ng-icon>
             </button>
         </div>
@@ -27,7 +27,7 @@
 <!-- side bar -->
 <aside id="logo-sidebar"
     class="fixed top-0 left-0 z-40 md:w-[250px] pt-16 h-screen w-full transition-transform shadow-xl bg-white border-r border-gray-200"
-    [ngClass]="{'translate-y-0' : isSidebarMobileOpen, '-translate-x-full': !isSidebarMobileOpen && isSmallScreen}"
+    [ngClass]="{'translate-y-0' :dashboardService.isSidebarMobileOpen, '-translate-x-full': !dashboardService.isSidebarMobileOpen && dashboardService.isSmallScreen}"
     aria-label="Sidebar">
     <div class="h-full overflow-y-auto bg-white">
         <div class="flex h-full flex-col justify-between">

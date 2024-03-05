@@ -6,16 +6,11 @@ import { ionAddOutline, ionCloseOutline } from '@ng-icons/ionicons';
 import { BoardService } from '../../services/board/board.service';
 import { Card } from '../../models/card.model';
 import { List } from '../../models/list.model';
-import {
-  CdkDragDrop,
-  DragDropModule,
-  moveItemInArray,
-  transferArrayItem,
-} from '@angular/cdk/drag-drop';
+import { CdkDragDrop, DragDropModule } from '@angular/cdk/drag-drop';
 import * as fromApp from '../../store/store.reducer';
 import * as BoardActions from '../../store/board/board.actions';
+import { v4 as uuidv4 } from 'uuid';
 import { Store } from '@ngrx/store';
-import { Subscription, map } from 'rxjs';
 
 @Component({
   selector: 'app-card',
@@ -32,7 +27,7 @@ import { Subscription, map } from 'rxjs';
 })
 export class CardComponent implements OnInit {
   @Input() listItem!: List;
-  @Input() listIndex!: number;
+  @Input() listIndex!: string;
 
   cardTitle: string;
   constructor(
@@ -44,19 +39,9 @@ export class CardComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  getNextCardId(): number {
-    // Find the maximum ID in the existing cards of the current list item
-    const maxId = this.listItem.cards.reduce(
-      (max, card) => (card.id > max ? card.id : max),
-      0
-    );
-    // Increment the maximum ID to get the next available ID for the new card
-    return maxId + 1;
-  }
-
   addCard() {
     const newCard: Card = {
-      id: this.getNextCardId(), // Generate ID for the new card
+      id: uuidv4(), // Generate ID for the new card
       title: this.cardTitle,
     };
     // Dispatch an action to add card inside list
@@ -81,7 +66,7 @@ export class CardComponent implements OnInit {
     }
   }
 
-  handleAddCardOpen(event: Event, index: number) {
+  handleAddCardOpen(event: Event, index: string) {
     event.stopPropagation();
     if (this.boardService.openCardIndex === index) {
       this.boardService.handleCloseCard();
@@ -101,7 +86,6 @@ export class CardComponent implements OnInit {
     } = newEvent;
     const { data: currentCards, id: currentListId } = container;
     const { data: previousCards, id: previousListId } = previousContainer;
-    console.log('drop', newEvent);
     if (newEvent.previousContainer === newEvent.container) {
       // move same list
       this.store.dispatch(

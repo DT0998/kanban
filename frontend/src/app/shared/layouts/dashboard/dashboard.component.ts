@@ -26,6 +26,9 @@ import { Subscription, map } from 'rxjs';
 import * as fromApp from '../../store/store.reducer';
 import { Store } from '@ngrx/store';
 import { Board } from '../../models/board.model';
+import { selectBoardList } from '../../store/board/board.selector';
+import { DashboardService } from '../../services/dashboard/dashboard.service';
+import { selectPremium } from '../../store/premium/premium.selector';
 
 @Component({
   selector: 'app-dashboard',
@@ -56,84 +59,58 @@ import { Board } from '../../models/board.model';
 })
 export class DashboardComponent implements OnInit, OnDestroy {
   @ViewChild('modalBoard') modalBoard!: ElementRef;
-  isSidebarMobileOpen: boolean;
-  isSmallScreen: boolean;
+
   isModalBoardOpen: boolean = false;
   subscription!: Subscription;
   boardLists: Board[] = [];
 
-  constructor(public dialog: MatDialog, public store: Store<fromApp.AppState>) {
-    this.isSidebarMobileOpen = false;
-    this.isSmallScreen = false;
-  }
+  premium!: boolean;
+
+  constructor(
+    public dialog: MatDialog,
+    public store: Store<fromApp.AppState>,
+    public dashboardService: DashboardService
+  ) {}
 
   ngOnInit(): void {
     this.getBoardList();
+    this.getPremium();
   }
 
   getBoardList() {
     // get the board list from the store
-    this.subscription = this.store
-      .select('board')
-      .pipe(map((boardState) => boardState?.boardList))
-      .subscribe((boardLists) => {
-        this.boardLists = boardLists;
-      });
+    this.store.select(selectBoardList).subscribe((boardList: Board[]) => {
+      this.boardLists = boardList;
+    });
+  }
+
+  getPremium() {
+    // get the premium from the store
+    this.store.select(selectPremium).subscribe((premium: boolean) => {
+      this.premium = premium;
+    });
   }
 
   // detect window resize
   @HostListener('window:resize', ['$event'])
   onResize(event: Event): void {
-    this.isSmallScreen = window.innerWidth <= 426;
-    // change sidebar when desktop
-    if (!this.isSmallScreen) {
-      this.isSidebarMobileOpen = false;
-    }
+    this.dashboardService.onResize(event);
   }
 
   toggleSidebarMobile = () => {
-    if (!this.isSmallScreen) {
-      this.isSidebarMobileOpen = false;
-    } else {
-      this.isSidebarMobileOpen = !this.isSidebarMobileOpen;
-    }
+    this.dashboardService.toggleSidebarMobile();
   };
 
   openPremiumModal() {
-    this.dialog.open(ModalPremiumComponent, {
-      width: this.isSmallScreen ? '100vw' : '450px',
-      maxWidth: this.isSmallScreen ? '100vw' : '450px',
-      height: this.isSmallScreen ? '100%' : 'auto',
-    });
-    this.isSidebarMobileOpen = false;
+    this.dashboardService.openPremiumModal();
   }
 
   openBoardModal() {
-    if (this.isModalBoardOpen) {
-      // If the modal is open, close it
-      this.dialog.closeAll(); // Close any open dialog (assuming you're using Angular Material Dialog)
-    } else {
-      // If the modal is closed, open it
-      const positionData = {
-        top: this.modalBoard.nativeElement.getBoundingClientRect().top,
-        right: this.modalBoard.nativeElement.getBoundingClientRect().right,
-      };
-      const dialogRef = this.dialog.open(ModalBoardComponent, {
-        width: this.isSmallScreen ? '100vw' : '304px',
-        maxWidth: this.isSmallScreen ? '100vw' : '304px',
-        height: this.isSmallScreen ? '100%' : 'auto',
-        hasBackdrop: false,
-        data: positionData,
-      });
-      // Subscribe to the afterClosed observable to update the flag when the dialog is closed
-      dialogRef.afterClosed().subscribe(() => {
-        this.isModalBoardOpen = false;
-      });
-      // Toggle the flag
-      this.isModalBoardOpen = !this.isModalBoardOpen;
-      // Optionally, close the sidebar if needed
-      this.isSidebarMobileOpen = false;
-    }
+    this.dashboardService.openBoardModal(
+      this.modalBoard,
+      this.premium,
+      this.boardLists.length
+    );
   }
 
   ngOnDestroy(): void {

@@ -15,12 +15,12 @@ export class AddBoard implements Action {
 
 export class AddList implements Action {
   readonly type = ADD_LIST;
-  constructor(public payload: { list: List; boardId: number | undefined }) {}
+  constructor(public payload: { list: List; boardId: string | undefined }) {}
 }
 
 export class AddCard implements Action {
   readonly type = ADD_CARD;
-  constructor(public payload: { card: Card; listId: number }) {}
+  constructor(public payload: { card: Card; listId: string }) {}
 }
 
 export class UpdatePositionCard implements Action {
@@ -36,6 +36,7 @@ export class UpdatePositionCard implements Action {
     }
   ) {}
 }
+
 export type BoardActions =
   | AddBoard
   | AddList

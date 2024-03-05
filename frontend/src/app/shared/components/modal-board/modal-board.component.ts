@@ -24,6 +24,7 @@ import * as fromApp from '../../store/store.reducer';
 import * as BoardActions from '../../store/board/board.actions';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-modal',
@@ -107,6 +108,8 @@ export class ModalBoardComponent implements OnInit {
   handleCreateBoard() {
     if (this.boardForm.valid && this.selectedBackground) {
       const title = this.boardForm.get('title')?.value;
+      // Assign the generated UUID to the id property
+      this.selectedBackground.id = uuidv4();
 
       // Dispatch an action to add the board
       this.store.dispatch(

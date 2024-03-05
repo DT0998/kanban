@@ -1,4 +1,4 @@
-<ol id="{{+listIndex}}" cdkDropList [cdkDropListData]="listItem.cards" (cdkDropListDropped)="drop($event)"
+<ol id="{{listIndex}}" cdkDropList [cdkDropListData]="listItem.cards" (cdkDropListDropped)="drop($event)"
     cdkDropListOrientation="vertical" #childList="cdkDropList">
     <li class="flex flex-row mt-[10px]" *ngFor="let cardItem of listItem.cards;" cdkDrag [cdkDragData]="cardItem.title">
         <input
