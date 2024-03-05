@@ -15,7 +15,8 @@ import {
   ionCalendarClearOutline,
   ionAddOutline,
   ionBagCheckOutline,
-  ionPersonCircleOutline
+  ionPersonCircleOutline,
+  ionReceiptOutline,
 } from '@ng-icons/ionicons';
 import { RouterLink, RouterModule, RouterOutlet } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
@@ -46,7 +47,8 @@ import { Board } from '../../models/board.model';
       ionCalendarClearOutline,
       ionAddOutline,
       ionBagCheckOutline,
-      ionPersonCircleOutline
+      ionPersonCircleOutline,
+      ionReceiptOutline,
     }),
   ],
   templateUrl: './dashboard.component.html',
@@ -76,7 +78,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
       .pipe(map((boardState) => boardState?.boardList))
       .subscribe((boardLists) => {
         this.boardLists = boardLists;
-        console.log('Board list received:', boardLists);
       });
   }
 

@@ -6,6 +6,7 @@ import * as BoardActions from './board.actions';
 export interface State {
   boardList: Board[];
 }
+
 const initialState: State = {
   boardList: [],
 };
@@ -42,6 +43,84 @@ function addCardToList(
   }));
 }
 
+// update position card
+function updatePositionCardList(
+  currentCards: Card[],
+  previousCards: Card[],
+  currentIndexCard: number,
+  previousIndexCard: number,
+  currentListId: number | string,
+  previousListId: number | string,
+  boardList: Board[]
+): Board[] {
+  if (currentListId === previousListId) {
+    console.log('move same list');
+    const newCurrentCardList = moveCardInCardList(
+      currentCards,
+      currentIndexCard,
+      previousIndexCard
+    );
+    return boardList.map((board) => ({
+      ...board,
+      lists: board.lists.map((list) =>
+        // convert string to number
+        list.id === +currentListId
+          ? {
+              ...list,
+              cards: newCurrentCardList,
+            }
+          : list
+      ),
+    }));
+  } else {
+    const { newCurrentCardList, newPreviousCardList } =
+      transferCardToOtherCardList(
+        currentCards,
+        previousCards,
+        currentIndexCard,
+        previousIndexCard
+      );
+    return boardList.map((board) => ({
+      ...board,
+      lists: board.lists.map((list) =>
+        list.id === +currentListId
+          ? { ...list, cards: newCurrentCardList }
+          : list.id === +previousListId
+          ? { ...list, cards: newPreviousCardList }
+          : list
+      ),
+    }));
+  }
+}
+
+// move same list
+function moveCardInCardList(
+  currentCards: Card[],
+  currentIndexCard: number,
+  previousIndexCard: number
+): Card[] {
+  const newCardList = [...currentCards];
+  // card item move
+  const [movedCard] = newCardList.splice(previousIndexCard, 1);
+  newCardList.splice(currentIndexCard, 0, movedCard);
+  return newCardList;
+}
+
+// move different list
+function transferCardToOtherCardList(
+  currentCards: Card[],
+  previousCards: Card[],
+  currentIndexCard: number,
+  previousIndexCard: number
+): any {
+  const newCurrentCardList = [...currentCards];
+  const newPreviousCardList = [...previousCards];
+  // card item move
+  const [movedCard] = newPreviousCardList.splice(previousIndexCard, 1);
+  newCurrentCardList.splice(currentIndexCard, 0, movedCard);
+  return { newCurrentCardList, newPreviousCardList };
+}
+
 export function boardReducer(
   state = initialState,
   action: BoardActions.BoardActions
@@ -60,11 +139,37 @@ export function boardReducer(
         boardList: newBoardList,
       };
     case BoardActions.ADD_CARD:
-      const { card, listId } = action.payload;
-      const newBoardListWithCard = addCardToList(state.boardList, card, listId);
+      const { card, listId: addListId } = action.payload;
+      const newBoardListWithCard = addCardToList(
+        state.boardList,
+        card,
+        addListId
+      );
       return {
         ...state,
         boardList: newBoardListWithCard,
+      };
+    case BoardActions.UPDATE_POSITION_CARD:
+      const {
+        currentCards,
+        previousCards,
+        currentIndexCard,
+        previousIndexCard,
+        currentListId,
+        previousListId,
+      } = action.payload;
+      const newBoardListWithUpdatePositionCard = updatePositionCardList(
+        currentCards,
+        previousCards,
+        currentIndexCard,
+        previousIndexCard,
+        currentListId,
+        previousListId,
+        state.boardList
+      );
+      return {
+        ...state,
+        boardList: newBoardListWithUpdatePositionCard,
       };
     default:
       return state;

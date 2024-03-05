@@ -12,6 +12,7 @@ import {
 import { authInterceptor } from './shared/interceptors/auth.interceptor';
 import { ShareService } from './shared/services/share.service';
 import * as fromApp from './shared/store/store.reducer';
+import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-browser/animations';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -19,7 +20,12 @@ export const appConfig: ApplicationConfig = {
     provideEffects(),
     provideStore(fromApp.appReducer),
     ...ShareService,
-    importProvidersFrom(HttpClientModule),
+    // Add providers here to be used in the app
+    importProvidersFrom([
+      HttpClientModule,
+      BrowserAnimationsModule,
+    ]),
+    provideAnimations(),
     provideHttpClient(
       withInterceptors([
         // Add interceptors here

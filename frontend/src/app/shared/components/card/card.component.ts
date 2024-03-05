@@ -92,21 +92,40 @@ export class CardComponent implements OnInit {
 
   // Drag and Drop card item
   drop(event: CdkDragDrop<Card[]>) {
-    if (event.previousContainer === event.container) {
+    const newEvent = { ...event };
+    const {
+      currentIndex: currentIndexCard,
+      previousIndex: previousIndexCard,
+      container,
+      previousContainer,
+    } = newEvent;
+    const { data: currentCards, id: currentListId } = container;
+    const { data: previousCards, id: previousListId } = previousContainer;
+    console.log('drop', newEvent);
+    if (newEvent.previousContainer === newEvent.container) {
       // move same list
-      // moveItemInArray(
-      //   newCards,
-      //   event.previousIndex,
-      //   event.currentIndex
-      // );
+      this.store.dispatch(
+        new BoardActions.UpdatePositionCard({
+          previousCards,
+          currentCards,
+          currentIndexCard,
+          previousIndexCard,
+          currentListId,
+          previousListId,
+        })
+      );
     } else {
       // move different list
-      // transferArrayItem(
-      //   event.previousContainer.data,
-      //   newCards,
-      //   event.previousIndex,
-      //   event.currentIndex
-      // );
+      this.store.dispatch(
+        new BoardActions.UpdatePositionCard({
+          previousCards,
+          currentCards,
+          currentIndexCard,
+          previousIndexCard,
+          currentListId,
+          previousListId,
+        })
+      );
     }
   }
 }

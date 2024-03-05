@@ -60,7 +60,7 @@ export class ModalBoardComponent implements OnInit {
   ) {
     this.modalBackgroundColors = modalBackgroundColors;
     this.modalBackgroundPhotos = modalBackgroundPhotos;
-    // create board form
+    // init create board form
     this.boardForm = new FormGroup({
       title: new FormControl('', [
         Validators.required,
@@ -79,7 +79,7 @@ export class ModalBoardComponent implements OnInit {
     // Update position of the modal
     this.positionData = this.data;
     this.dialogRef.updatePosition({
-      top: `${this.positionData.top - 120}px`,
+      top: `${this.positionData.top - 180}px`,
       left: `${this.positionData.right}px`,
     });
   }
@@ -96,7 +96,6 @@ export class ModalBoardComponent implements OnInit {
     } else {
       // If not selected, select it and clear any previous selection
       this.selectedBackground = background;
-      console.log(this.selectedBackground);
     }
   }
 
