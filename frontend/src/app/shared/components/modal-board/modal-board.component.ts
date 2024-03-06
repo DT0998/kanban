@@ -52,7 +52,7 @@ export class ModalBoardComponent implements OnInit {
   modalBackgroundPhotos: ListBackground[];
   // selected background
   selectedBackground: ListBackground | null = null;
-  boardForm: FormGroup;
+  boardForm!: FormGroup;
   constructor(
     public dialogRef: MatDialogRef<ModalBoardComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -61,6 +61,10 @@ export class ModalBoardComponent implements OnInit {
   ) {
     this.modalBackgroundColors = modalBackgroundColors;
     this.modalBackgroundPhotos = modalBackgroundPhotos;
+    this.boardFormInit();
+  }
+
+  boardFormInit() {
     // init create board form
     this.boardForm = new FormGroup({
       title: new FormControl('', [

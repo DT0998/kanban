@@ -20,8 +20,20 @@ export class BoardService {
     }
   }
 
-  handleOpenCard(index: string) {
-    this.openCardIndex = index;
+  handleOpenCard(index: string, premium: boolean) {
+    // open card for non-premium users
+    if (!premium) {
+      if (+index <= 4) {
+        this.openCardIndex = index;
+      }
+      if (+index > 4) {
+        this.dashboardService.openPremiumModal();
+      }
+    }
+    // open card for premium users
+    if (premium) {
+      this.openCardIndex = index;
+    }
   }
 
   handleCloseCard() {

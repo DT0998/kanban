@@ -18,11 +18,15 @@ import {
   ionPersonCircleOutline,
   ionReceiptOutline,
 } from '@ng-icons/ionicons';
-import { RouterLink, RouterModule, RouterOutlet } from '@angular/router';
+import {
+  Router,
+  RouterLink,
+  RouterModule,
+  RouterOutlet,
+} from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalPremiumComponent } from '../../components/modal-premium/modal-premium.component';
 import { ModalBoardComponent } from '../../components/modal-board/modal-board.component';
-import { Subscription, map } from 'rxjs';
 import * as fromApp from '../../store/store.reducer';
 import { Store } from '@ngrx/store';
 import { Board } from '../../models/board.model';
@@ -60,8 +64,6 @@ import { selectPremium } from '../../store/premium/premium.selector';
 export class DashboardComponent implements OnInit, OnDestroy {
   @ViewChild('modalBoard') modalBoard!: ElementRef;
 
-  isModalBoardOpen: boolean = false;
-  subscription!: Subscription;
   boardLists: Board[] = [];
 
   premium!: boolean;
@@ -69,7 +71,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   constructor(
     public dialog: MatDialog,
     public store: Store<fromApp.AppState>,
-    public dashboardService: DashboardService
+    public dashboardService: DashboardService,
+    public router: Router
   ) {}
 
   ngOnInit(): void {
@@ -113,8 +116,16 @@ export class DashboardComponent implements OnInit, OnDestroy {
     );
   }
 
+  navigateBoardDetail(board: Board, index: number) {
+    if (this.premium || index <= 4) {
+      this.router.navigate(['/dashboard', 'board', board.background.id]);
+    } else {
+      this.router.navigate(['/dashboard', 'board', this.boardLists[4].background.id]);
+      this.dashboardService.openPremiumModal();
+    }
+  }
+
   ngOnDestroy(): void {
     this.dialog.closeAll();
-    this.subscription.unsubscribe();
   }
 }

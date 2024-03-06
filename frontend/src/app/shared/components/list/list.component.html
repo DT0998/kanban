@@ -1,18 +1,27 @@
 <div class="flex flex-row md:px-[20px] overflow-x-auto h-full">
     <!-- render list -->
     <div class="flex h-full" cdkDropListGroup>
-        <div class="py-[20px] px-[10px]" *ngFor="let listItem of lists;">
+        <div class="py-[20px] px-[10px]" *ngFor="let listItem of lists;index as i">
             <div class="md:p-4 p-4 text-white flex flex-col rounded-xl cursor-pointer w-[272px] mt-14 bg-neutral-100">
                 <div class="flex flex-row">
-                    <textarea class="text-black px-[12px] py-[3px] w-full h-[32px] bg-neutral-100"
-                        [(ngModel)]="listItem.title"></textarea>
+                    <!-- have premium -->
+                    <ng-container *ngIf="premium || i <= 4; else readOnlyList">
+                        <textarea class="text-black px-[12px] py-[3px] w-full h-[32px] bg-neutral-100"
+                            [(ngModel)]="listItem.title"></textarea>
+                    </ng-container>
+                    <!-- dont have premium -->
+                    <ng-template #readOnlyList>
+                        <p class="text-black px-[12px] py-[3px] w-full h-[32px] bg-neutral-100">{{listItem.title}}</p>
+                    </ng-template>
                 </div>
                 <!-- render card -->
-                <app-card [listItem]="listItem" [listIndex]="listItem.id"></app-card>
+                <app-card [listItem]="listItem" [listIndex]="listItem.id" [premium]="premium"></app-card>
             </div>
         </div>
     </div>
-    
+
+
+
     <div class="py-[20px] px-[10px]">
         <!-- open add list -->
         <div class="md:p-4 p-4 text-white flex flex-col rounded-xl cursor-pointer w-[272px] mt-14"

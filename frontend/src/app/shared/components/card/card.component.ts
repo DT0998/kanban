@@ -28,7 +28,7 @@ import { Store } from '@ngrx/store';
 export class CardComponent implements OnInit {
   @Input() listItem!: List;
   @Input() listIndex!: string;
-
+  @Input() premium!: boolean;
   cardTitle: string;
   constructor(
     public boardService: BoardService,
@@ -71,7 +71,7 @@ export class CardComponent implements OnInit {
     if (this.boardService.openCardIndex === index) {
       this.boardService.handleCloseCard();
     } else {
-      this.boardService.handleOpenCard(index);
+      this.boardService.handleOpenCard(index, this.premium);
     }
   }
 

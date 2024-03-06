@@ -1,13 +1,30 @@
-<ol id="{{listIndex}}" cdkDropList [cdkDropListData]="listItem.cards" (cdkDropListDropped)="drop($event)"
-    cdkDropListOrientation="vertical" #childList="cdkDropList">
-    <li class="flex flex-row mt-[10px]" *ngFor="let cardItem of listItem.cards;" cdkDrag [cdkDragData]="cardItem.title">
-        <input
-            class="font-bold bg-transparent px-[12px] py-[6px] w-full text-black outline-2 border-2 rounded-lg shadow-sm bg-white"
-            placeholder="Enter card title..." type="text" [(ngModel)]="cardItem.title" />
-    </li>
-</ol>
+<!-- have premium -->
+<ng-container *ngIf="premium || +listIndex < 5; else readOnlyCard">
+    <ol id="{{listIndex}}" cdkDropList [cdkDropListData]="listItem.cards" (cdkDropListDropped)="drop($event)"
+        cdkDropListOrientation="vertical" #childList="cdkDropList">
+        <li class="flex flex-row mt-[10px]" *ngFor="let cardItem of listItem.cards;index as i" cdkDrag
+            [cdkDragData]="cardItem.title">
+            <input
+                class="font-bold bg-transparent px-[12px] py-[6px] w-full text-black outline-2 border-2 rounded-lg shadow-sm bg-white"
+                placeholder="Enter card title..." type="text" [(ngModel)]="cardItem.title" />
+        </li>
+    </ol>
+</ng-container>
 
-<div class="flex items-center mt-[10px] flex-col" *ngIf="boardService.openCardIndex === listIndex">
+<!-- dont have premium -->
+<ng-template #readOnlyCard>
+    <ol id="{{listIndex}}">
+        <li class="flex flex-row mt-[10px]" *ngFor="let cardItem of listItem.cards;index as i">
+            <p
+                class="font-bold bg-transparent px-[12px] py-[6px] w-full text-black outline-2 border-2 rounded-lg shadow-sm bg-white">
+                {{cardItem.title}}</p>
+        </li>
+    </ol>
+</ng-template>
+
+
+<div class="flex items-center mt-[10px] flex-col"
+    *ngIf="boardService.openCardIndex === listIndex">
     <textarea
         class="font-bold bg-transparent px-[12px] py-[6px] w-full text-black focus:outline-blue-600 outline-2 border-blue-600 border-2 rounded-lg h-[56px]"
         placeholder="Enter a title for this card..." type="text" [(ngModel)]="cardTitle"
@@ -21,6 +38,7 @@
         </div>
     </div>
 </div>
+
 <div class="flex flex-row pb-4" *ngIf="boardService.openCardIndex !== listIndex">
     <ng-icon name="ionAddOutline" size="24" class="text-black md:mr-3"></ng-icon>
     <p class="font-bold text-black" (click)="handleAddCardOpen($event, listIndex)">Add a card</p>

@@ -9,7 +9,7 @@ import { ModalBoardComponent } from '../../components/modal-board/modal-board.co
 export class DashboardService {
   isSidebarMobileOpen: boolean;
   isSmallScreen: boolean;
-  isModalBoardOpen: boolean;
+  private isModalBoardOpen: boolean;
 
   constructor(public dialog: MatDialog) {
     this.isSidebarMobileOpen = false;

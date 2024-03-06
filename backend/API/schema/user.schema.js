@@ -2,16 +2,16 @@
  * @swagger
  * components:
  *   schemas:
- *     Employee:
+ *     User:
  *       type: object
  *       required:
  *         - name
- *         - email
- *         - finished
+ *         - address
+ *         - dateAdded
  *       properties:
  *         name:
  *             type: string
- *         email:
+ *         address:
  *           type: string
  *         dateAdded:
  *           type: string

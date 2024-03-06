@@ -65,8 +65,9 @@
                     </div>
                 </div>
                 <!-- board list -->
-                <div *ngFor="let board of boardLists">
-                    <a [routerLink]="'/dashboard/board/' + board.background.id" routerLinkActive="active">
+                <div *ngFor="let board of boardLists;index as i">
+                    <a [routerLink]="'/dashboard/board/' + board.background.id" routerLinkActive="active"
+                        (click)="navigateBoardDetail(board,i)">
                         <div class="md:px-0 py-[12px] menu-container flex items-center">
                             <div class="board-img mx-[12px] md:ml-3"
                                 [style.background-image]="'url(' + board.background.icon + ')'">
