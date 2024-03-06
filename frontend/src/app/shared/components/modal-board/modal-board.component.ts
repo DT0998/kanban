@@ -108,14 +108,16 @@ export class ModalBoardComponent implements OnInit {
   handleCreateBoard() {
     if (this.boardForm.valid && this.selectedBackground) {
       const title = this.boardForm.get('title')?.value;
+      // Create a deep copy of the selectedBackground object
+      const background = JSON.parse(JSON.stringify(this.selectedBackground));
       // Assign the generated UUID to the id property
-      this.selectedBackground.id = uuidv4();
+      background.id = uuidv4();
 
       // Dispatch an action to add the board
       this.store.dispatch(
         new BoardActions.AddBoard({
           title,
-          background: this.selectedBackground,
+          background,
           lists: [],
         })
       );

@@ -69,6 +69,12 @@ export class ListComponent implements OnInit, OnDestroy, OnChanges {
     // detect change input boardId
     if (changes['boardId'] && !changes['boardId'].firstChange) {
       this.getList();
+      // check if the list is empty
+      if (this.lists.length > 0) {
+        this.isFirstListInit = false;
+      } else {
+        this.isFirstListInit = true;
+      }
     }
   }
 
@@ -101,9 +107,6 @@ export class ListComponent implements OnInit, OnDestroy, OnChanges {
     );
     this.listTitle = '';
     this.boardService.handleCloseOverlayAndIcon();
-    if (this.lists.length > 0) {
-      this.isFirstListInit = false;
-    }
   }
 
   updateList() {
@@ -117,7 +120,6 @@ export class ListComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   handleAddListOpen(event: Event) {
-    console.log(this.lists);
     event.stopPropagation();
     if (this.lists.length >= 0) {
       this.boardService.handleOpenList(this.lists.length, this.premium);
