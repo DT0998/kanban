@@ -15,13 +15,13 @@ constructor(){
 
 
 struct request {
+    // address of the requestor
         address requestor;
         uint256 amount;
         string name;
 }
 
 struct sendReceive {
-        string action;
         uint256 amount;
         address otherPartyAddress;
         string otherPartyName;
@@ -76,7 +76,7 @@ function payRequest(uint256 _request) public payable {
 
     payable(payableRequest.requestor).transfer(msg.value);
 
-    // Add to history of both parties
+    // Add to history of user subscribe premium
     addHistorySubscribePremium(msg.sender, payableRequest.requestor, payableRequest.amount);
 
     myRequests[_request] = myRequests[myRequests.length-1];
@@ -87,7 +87,6 @@ function payRequest(uint256 _request) public payable {
 function addHistorySubscribePremium(address sender, address receiver, uint256 _amount) private {
     // history of sender
     sendReceive memory newSend;
-    newSend.action = "Send";
     newSend.amount = _amount;
     newSend.otherPartyAddress = receiver;
     if(names[receiver].hasName){

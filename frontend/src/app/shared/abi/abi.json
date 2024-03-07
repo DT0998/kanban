@@ -11,7 +11,6 @@
     "inputs": [
       { "internalType": "address", "name": "user", "type": "address" },
       { "internalType": "uint256", "name": "_amount", "type": "uint256" },
-      { "internalType": "string", "name": "_message", "type": "string" }
     ],
     "name": "createRequest",
     "outputs": [],
@@ -28,7 +27,6 @@
         "components": [
           { "internalType": "string", "name": "action", "type": "string" },
           { "internalType": "uint256", "name": "amount", "type": "uint256" },
-          { "internalType": "string", "name": "message", "type": "string" },
           {
             "internalType": "address",
             "name": "otherPartyAddress",

@@ -37,18 +37,31 @@ export class CalendarComponent {
     }
   }
 
+  getLastDayOfMonth(): Date {
+    const now = new Date();
+    const lastDateOfCurrentMonth = new Date(
+      now.getFullYear(),
+      now.getMonth() + 1,
+      0
+    );
+    return lastDateOfCurrentMonth;
+  }
+
   calendarOptions: CalendarOptions = {
+    nextDayThreshold: '00:00:00',
     initialView: 'dayGridWeek',
     plugins: [dayGridPlugin, interactionPlugin, timeGridPlugin],
     dateClick: (arg) => this.handleDateClick(arg),
     events: [
-      { title: 'event 1', date: new Date() },
-      { title: 'event 2', date: new Date() },
+      {
+        title: 'Subscribe Premium',
+        start: new Date(),
+        end: this.getLastDayOfMonth(),
+      },
     ],
     headerToolbar: {
       left: 'prev,next',
       center: 'title',
-      // right: 'dayGridWeek,dayGridDay',
       right: '',
     },
   };

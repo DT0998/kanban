@@ -48,3 +48,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .fc-direction-ltr {
   padding: 0.5rem !important;
 }
+
+.fc-direction-ltr .fc-daygrid-event .fc-event-time {
+  display: none !important;
+}
