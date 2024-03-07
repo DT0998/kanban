@@ -7,7 +7,7 @@ const user = config.get("user");
 const password = config.get("password");
 const database = config.get("database");
 
-export const connectionMysql = mysql.createConnection({
+const connectionMysql = mysql.createConnection({
   host: host,
   user: user,
   password: password,
@@ -24,4 +24,4 @@ async function connect() {
   }
 }
 
-module.exports = connect;
+module.exports = { connect, connectionMysql };

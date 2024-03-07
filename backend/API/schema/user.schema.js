@@ -6,17 +6,19 @@
  *       type: object
  *       required:
  *         - name
- *         - address
+ *         - balance
  *         - dateAdded
+ *         - premium
  *       properties:
  *         name:
  *             type: string
  *         address:
  *           type: string
+ *         balance:
+ *            type: number
  *         dateAdded:
  *           type: string
  *           format: date
+ *        premium:
+ *          type: boolean
  */
-
-
-

@@ -6,12 +6,14 @@ const {
 } = require("./API/utils/mettrics");
 const swaggerDocs = require("./API/utils/swagger");
 const logger = require("./API/utils/logger");
-const connect = require("./API/utils/connect");
+const { connect } = require("./API/utils/connect");
 const config = require("config");
 const responseTime = require("response-time");
 const { userRoutes } = require("./API/routes/index.routes");
+const Moralis = require("moralis").default;
 
 const port = config.get("port");
+const moralisApiKey = config.get("moralisKey");
 const app = express();
 
 app.use(express.json());
@@ -31,15 +33,26 @@ app.use(
   })
 );
 
-// server listerning
-app.listen(port, async () => {
-  logger.info(`App is running at http://localhost:${port}`);
+const startServer = async () => {
+  try {
+    await Moralis.start({
+      apiKey: moralisApiKey,
+    });
+    // server listerning
+    app.listen(port, async () => {
+      logger.info(`App is running at http://localhost:${port}`);
 
-  await connect();
+      await connect();
 
-  userRoutes(app, "api");
+      userRoutes(app, "api");
 
-  startMetricsServer();
+      startMetricsServer();
 
-  swaggerDocs(app, port);
-});
+      swaggerDocs(app, port);
+    });
+  } catch (error) {
+    logger.error(`Error: ${error}`);
+  }
+};
+
+startServer();
