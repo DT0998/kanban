@@ -39,3 +39,12 @@ $notebook-app-theme: mat.define-light-theme((
 @tailwind utilities;
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+// fullcalendar
+.fc .fc-toolbar-title {
+  font-size: 1rem !important;
+}
+
+.fc-direction-ltr {
+  padding: 0.5rem !important;
+}

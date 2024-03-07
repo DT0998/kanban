@@ -16,11 +16,29 @@
             </button>
         </div>
         <!-- avatar -->
-        <a routerLink="/dashboard/profile">
-            <div class="md:mr-3 md:mx-0 mx-[12px] h-full flex items-center">
-                <ng-icon name="ionPersonCircleOutline" size="20" class="text-white mx-[12px] md:hidden block"></ng-icon>
+        <div class="h-full flex items-center">
+            <button mat-button [matMenuTriggerFor]="menu" class="md:mr-3 md:mx-0 mx-[12px]">
+                <ng-icon name="ionPersonCircleOutline" size="20"
+                    class="text-white mx-[12px] md:hidden block"></ng-icon></button>
+        </div>
+        <!-- menu dropdown -->
+        <mat-menu #menu="matMenu">
+            <div class="px-[11px] py-[15px]">
+                <ng-container *ngIf="premium; else nonPremium">
+                    <span class="py-[5px] px-[5px] text-white rounded"
+                        style="background: linear-gradient(97.78deg, var(--ds-background-accent-purple-bolder, #4423a3) 17.5%, var(--ds-background-accent-magenta-subtle, #aa63cb) 113.39%);">Premium</span>
+                </ng-container>
+                <ng-template #nonPremium>
+                    <span class="py-[5px] px-[5px] bg-slate-300 rounded">Non-premium</span>
+                </ng-template>
             </div>
-        </a>
+            <a routerLink="/dashboard/profile">
+                <button mat-menu-item>
+                    Edit profile
+                </button>
+            </a>
+            <button mat-menu-item>Logout</button>
+        </mat-menu>
     </div>
 </nav>
 

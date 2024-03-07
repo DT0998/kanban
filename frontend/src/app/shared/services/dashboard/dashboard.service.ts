@@ -9,17 +9,20 @@ import { ModalBoardComponent } from '../../components/modal-board/modal-board.co
 export class DashboardService {
   isSidebarMobileOpen: boolean;
   isSmallScreen: boolean;
+  isLaptopSmallScreen: boolean;
   private isModalBoardOpen: boolean;
 
   constructor(public dialog: MatDialog) {
     this.isSidebarMobileOpen = false;
     this.isSmallScreen = false;
     this.isModalBoardOpen = false;
+    this.isLaptopSmallScreen = false;
   }
 
   // detect window resize
   onResize(event: Event): void {
     this.isSmallScreen = window.innerWidth <= 426;
+    this.isLaptopSmallScreen = window.innerWidth <= 1025;
     // change sidebar when desktop
     if (!this.isSmallScreen) {
       this.isSidebarMobileOpen = false;

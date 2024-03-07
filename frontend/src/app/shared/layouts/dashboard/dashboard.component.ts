@@ -33,6 +33,8 @@ import { Board } from '../../models/board.model';
 import { selectBoardList } from '../../store/board/board.selector';
 import { DashboardService } from '../../services/dashboard/dashboard.service';
 import { selectPremium } from '../../store/premium/premium.selector';
+import { MatMenuModule } from '@angular/material/menu';
+import {MatButtonModule} from '@angular/material/button';
 
 @Component({
   selector: 'app-dashboard',
@@ -45,6 +47,8 @@ import { selectPremium } from '../../store/premium/premium.selector';
     RouterModule,
     ModalPremiumComponent,
     ModalBoardComponent,
+    MatMenuModule,
+    MatButtonModule
   ],
   providers: [
     provideIcons({
