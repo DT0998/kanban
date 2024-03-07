@@ -12,8 +12,6 @@ constructor(){
 }
 
 //Create Struct and Mappping for request, transaction & name
-
-
 struct request {
     // address of the requestor
         address requestor;
@@ -40,18 +38,14 @@ mapping(address  => sendReceive[]) history;
 //Add a name to wallet address
 
 function addName(string memory _name) public {
-    
     userName storage newUserName = names[msg.sender];
     newUserName.name = _name;
     newUserName.hasName = true;
-
 }
 
 
 //Create a Request
-
 function createRequest(address user, uint256 _amount) public {
-        
     request memory newRequest;
     newRequest.requestor = msg.sender;
     newRequest.amount = _amount;
@@ -59,12 +53,10 @@ function createRequest(address user, uint256 _amount) public {
         newRequest.name = names[msg.sender].name;
     }
     requests[user].push(newRequest);
-
 }
 
 
 //Pay a Request
-
 function payRequest(uint256 _request) public payable {
     
     require(_request < requests[msg.sender].length, "No Such Request");
@@ -84,6 +76,7 @@ function payRequest(uint256 _request) public payable {
 
 }
 
+// Add to history of user subscribe premium
 function addHistorySubscribePremium(address sender, address receiver, uint256 _amount) private {
     // history of sender
     sendReceive memory newSend;
@@ -97,7 +90,6 @@ function addHistorySubscribePremium(address sender, address receiver, uint256 _a
 
 
 //Get all requests sent to a User
-
 function getMyRequests(address _user) public view returns(
          address[] memory, 
          uint256[] memory, 
@@ -120,8 +112,6 @@ function getMyRequests(address _user) public view returns(
 
 
 //Get all historic transactions user has been apart of
-
-
 function getMyHistory(address _user) public view returns(sendReceive[] memory){
         return history[_user];
 }

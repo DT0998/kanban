@@ -8,7 +8,7 @@ import { CalendarOptions } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import timeGridPlugin from '@fullcalendar/timegrid';
-import { DashboardService } from '../../shared/services/dashboard/dashboard.service';
+import { DashboardService } from '../../../shared/services/dashboard/dashboard.service';
 
 @Component({
   selector: 'app-calendar',

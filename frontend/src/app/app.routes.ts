@@ -1,11 +1,11 @@
 import { Routes } from '@angular/router';
 import { DashboardComponent } from './shared/layouts/dashboard/dashboard.component';
-import { HomeComponent } from './pages/home/home.component';
+import { HomeComponent } from './pages/dashboard/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
-import { ProfileComponent } from './pages/profile/profile.component';
-import { BoardDetailComponent } from './pages/board-detail/board-detail.component';
-import { CalendarComponent } from './pages/calendar/calendar.component';
-import { HistoryComponent } from './pages/history/history.component';
+import { ProfileComponent } from './pages/dashboard/profile/profile.component';
+import { BoardDetailComponent } from './pages/dashboard/board-detail/board-detail.component';
+import { CalendarComponent } from './pages/dashboard/calendar/calendar.component';
+import { HistoryComponent } from './pages/dashboard/history/history.component';
 
 export const routes: Routes = [
   {

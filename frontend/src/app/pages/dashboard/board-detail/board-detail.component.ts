@@ -2,14 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { ListComponent } from '../../shared/components/list/list.component';
-import { BoardService } from '../../shared/services/board/board.service';
+import { ListComponent } from '../../../shared/components/list/list.component';
+import { BoardService } from '../../../shared/services/board/board.service';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription, map } from 'rxjs';
-import { Board } from '../../shared/models/board.model';
-import * as fromApp from '../../shared/store/store.reducer';
+import { Board } from '../../../shared/models/board.model';
+import * as fromApp from '../../../shared/store/store.reducer';
 import { Store } from '@ngrx/store';
-import { selectBoardList } from '../../shared/store/board/board.selector';
+import { selectBoardList } from '../../../shared/store/board/board.selector';
 
 @Component({
   selector: 'app-board-detail',
