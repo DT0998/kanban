@@ -25,8 +25,8 @@ export class WagmiService {
     } catch (error) {
       console.error(error);
     }
-    }
-    
+  }
+
   async disconnectWallet() {
     try {
       await disconnect();
