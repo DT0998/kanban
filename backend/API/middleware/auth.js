@@ -1,21 +1,32 @@
-const jwt = require("jsonwebtoken");
-// const User = require("../models/User");
 const config = require("config");
+const jwt = require("jsonwebtoken");
+const accessTokenSecret = config.get("accessTokenSecret");
 
-const auth = async (req, res, next) => {
-  const token = req.header("Authorization").replace("Bearer ", "");
-  const JwtKey = config.get("jwtKey");
-  const data = jwt.verify(token, JwtKey);
+const verifyToken = async (req, res, next) => {
+  const authorizationHeader = req.header("Authorization");
+
+  // Check if Authorization header exists
+  if (!authorizationHeader) {
+    return res.status(401).send({ message: "Authorization header missing" });
+  }
+
+  // Check if the Authorization header has the correct format
+  if (!authorizationHeader.startsWith("Bearer ")) {
+    return res.status(401).send({ message: "Invalid authorization format" });
+  }
+
+  const token = authorizationHeader.replace("Bearer ", "");
+  if (!token) return res.sendStatus(401);
   try {
-    // const user = await User.findOne({ _id: data._id, "tokens.token": token });
-    if (!user) {
-      throw new Error();
-    }
-    req.user = user;
-    req.token = token;
+    const decode = jwt.verify(token, accessTokenSecret);
+    req.user = decode;
     next();
   } catch (error) {
-    res.status(401).send({ error: "Not authorized to access this resource" });
+    // handle the error
+    if (error.name === "JsonWebTokenError") {
+      res.status(401).send({ message: "Not authorized to access this resource" });
+    }
+    res.status(401).send({ message: "Token Expired" });
   }
 };
-module.exports = auth;
+module.exports = verifyToken;

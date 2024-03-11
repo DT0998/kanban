@@ -9,7 +9,7 @@ const logger = require("./API/utils/logger");
 const { connect } = require("./API/utils/connect");
 const config = require("config");
 const responseTime = require("response-time");
-const { userRoutes } = require("./API/routes/index.routes");
+const { userRoutes, authRoutes } = require("./API/routes/index.routes");
 const Moralis = require("moralis").default;
 
 const port = config.get("port");
@@ -44,7 +44,9 @@ const startServer = async () => {
 
       await connect();
 
+      // routes
       userRoutes(app, "api");
+      authRoutes(app, "api");
 
       startMetricsServer();
 

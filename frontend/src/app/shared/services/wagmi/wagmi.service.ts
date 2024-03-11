@@ -1,27 +1,46 @@
 import { Injectable } from '@angular/core';
 import {
-  InjectedConnector,
-  connect,
-  createClient,
+  createConfig,
+  configureChains,
+  mainnet,
   disconnect,
+  connect,
+  fetchEnsName,
+  ConnectResult,
+  PublicClient,
+  getContract,
+  readContract,
+  writeContract,
 } from '@wagmi/core';
-import { getDefaultProvider } from 'ethers';
+import { InjectedConnector } from '@wagmi/core/connectors/injected';
+import { publicProvider } from '@wagmi/core/providers/public';
+import { polygonMumbai } from '@wagmi/chains';
 
-const client = createClient({
-  autoConnect: true,
-  provider: getDefaultProvider(),
+const { publicClient, webSocketPublicClient } = configureChains(
+  [polygonMumbai],
+  [publicProvider()]
+);
+
+// initialize the client
+const config = createConfig({
+  autoConnect: false,
+  publicClient,
+  webSocketPublicClient,
 });
-
 @Injectable({
   providedIn: 'root',
 })
 export class WagmiService {
+  wagmiProvider!: ConnectResult<PublicClient>;
   constructor() {}
 
   async connectWallet() {
     try {
-      const test = await connect({ connector: new InjectedConnector() });
-      console.log(test);
+      this.wagmiProvider = await connect({
+        connector: new InjectedConnector({
+          chains: [polygonMumbai],
+        }),
+      });
     } catch (error) {
       console.error(error);
     }

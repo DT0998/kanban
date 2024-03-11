@@ -6,10 +6,20 @@ const options = {
   definition: {
     openapi: "3.0.0",
     info: {
-      title: "API employee",
+      title: "API kanban",
       version: "1.0.0",
       description:
         "This is a simple CRUD API application made with Express and documented with Swagger",
+    },
+    components: {
+      securitySchemes: {
+        Authorization: {
+          type: "http",
+          scheme: "bearer",
+          bearerFormat: "JWT",
+          value: "Bearer <JWT token here>",
+        },
+      },
     },
   },
   apis: ["./API/routes/*.js", "./API/schema/*.js"],

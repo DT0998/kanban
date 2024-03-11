@@ -3,7 +3,6 @@ import {
   HttpInterceptorFn,
   HttpRequest,
 } from '@angular/common/http';
-import { AuthService } from '../services/auth/auth.service';
 import { inject } from '@angular/core';
 
 export const authInterceptor: HttpInterceptorFn = (
@@ -11,8 +10,7 @@ export const authInterceptor: HttpInterceptorFn = (
   next: HttpHandlerFn
 ) => {
   // Get the auth token from the service.
-  const authService = inject(AuthService);
-  const authToken = authService.getAuthorizationToken();
+  const authToken = '123';
   // Clone the request and replace the original headers with
   // cloned headers, updated with the authorization.
   const authRequest = request.clone({

@@ -2,7 +2,7 @@
  * @swagger
  * components:
  *   schemas:
- *     History:
+ *     Premium:
  *       type: object
  *       required:
  *         - id

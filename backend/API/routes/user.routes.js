@@ -1,23 +1,29 @@
-// employee routes
+const { getUser } = require("../controllers/user.controller");
+const verifyToken = require("../middleware/auth");
+
+// User routes
 function routes(app, rootUrl) {
   /**
    * @swagger
    * tags:
-   *   name: Employee
-   *   description: Employee management APIs
+   *   name: User
+   *   description: User management APIs
    */
   /**
    * @swagger
-   * /api/Employee:
+   * /api/Profile:
    *   get:
-   *     summary: Get all employees
-   *     tags: [Employee]
+   *     security:
+   *     - Authorization: []
+   *     summary: Get User Profile
+   *     tags: [User]
    *     responses:
    *       200:
-   *         description: List of employees
+   *         description: User Profile
    *       500:
    *         description: Some server error
    */
+  app.get(`/${rootUrl}/Profile`, verifyToken, getUser);
 }
 
 module.exports = routes;

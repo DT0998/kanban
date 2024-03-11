@@ -6,19 +6,20 @@
  *       type: object
  *       required:
  *         - name
- *         - balance
+ *         - address
  *         - dateAdded
  *         - premium
+ *         - refreshToken
  *       properties:
  *         name:
- *             type: string
+ *           type: string
  *         address:
  *           type: string
- *         balance:
- *            type: number
  *         dateAdded:
  *           type: string
  *           format: date
- *        premium:
- *          type: boolean
+ *         premium:
+ *           type: boolean
+ *         refreshToken:
+ *           type: string
  */
