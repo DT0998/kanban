@@ -7,17 +7,17 @@ const refreshTokenSecret = config.get("refreshTokenSecret");
 const refreshTokenLife = config.get("refreshTokenLife");
 
 function createAccessToken(data) {
-  const { name, address } = data;
+  const { address } = data;
   // Create access token
-  const accessToken = jwt.sign({ name, address }, accessTokenSecret, {
+  const accessToken = jwt.sign({ address }, accessTokenSecret, {
     expiresIn: accessTokenLife,
   });
   return accessToken;
 }
 
 function createRefreshToken(data) {
-  const { name, address } = data;
-  const refreshToken = jwt.sign({ name, address }, refreshTokenSecret, {
+  const { address } = data;
+  const refreshToken = jwt.sign({ address }, refreshTokenSecret, {
     expiresIn: refreshTokenLife,
   });
   return refreshToken;

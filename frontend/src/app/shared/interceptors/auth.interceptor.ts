@@ -3,7 +3,6 @@ import {
   HttpInterceptorFn,
   HttpRequest,
 } from '@angular/common/http';
-import { inject } from '@angular/core';
 
 export const authInterceptor: HttpInterceptorFn = (
   request: HttpRequest<any>,

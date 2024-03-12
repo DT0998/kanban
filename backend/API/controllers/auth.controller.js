@@ -9,9 +9,10 @@ let refreshTokens = {}; // tao mot object chua nhung refreshTokens
 // Function to handle login
 async function login(req, res) {
   try {
-    const { name, address } = req.body;
+    const { address } = req.body;
     const premium = false;
     const dateAdded = new Date();
+    const name = "Unnammed";
 
     // Check if the user exists in the database
     const userExists = await checkUserExists(address);
@@ -85,10 +86,10 @@ function register(name, address, dateAdded, premium) {
 }
 
 function refreshToken(req, res) {
-  const { refreshToken, name, address } = req.body;
+  const { refreshToken, address } = req.body;
   // if refresh token exists
   if (refreshToken && refreshToken in refreshTokens) {
-    const accessToken = createAccessToken({ name, address });
+    const accessToken = createAccessToken({ address });
     const response = {
       accessToken: accessToken,
     };

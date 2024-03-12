@@ -9,9 +9,9 @@
                 <span class="text-blue-500">Learn more</span>
             </p>
             <div class="border-t border-indigo-500 mx-4"></div>
-            <div class="text-black flex justify-center py-[15px] wallet-container cursor-pointer">
-                <button type="submit" class="text-center px-[40px] py-[5px] rounded-3xl flex gap-2 flex items-center"
-                    (click)="handleLogin()">
+            <div class="text-black flex justify-center py-[15px] wallet-container cursor-pointer"
+                (click)="handleLogin()">
+                <button type="submit" class="text-center px-[40px] py-[5px] rounded-3xl flex gap-2 flex items-center">
                     <ng-container *ngIf="isLoading; else notIsLoading">
                         <mat-spinner [diameter]="30"></mat-spinner>
                     </ng-container>

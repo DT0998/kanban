@@ -21,11 +21,8 @@
  *     Login:
  *       type: object
  *       required:
- *         - name
  *         - address
  *       properties:
- *         name:
- *           type: string
  *         address:
  *           type: string
  */
@@ -51,12 +48,9 @@
  *       type: object
  *       required:
  *         - refreshToken
- *         - name
  *         - address
  *       properties:
  *         refreshToken:
- *           type: string
- *         name:
  *           type: string
  *         address:
  *           type: string

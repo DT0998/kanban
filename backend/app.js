@@ -11,12 +11,15 @@ const config = require("config");
 const responseTime = require("response-time");
 const { userRoutes, authRoutes } = require("./API/routes/index.routes");
 const Moralis = require("moralis").default;
+const cors = require("cors");
 
 const port = config.get("port");
 const moralisApiKey = config.get("moralisKey");
 const app = express();
 
 app.use(express.json());
+app.use(cors());
+app.options('*', cors()); 
 
 app.use(
   responseTime((req, res, time) => {
