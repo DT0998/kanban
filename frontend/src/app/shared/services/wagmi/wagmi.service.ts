@@ -15,17 +15,13 @@ const { publicClient, webSocketPublicClient } = configureChains(
   [publicProvider()]
 );
 
-export const publicClientViem = createPublicClient({
-  chain: polygonMumbai,
-  transport: http(),
-});
-
 // initialize the client
 const config = createConfig({
   autoConnect: false,
   publicClient,
   webSocketPublicClient,
 });
+
 @Injectable({
   providedIn: 'root',
 })
@@ -47,6 +43,8 @@ export class WagmiService {
   async disconnectWallet() {
     try {
       await disconnect();
-    } catch (error) {}
+    } catch (error) {
+      console.error(error);
+    }
   }
 }

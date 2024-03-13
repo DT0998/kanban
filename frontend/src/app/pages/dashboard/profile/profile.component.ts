@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpService } from '../../../shared/services/http/http.service';
 
 @Component({
   selector: 'app-profile',
@@ -9,5 +10,5 @@ import { CommonModule } from '@angular/common';
   styleUrl: './profile.component.scss',
 })
 export class ProfileComponent {
-  constructor() {}
+  constructor(public httpService: HttpService) {}
 }

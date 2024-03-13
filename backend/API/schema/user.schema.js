@@ -20,6 +20,17 @@
  *           format: date
  *         premium:
  *           type: boolean
- *         refreshToken:
+ */
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     UserProfileRequest:
+ *       type: object
+ *       required:
+ *         - address
+ *       properties:
+ *         address:
  *           type: string
  */

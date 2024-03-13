@@ -1,4 +1,4 @@
-const { getUser } = require("../controllers/user.controller");
+const { getUserProfile } = require("../controllers/user.controller");
 const verifyToken = require("../middleware/auth");
 
 // User routes
@@ -9,21 +9,35 @@ function routes(app, rootUrl) {
    *   name: User
    *   description: User management APIs
    */
+
   /**
    * @swagger
-   * /api/Profile:
+   * /api/profile/{address}:
    *   get:
    *     security:
    *     - Authorization: []
-   *     summary: Get User Profile
+   *     summary: Get user profile
    *     tags: [User]
+   *     parameters:
+   *       - in: path
+   *         name: address
+   *         schema:
+   *           type: string
+   *         required: true
+   *         description: Address of the user
    *     responses:
    *       200:
-   *         description: User Profile
+   *         description: Get user profile successfully
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: '#/components/schemas/User'  
+   *       404:
+   *         description: User not found
    *       500:
-   *         description: Some server error
+   *         description: Internal Server Error
    */
-  app.get(`/${rootUrl}/Profile`, verifyToken, getUser);
+  app.get(`/${rootUrl}/profile/:address`, verifyToken, getUserProfile);
 }
 
 module.exports = routes;

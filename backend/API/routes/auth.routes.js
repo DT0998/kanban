@@ -11,7 +11,7 @@ function routes(app, rootUrl) {
 
   /**
    * @swagger
-   * /api/Login:
+   * /api/login:
    *   post:
    *     summary: Login with wallet
    *     tags: [Auth]
@@ -31,11 +31,11 @@ function routes(app, rootUrl) {
    *       500:
    *         description: Some server error
    */
-  app.post(`/${rootUrl}/Login`, login);
+  app.post(`/${rootUrl}/login`, login);
 
   /**
    * @swagger
-   * /api/Token:
+   * /api/token:
    *   post:
    *     summary: Refresh token
    *     tags: [Auth]
@@ -55,7 +55,7 @@ function routes(app, rootUrl) {
    *       500:
    *         description: Some server error
    */
-  app.post(`/${rootUrl}/Token`, refreshToken);
+  app.post(`/${rootUrl}/token`, refreshToken);
 }
 
 module.exports = routes;

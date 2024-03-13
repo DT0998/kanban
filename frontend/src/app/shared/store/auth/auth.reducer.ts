@@ -1,11 +1,13 @@
 import * as AuthActions from './auth.actions';
 
 export interface State {
-  token: string;
+  accessToken: string;
+  refreshToken: string;
 }
 
 const initialState: State = {
-  token: '',
+  accessToken: '',
+  refreshToken: '',
 };
 
 export function authReducer(
@@ -13,6 +15,16 @@ export function authReducer(
   action: AuthActions.AuthActions
 ): State {
   switch (action.type) {
+    case AuthActions.GET_ACCESS_TOKEN:
+      return {
+        ...state,
+        accessToken: action.payload,
+      };
+    case AuthActions.GET_REFRESH_TOKEN:
+      return {
+        ...state,
+        refreshToken: action.payload,
+      };
     default:
       return state;
   }

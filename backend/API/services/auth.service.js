@@ -17,6 +17,7 @@ function createAccessToken(data) {
 
 function createRefreshToken(data) {
   const { address } = data;
+  // create refresh token
   const refreshToken = jwt.sign({ address }, refreshTokenSecret, {
     expiresIn: refreshTokenLife,
   });

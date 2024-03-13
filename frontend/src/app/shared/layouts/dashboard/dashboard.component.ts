@@ -34,7 +34,8 @@ import { selectBoardList } from '../../store/board/board.selector';
 import { DashboardService } from '../../services/dashboard/dashboard.service';
 import { selectPremium } from '../../store/premium/premium.selector';
 import { MatMenuModule } from '@angular/material/menu';
-import {MatButtonModule} from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
+import { LocalStorageService } from '../../services/localStorage/localStorage.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -48,7 +49,7 @@ import {MatButtonModule} from '@angular/material/button';
     ModalPremiumComponent,
     ModalBoardComponent,
     MatMenuModule,
-    MatButtonModule
+    MatButtonModule,
   ],
   providers: [
     provideIcons({
@@ -76,6 +77,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     public dialog: MatDialog,
     public store: Store<fromApp.AppState>,
     public dashboardService: DashboardService,
+    public localStorageService: LocalStorageService,
     public router: Router
   ) {}
 
@@ -124,9 +126,18 @@ export class DashboardComponent implements OnInit, OnDestroy {
     if (this.premium || index <= 4) {
       this.router.navigate(['/dashboard', 'board', board.background.id]);
     } else {
-      this.router.navigate(['/dashboard', 'board', this.boardLists[4].background.id]);
+      this.router.navigate([
+        '/dashboard',
+        'board',
+        this.boardLists[4].background.id,
+      ]);
       this.dashboardService.openPremiumModal();
     }
+  }
+
+  async handleLogout() {
+    this.localStorageService.removeItem('userInfo');
+    this.router.navigateByUrl('/login');
   }
 
   ngOnDestroy(): void {

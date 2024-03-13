@@ -6,11 +6,13 @@ import { ProfileComponent } from './pages/dashboard/profile/profile.component';
 import { BoardDetailComponent } from './pages/dashboard/board-detail/board-detail.component';
 import { CalendarComponent } from './pages/dashboard/calendar/calendar.component';
 import { HistoryComponent } from './pages/dashboard/history/history.component';
+import { authGuard } from './shared/guards/auth.guard';
 
 export const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
+    canActivate: [authGuard],
     children: [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: HomeComponent },
@@ -23,7 +25,8 @@ export const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+    canActivate: [authGuard],
   },
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: '**', redirectTo: '' },
 ];

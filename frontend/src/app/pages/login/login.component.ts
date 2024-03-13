@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  WagmiService,
-  publicClientViem,
-} from '../../shared/services/wagmi/wagmi.service';
+import { WagmiService } from '../../shared/services/wagmi/wagmi.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { HttpService } from '../../shared/services/http/http.service';
-import { lastValueFrom } from 'rxjs';
-import { getAccount, Address } from '@wagmi/core';
+import { getAccount } from '@wagmi/core';
+import * as fromApp from '../../shared/store/store.reducer';
+import * as AuthActions from '../../shared/store/auth/auth.actions';
+import { Store } from '@ngrx/store';
+import { LocalStorageService } from '../../shared/services/localStorage/localStorage.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +21,10 @@ export class LoginComponent {
   isLoading: boolean;
   constructor(
     public wagmiService: WagmiService,
-    public httpService: HttpService
+    public httpService: HttpService,
+    public localStorageService: LocalStorageService,
+    public store: Store<fromApp.AppState>,
+    public router: Router
   ) {
     this.isLoading = false;
   }
@@ -33,9 +37,20 @@ export class LoginComponent {
       const payload = {
         address: account.address,
       };
-      // await this use rxjs
-      const login$ = this.httpService.post('api/Login', payload);
-      await lastValueFrom(login$);
+      // Make the login request and convert the observable to a promise
+      const res = await this.httpService.post('api/login', payload).toPromise();
+
+      // Store the access token object in local storage
+      const obj = {
+        accessToken: res.accessToken,
+        address: account.address,
+      };
+      this.localStorageService.setItem('userInfo', JSON.stringify(obj));
+      this.store.dispatch(new AuthActions.GetAccessToken(res.accessToken));
+      this.store.dispatch(new AuthActions.GetRefreshToken(res.refreshToken));
+
+      // Navigate to the dashboard after login is successful
+      this.router.navigateByUrl('/dashboard');
     } catch {
       await this.wagmiService.disconnectWallet();
     } finally {

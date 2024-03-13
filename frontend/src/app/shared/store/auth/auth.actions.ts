@@ -1,18 +1,21 @@
 import { Action } from '@ngrx/store';
 
-export const GET_TOKEN = '[Premium] LOAD_TOKEN';
-export const GET_TOKEN_SUCCESS = '[Premium] LOAD_TOKEN_SUCCESS';
-export const GET_TOKEN_ERROR = '[Premium] LOAD_TOKEN_ERROR';
+export const GET_ACCESS_TOKEN = '[Auth] GET_ACCESS_TOKEN';
 
-export const GET_REFRESH_TOKEN = '[Premium] LOAD_REFRESH_TOKEN';
-export const GET_REFRESH_TOKEN_SUCCESS = '[Premium] LOAD_REFRESH_TOKEN_SUCCESS';
-export const GET_REFRESH_TOKEN_ERROR = '[Premium] LOAD_REFRESH_TOKEN_ERROR';
+export const GET_REFRESH_TOKEN = '[Auth] GET_REFRESH_TOKEN';
 
-export class GetToken implements Action {
-  readonly type = GET_TOKEN;
+export const GET_NEW_ACCESS_TOKEN = '[Auth] GET_NEW_ACCESS_TOKEN';
+export const GET_NEW_ACCESS_TOKEN_SUCCESS =
+  '[Auth] GET_NEW_ACCESS_TOKEN_SUCCESS';
+export const GET_NEW_ACCESS_TOKEN_ERROR = '[Auth] GET_NEW_ACCESS_TOKEN_ERROR';
+
+export class GetAccessToken implements Action {
+  readonly type = GET_ACCESS_TOKEN;
+  constructor(public payload: string) {}
 }
 
 export class GetRefreshToken implements Action {
   readonly type = GET_REFRESH_TOKEN;
+  constructor(public payload: string) {}
 }
-export type AuthActions = GetToken | any;
+export type AuthActions = GetAccessToken | GetRefreshToken | any;
