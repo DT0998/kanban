@@ -10,6 +10,11 @@ let refreshTokens = {}; // tao mot object chua nhung refreshTokens
 async function login(req, res) {
   try {
     const { address } = req.body;
+    console.log("address", address);
+    // Check if the address is empty
+    if (!address) {
+      return res.status(400).json({ message: "Address is required" });
+    }
     const premium = false;
     const dateAdded = new Date();
     const name = "Unnammed";

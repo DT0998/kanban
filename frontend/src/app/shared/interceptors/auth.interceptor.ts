@@ -20,7 +20,7 @@ export const authInterceptor: HttpInterceptorFn = (
   return next(authRequest).pipe(
     catchError((error: HttpErrorResponse) => {
       // If the error is due to token expiration
-      if (error.status === 401 && error.error.message === 'Token Expired') {
+      if (error.error.message === 'Token Expired') {
         // Attempt to refresh token and retry the request
         return authService.refreshTokenAndRetry(request, next);
       }

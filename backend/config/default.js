@@ -1,6 +1,6 @@
 // config server
 module.exports = {
-  port: 1337,
+  port: 3000,
   host: process.env.HOST,
   user: process.env.USER,
   password: process.env.PASSWORD,

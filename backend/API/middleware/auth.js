@@ -18,8 +18,8 @@ const verifyToken = async (req, res, next) => {
   const token = authorizationHeader.replace("Bearer ", "");
   if (!token) return res.sendStatus(401);
   try {
-    const decode = jwt.verify(token, accessTokenSecret);
-    req.user = decode;
+    jwt.verify(token, accessTokenSecret);
+    console.log("req",req)
     next();
   } catch (error) {
     // handle the error

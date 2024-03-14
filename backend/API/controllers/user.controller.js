@@ -9,11 +9,9 @@ function getUserProfile(req, res) {
     if (error) {
       console.error("Error executing SQL query:", error);
       res.status(500).send({ error: "Internal server error" });
-      return;
     }
     if (results.length === 0) {
       res.status(404).send({ error: "User not found" });
-      return;
     }
     // Convert premium field to boolean for each result
     results.forEach((result) => {

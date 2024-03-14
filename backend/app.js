@@ -18,8 +18,12 @@ const moralisApiKey = config.get("moralisKey");
 const app = express();
 
 app.use(express.json());
-app.use(cors());
-app.options('*', cors()); 
+// config cors
+const corsOptions = {
+  origin: `*`,
+  optionsSuccessStatus: 200,
+};
+app.use(cors(corsOptions));
 
 app.use(
   responseTime((req, res, time) => {
@@ -43,7 +47,7 @@ const startServer = async () => {
     });
     // server listerning
     app.listen(port, async () => {
-      logger.info(`App is running at http://localhost:${port}`);
+      logger.info(`App is running at http://localhost:${port}/swagger`);
 
       await connect();
 

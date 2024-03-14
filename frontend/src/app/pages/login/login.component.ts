@@ -47,23 +47,24 @@ export class LoginComponent {
       const resLogin = await this.httpService
         .post('api/login', payload)
         .toPromise();
-
       // Store the access token object in local storage
       const userInfo = {
         accessToken: resLogin.accessToken,
         refreshToken: resLogin.refreshToken,
         address: userAddress,
       };
-      this.localStorageService.setItem('userInfo', JSON.stringify(userInfo));
-      this.authService.userInfo = userInfo;
       this.store.dispatch(new AuthActions.GetAccessToken(resLogin.accessToken));
       this.store.dispatch(
         new AuthActions.GetRefreshToken(resLogin.refreshToken)
       );
+      // await this.profileService.getProfile(userAddress);
       this.toastr.success('Login successful');
+      this.localStorageService.setItem('userInfo', JSON.stringify(userInfo));
+      if (userInfo) {
+        this.authService.userInfo = userInfo;
+      }
       // Navigate to the dashboard after login is successful
       this.router.navigateByUrl('/dashboard');
-      await this.profileService.getProfile(userAddress);
     } catch {
       await this.wagmiService.disconnectWallet();
     } finally {

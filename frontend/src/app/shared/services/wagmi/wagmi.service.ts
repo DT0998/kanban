@@ -7,7 +7,6 @@ import {
 } from '@wagmi/core';
 import { InjectedConnector } from '@wagmi/core/connectors/injected';
 import { polygonMumbai } from '@wagmi/chains';
-import { createPublicClient, http } from 'viem';
 import { publicProvider } from '@wagmi/core/providers/public';
 
 const { publicClient, webSocketPublicClient } = configureChains(
