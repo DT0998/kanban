@@ -36,6 +36,7 @@ import { selectPremium } from '../../store/premium/premium.selector';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { LocalStorageService } from '../../services/localStorage/localStorage.service';
+import { WagmiService } from '../../services/wagmi/wagmi.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -78,6 +79,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     public store: Store<fromApp.AppState>,
     public dashboardService: DashboardService,
     public localStorageService: LocalStorageService,
+    public wagmiService: WagmiService,
     public router: Router
   ) {}
 
@@ -136,6 +138,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   async handleLogout() {
+    await this.wagmiService.disconnectWallet();
     this.localStorageService.removeItem('userInfo');
     this.router.navigateByUrl('/login');
   }

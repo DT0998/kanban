@@ -11,6 +11,7 @@ import { LocalStorageService } from '../../shared/services/localStorage/localSto
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ProfileService } from '../../shared/services/profile/profile.service';
+import { AuthService } from '../../shared/services/auth/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -28,7 +29,8 @@ export class LoginComponent {
     public store: Store<fromApp.AppState>,
     public router: Router,
     private toastr: ToastrService,
-    public profileService: ProfileService
+    public profileService: ProfileService,
+    public authService: AuthService
   ) {
     this.isLoading = false;
   }
@@ -37,9 +39,9 @@ export class LoginComponent {
     try {
       this.isLoading = true;
       await this.wagmiService.connectWallet();
-      const account = getAccount();
+      const userAddress = this.wagmiService.wagmiProvider.account;
       const payload = {
-        address: account.address,
+        address: userAddress,
       };
       // Make the login request and convert the observable to a promise
       const resLogin = await this.httpService
@@ -50,17 +52,18 @@ export class LoginComponent {
       const userInfo = {
         accessToken: resLogin.accessToken,
         refreshToken: resLogin.refreshToken,
-        address: account.address,
+        address: userAddress,
       };
       this.localStorageService.setItem('userInfo', JSON.stringify(userInfo));
+      this.authService.userInfo = userInfo;
       this.store.dispatch(new AuthActions.GetAccessToken(resLogin.accessToken));
       this.store.dispatch(
         new AuthActions.GetRefreshToken(resLogin.refreshToken)
       );
-      await this.profileService.getProfile();
       this.toastr.success('Login successful');
       // Navigate to the dashboard after login is successful
       this.router.navigateByUrl('/dashboard');
+      await this.profileService.getProfile(userAddress);
     } catch {
       await this.wagmiService.disconnectWallet();
     } finally {

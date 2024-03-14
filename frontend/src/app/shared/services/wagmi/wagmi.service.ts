@@ -26,11 +26,12 @@ const config = createConfig({
   providedIn: 'root',
 })
 export class WagmiService {
+  wagmiProvider: any;
   constructor() {}
 
   async connectWallet() {
     try {
-      await connect({
+      this.wagmiProvider = await connect({
         connector: new InjectedConnector({
           chains: [polygonMumbai],
         }),

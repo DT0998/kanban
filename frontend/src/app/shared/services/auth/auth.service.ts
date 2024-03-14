@@ -12,21 +12,19 @@ import { Observable, catchError, switchMap, throwError } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthService {
-  userInfo: string | null;
-  userInfoParsed!: UserInfo;
+  userInfo!: UserInfo;
   constructor(
     public httpService: HttpService,
     public localStorageService: LocalStorageService,
     public store: Store<fromApp.AppState>
   ) {
-    this.userInfo = this.localStorageService.getItem('userInfo');
-    this.userInfoParsed = this.userInfo ? JSON.parse(this.userInfo) : null;
+    console.log('AuthService', this.userInfo);
   }
 
   addAuthorizationHeader(request: HttpRequest<any>): HttpRequest<any> {
     // Get the access token from the AuthService
-    const accessToken = this.userInfoParsed?.accessToken;
-
+    const accessToken = this.userInfo.accessToken;
+    console.log(accessToken);
     // If the token exists, add it to the request header
     if (accessToken) {
       return request.clone({
@@ -42,8 +40,8 @@ export class AuthService {
 
   refreshTokenAndRetry(request: HttpRequest<any>, next: any): Observable<any> {
     const payload = {
-      address: this.userInfoParsed?.address,
-      refreshToken: this.userInfoParsed?.refreshToken,
+      address: this.userInfo.address,
+      refreshToken: this.userInfo.refreshToken,
     };
     return this.httpService.post('api/token', payload).pipe(
       switchMap((res) => {
@@ -52,6 +50,7 @@ export class AuthService {
           accessToken: res.accessToken,
         };
         this.localStorageService.setItem('userInfo', JSON.stringify(userInfo));
+        this.userInfo.accessToken = res.accessToken;
         this.store.dispatch(new AuthActions.GetAccessToken(res.accessToken));
 
         // Clone the original request with the new token and retry it
