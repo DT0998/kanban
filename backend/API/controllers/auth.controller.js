@@ -89,7 +89,7 @@ function refreshToken(req, res) {
   const { refreshToken, address } = req.body;
   // if refresh token exists
   if (refreshToken && refreshToken in refreshTokens) {
-    const accessToken = createAccessToken({ address });
+    const accessToken = createRefreshToken({ address });
     const response = {
       accessToken: accessToken,
     };

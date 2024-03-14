@@ -13,6 +13,7 @@ import { authInterceptor } from './shared/interceptors/auth.interceptor';
 import { ShareService } from './shared/services/share.service';
 import * as fromApp from './shared/store/store.reducer';
 import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-browser/animations';
+import { provideToastr } from 'ngx-toastr';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -26,6 +27,7 @@ export const appConfig: ApplicationConfig = {
       BrowserAnimationsModule,
     ]),
     provideAnimations(),
+    provideToastr(),
     provideHttpClient(
       withInterceptors([
         // Add interceptors here

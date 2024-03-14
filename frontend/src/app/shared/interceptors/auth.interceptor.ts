@@ -1,38 +1,30 @@
 import {
-  HttpHandlerFn,
+  HttpErrorResponse,
   HttpInterceptorFn,
   HttpRequest,
 } from '@angular/common/http';
 import { inject } from '@angular/core';
-import { LocalStorageService } from '../services/localStorage/localStorage.service';
-import { HttpService } from '../services/http/http.service';
-import { UserInfo } from '../models/user-info.model';
+import { catchError, throwError } from 'rxjs';
+import { AuthService } from '../services/auth/auth.service';
 
 export const authInterceptor: HttpInterceptorFn = (
   request: HttpRequest<any>,
-  next: HttpHandlerFn
+  next: any
 ) => {
   // Get the auth token from the store.
-  const localStorageService = inject(LocalStorageService);
-  const httpService = inject(HttpService);
-  const userInfo: string | null = localStorageService.getItem('userInfo');
-  const userInfoParsed: UserInfo | null = userInfo
-    ? (JSON.parse(userInfo) as UserInfo)
-    : null;
+  const authService = inject(AuthService);
 
-  let authRequest;
-  if (userInfoParsed?.accessToken) {
-    // If access token is available, create the authRequest.
-    authRequest = request.clone({
-      headers: request.headers.set(
-        'Authorization',
-        `Bearer ${userInfoParsed?.accessToken}`
-      ),
-    });
-  } else {
-    // If access token is not available, just use the original request.
-    authRequest = request;
-  }
+  const authRequest = authService.addAuthorizationHeader(request);
+
   // send cloned request (or original request) with header to the next handler.
-  return next(authRequest);
+  return next(authRequest).pipe(
+    catchError((error: HttpErrorResponse) => {
+      // If the error is due to token expiration
+      if (error.status === 401 && error.error.message === 'Token Expired') {
+        // Attempt to refresh token and retry the request
+        return authService.refreshTokenAndRetry(request, next);
+      }
+      return throwError(error);
+    })
+  );
 };

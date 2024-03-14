@@ -9,7 +9,6 @@
  *         - address
  *         - dateAdded
  *         - premium
- *         - refreshToken
  *       properties:
  *         name:
  *           type: string

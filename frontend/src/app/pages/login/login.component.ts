@@ -9,6 +9,8 @@ import * as AuthActions from '../../shared/store/auth/auth.actions';
 import { Store } from '@ngrx/store';
 import { LocalStorageService } from '../../shared/services/localStorage/localStorage.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { ProfileService } from '../../shared/services/profile/profile.service';
 
 @Component({
   selector: 'app-login',
@@ -24,7 +26,9 @@ export class LoginComponent {
     public httpService: HttpService,
     public localStorageService: LocalStorageService,
     public store: Store<fromApp.AppState>,
-    public router: Router
+    public router: Router,
+    private toastr: ToastrService,
+    public profileService: ProfileService
   ) {
     this.isLoading = false;
   }
@@ -38,17 +42,23 @@ export class LoginComponent {
         address: account.address,
       };
       // Make the login request and convert the observable to a promise
-      const res = await this.httpService.post('api/login', payload).toPromise();
+      const resLogin = await this.httpService
+        .post('api/login', payload)
+        .toPromise();
 
       // Store the access token object in local storage
-      const obj = {
-        accessToken: res.accessToken,
+      const userInfo = {
+        accessToken: resLogin.accessToken,
+        refreshToken: resLogin.refreshToken,
         address: account.address,
       };
-      this.localStorageService.setItem('userInfo', JSON.stringify(obj));
-      this.store.dispatch(new AuthActions.GetAccessToken(res.accessToken));
-      this.store.dispatch(new AuthActions.GetRefreshToken(res.refreshToken));
-
+      this.localStorageService.setItem('userInfo', JSON.stringify(userInfo));
+      this.store.dispatch(new AuthActions.GetAccessToken(resLogin.accessToken));
+      this.store.dispatch(
+        new AuthActions.GetRefreshToken(resLogin.refreshToken)
+      );
+      await this.profileService.getProfile();
+      this.toastr.success('Login successful');
       // Navigate to the dashboard after login is successful
       this.router.navigateByUrl('/dashboard');
     } catch {
