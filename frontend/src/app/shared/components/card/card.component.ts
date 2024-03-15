@@ -27,7 +27,8 @@ import { Store } from '@ngrx/store';
 })
 export class CardComponent implements OnInit {
   @Input() listItem!: List;
-  @Input() listIndex!: string;
+  @Input() listId!: string;
+  @Input() listIndex!: number;
   @Input() premium!: boolean;
   cardTitle: string;
   constructor(
@@ -46,7 +47,7 @@ export class CardComponent implements OnInit {
     };
     // Dispatch an action to add card inside list
     this.store.dispatch(
-      new BoardActions.AddCard({ listId: this.listIndex, card: newCard })
+      new BoardActions.AddCard({ listId: this.listId, card: newCard })
     );
     this.cardTitle = '';
   }
@@ -66,12 +67,12 @@ export class CardComponent implements OnInit {
     }
   }
 
-  handleAddCardOpen(event: Event, index: string) {
+  handleAddCardOpen(event: Event, listId: string) {
     event.stopPropagation();
-    if (this.boardService.openCardIndex === index) {
+    if (this.boardService.openCardIndex === listId) {
       this.boardService.handleCloseCard();
     } else {
-      this.boardService.handleOpenCard(index, this.premium);
+      this.boardService.handleOpenCard(listId, this.listIndex, this.premium);
     }
   }
 

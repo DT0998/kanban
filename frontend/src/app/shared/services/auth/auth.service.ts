@@ -6,23 +6,33 @@ import * as AuthActions from '../../../shared/store/auth/auth.actions';
 import * as fromApp from '../../../shared/store/store.reducer';
 import { Store } from '@ngrx/store';
 import { Observable, catchError, switchMap, throwError } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  userInfo!: string | any;
+  userInfoAuth!: string | any;
   constructor(
     public httpService: HttpService,
     public localStorageService: LocalStorageService,
-    public store: Store<fromApp.AppState>
-  ) {}
+    public store: Store<fromApp.AppState>,
+    private toastr: ToastrService
+  ) {
+    const userInfo = this.localStorageService.getItem('userInfo') as string;
+    const userInfoParse = JSON.parse(userInfo);
+    if (userInfoParse) {
+      this.userInfoAuth = userInfoParse;
+    } else {
+      this.toastr.error('Please refresh the page and try again');
+    }
+  }
 
   addAuthorizationHeader(request: HttpRequest<any>): HttpRequest<any> {
     // Get the access token from the AuthService
     let accessToken;
-    if (this.userInfo) {
-      accessToken = this.userInfo.accessToken;
+    if (this.userInfoAuth) {
+      accessToken = this.userInfoAuth.accessToken;
     }
     let requestAuth;
     // If the token exists, add it to the request header
@@ -41,26 +51,25 @@ export class AuthService {
 
   refreshTokenAndRetry(request: HttpRequest<any>, next: any): Observable<any> {
     const payload = {
-      address: this.userInfo.address,
-      refreshToken: this.userInfo.refreshToken,
+      address: this.userInfoAuth.address,
+      refreshToken: this.userInfoAuth.refreshToken,
     };
     return this.httpService.post('api/token', payload).pipe(
       switchMap((res) => {
         // Update the access token in local storage and in the application state
         const userInfo = {
+          address: this.userInfoAuth.address,
+          refreshToken: this.userInfoAuth.refreshToken,
           accessToken: res.accessToken,
         };
         this.localStorageService.setItem('userInfo', JSON.stringify(userInfo));
         // update the userInfoReceived object
-        this.localStorageService.getItem('userInfo') as string;
-        this.userInfo.accessToken = res.accessToken;
-        console.log(this.userInfo)
         this.store.dispatch(new AuthActions.GetAccessToken(res.accessToken));
 
         // Clone the original request with the new token and retry it
         const updatedRequest = request.clone({
           setHeaders: {
-            Authorization: `Bearer ${this.userInfo.accessToken}`,
+            Authorization: `Bearer ${userInfo.accessToken}`,
           },
         });
         return next(updatedRequest);

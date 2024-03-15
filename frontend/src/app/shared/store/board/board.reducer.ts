@@ -54,7 +54,6 @@ function updatePositionCardList(
   boardList: Board[]
 ): Board[] {
   if (currentListId === previousListId) {
-    console.log('move same list');
     const newCurrentCardList = moveCardInCardList(
       currentCards,
       currentIndexCard,

@@ -17,8 +17,6 @@ const verifyToken = async (req, res, next) => {
     }
 
     const token = authorizationHeader.replace("Bearer ", "");
-    console.log("token", token);
-    console.log()
     if (!token) return res.status(401).send({ message: "Token not found" });
     jwt.verify(token, tokenSecret);
     next();

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpService } from '../../../shared/services/http/http.service';
 import { ProfileService } from '../../../shared/services/profile/profile.service';
-import { WagmiService } from '../../../shared/services/wagmi/wagmi.service';
+import { LocalStorageService } from '../../../shared/services/localStorage/localStorage.service';
 
 @Component({
   selector: 'app-profile',
@@ -16,9 +16,11 @@ export class ProfileComponent implements OnInit {
   constructor(
     public httpService: HttpService,
     public profileService: ProfileService,
-    public wagmiService: WagmiService
+    public localStorageService: LocalStorageService
   ) {
-    this.userAddress = this.wagmiService.wagmiProvider?.account;
+    const userInfo = this.localStorageService.getItem('userInfo') as string;
+    const userInfoParse = JSON.parse(userInfo);
+    this.userAddress = userInfoParse.address;
   }
   ngOnInit(): void {
     this.getProfile();

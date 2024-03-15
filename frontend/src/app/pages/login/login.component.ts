@@ -60,9 +60,6 @@ export class LoginComponent {
       // await this.profileService.getProfile(userAddress);
       this.toastr.success('Login successful');
       this.localStorageService.setItem('userInfo', JSON.stringify(userInfo));
-      if (userInfo) {
-        this.authService.userInfo = userInfo;
-      }
       // Navigate to the dashboard after login is successful
       this.router.navigateByUrl('/dashboard');
     } catch {

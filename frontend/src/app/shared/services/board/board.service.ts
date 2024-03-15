@@ -20,19 +20,19 @@ export class BoardService {
     }
   }
 
-  handleOpenCard(index: string, premium: boolean) {
+  handleOpenCard(listId: string, listIndex: number, premium: boolean) {
     // open card for non-premium users
     if (!premium) {
-      if (+index <= 4) {
-        this.openCardIndex = index;
+      if (listIndex <= 4) {
+        this.openCardIndex = listId;
       }
-      if (+index > 4) {
+      if (listIndex > 4) {
         this.dashboardService.openPremiumModal();
       }
     }
     // open card for premium users
     if (premium) {
-      this.openCardIndex = index;
+      this.openCardIndex = listId;
     }
   }
 
