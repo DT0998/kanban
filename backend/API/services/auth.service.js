@@ -1,15 +1,14 @@
 const config = require("config");
 const jwt = require("jsonwebtoken");
 
-const accessTokenSecret = config.get("accessTokenSecret");
+const tokenSecret = config.get("tokenSecret");
 const accessTokenLife = config.get("accessTokenLife");
-const refreshTokenSecret = config.get("refreshTokenSecret");
 const refreshTokenLife = config.get("refreshTokenLife");
 
 function createAccessToken(data) {
   const { address } = data;
   // Create access token
-  const accessToken = jwt.sign({ address }, accessTokenSecret, {
+  const accessToken = jwt.sign({ address }, tokenSecret, {
     expiresIn: accessTokenLife,
   });
   return accessToken;
@@ -18,7 +17,7 @@ function createAccessToken(data) {
 function createRefreshToken(data) {
   const { address } = data;
   // create refresh token
-  const refreshToken = jwt.sign({ address }, refreshTokenSecret, {
+  const refreshToken = jwt.sign({ address }, tokenSecret, {
     expiresIn: refreshTokenLife,
   });
   return refreshToken;
