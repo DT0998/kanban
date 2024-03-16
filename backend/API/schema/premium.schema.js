@@ -2,7 +2,7 @@
  * @swagger
  * components:
  *   schemas:
- *     Premium:
+ *     History:
  *       type: object
  *       required:
  *         - id
@@ -17,4 +17,18 @@
  *         endDate:
  *           type: string
  *           format: date
+ */
+
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Premium:
+ *       type: object
+ *       required:
+ *         - premium
+ *       properties:
+ *         premium:
+ *           type: boolean
  */

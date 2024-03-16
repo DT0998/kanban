@@ -7,7 +7,7 @@ function routes(app, rootUrl) {
    * @swagger
    * tags:
    *   name: User
-   *   description: User management APIs
+   *   description: User APIs
    */
 
   /**

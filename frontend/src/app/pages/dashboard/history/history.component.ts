@@ -38,6 +38,8 @@ export class HistoryComponent implements AfterViewInit {
 
 export interface HistoryElement {
   id: number;
+  name: string;
+  address: string;
   startDate: Date;
   endDate: Date;
 }

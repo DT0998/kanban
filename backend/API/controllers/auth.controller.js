@@ -10,7 +10,6 @@ let refreshTokens = {}; // tao mot object chua nhung refreshTokens
 async function login(req, res) {
   try {
     const { address } = req.body;
-    console.log("address", address);
     // Check if the address is empty
     if (!address) {
       return res.status(400).json({ message: "Address is required" });
@@ -105,8 +104,4 @@ function refreshToken(req, res) {
   }
 }
 
-function logout(req, res) {
-  const { address } = req.body;
-}
-
-module.exports = { login, logout, refreshToken };
+module.exports = { login, refreshToken };
