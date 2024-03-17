@@ -1,0 +1,1430 @@
+{
+    "contractName": "Kanban",
+    "abi": [
+        {
+            "inputs": [],
+            "stateMutability": "nonpayable",
+            "type": "constructor"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "_sender",
+                    "type": "address"
+                }
+            ],
+            "name": "getMyHistorySubscribePremium",
+            "outputs": [
+                {
+                    "components": [
+                        {
+                            "internalType": "string",
+                            "name": "action",
+                            "type": "string"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "amount",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "address",
+                            "name": "userAddressWallet",
+                            "type": "address"
+                        }
+                    ],
+                    "internalType": "struct Kanban.user[]",
+                    "name": "",
+                    "type": "tuple[]"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "sender",
+                    "type": "address"
+                },
+                {
+                    "internalType": "address",
+                    "name": "receiver",
+                    "type": "address"
+                }
+            ],
+            "name": "subscribeRequestPremium",
+            "outputs": [],
+            "stateMutability": "payable",
+            "type": "function"
+        }
+    ],
+    "metadata": "{\"compiler\":{\"version\":\"0.8.19+commit.7dd6d404\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_sender\",\"type\":\"address\"}],\"name\":\"getMyHistorySubscribePremium\",\"outputs\":[{\"components\":[{\"internalType\":\"string\",\"name\":\"action\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"userAddressWallet\",\"type\":\"address\"}],\"internalType\":\"struct Kanban.user[]\",\"name\":\"\",\"type\":\"tuple[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"receiver\",\"type\":\"address\"}],\"name\":\"subscribeRequestPremium\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"d:/Tai_lieu_hoc_tap/kanban/smartcontract/contracts/kanban.sol\":\"Kanban\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"d:/Tai_lieu_hoc_tap/kanban/smartcontract/contracts/kanban.sol\":{\"keccak256\":\"0xe6ccdd1a81b702d4be4eead10899d302b309367f810e8a58a0a9e1637e398588\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://f5702c1d54f795a24548bf1cef081b80e807d701d550c619d7ed5a7b80c89b18\",\"dweb:/ipfs/Qmbo5ULwPUnagNse6UNxYjWa6vtDLSxGz6ifheCr3WV4WQ\"]}},\"version\":1}",
+    "bytecode": "608060405234801561001057600080fd5b50600080546001600160a01b031916331790556105ec806100326000396000f3fe6080604052600436106100295760003560e01c80633b9ba18d1461002e578063d033efc114610064575b600080fd5b34801561003a57600080fd5b5061004e61004936600461033d565b610079565b60405161005b919061035f565b60405180910390f35b610077610072366004610425565b6101a3565b005b6001600160a01b0381166000908152600160209081526040808320805482518185028101850190935280835260609492939192909184015b8282101561019857838290600052602060002090600302016040518060600160405290816000820180546100e490610458565b80601f016020809104026020016040519081016040528092919081815260200182805461011090610458565b801561015d5780601f106101325761010080835404028352916020019161015d565b820191906000526020600020905b81548152906001019060200180831161014057829003601f168201915b50505091835250506001828101546020808401919091526002909301546001600160a01b0316604090920191909152918352920191016100b1565b505050509050919050565b67016345785d8a00006001600160a01b03808316908416036102175760405162461bcd60e51b8152602060048201526024808201527f436f6e7472616374206f776e65722063616e6e6f7420706179207468656d73656044820152636c76657360e01b606482015260840160405180910390fd5b6040516001600160a01b0383169082156108fc029083906000818181858888f1935050505015801561024d573d6000803e3d6000fd5b50610258838261025d565b505050565b61028a6040518060600160405280606081526020016000815260200160006001600160a01b031681525090565b604080518082018252600481526314d95b9960e21b6020808301919091529083528281018490526001600160a01b0385166000908152600180835292812080549384018155815220825183926003029091019081906102e990826104f6565b5060208201516001820155604090910151600290910180546001600160a01b0319166001600160a01b03909216919091179055505050565b80356001600160a01b038116811461033857600080fd5b919050565b60006020828403121561034f57600080fd5b61035882610321565b9392505050565b60006020808301818452808551808352604092508286019150828160051b8701018488016000805b8481101561041657603f198a8503018652825160608151818752805180838901528592505b808310156103ca578183018c015188840160800152918b01916103ac565b608092508583828a0101528b8401518c8901528a84015193506103f78b8901856001600160a01b03169052565b988b0198601f01601f1916969096010194505091870191600101610387565b50919998505050505050505050565b6000806040838503121561043857600080fd5b61044183610321565b915061044f60208401610321565b90509250929050565b600181811c9082168061046c57607f821691505b60208210810361048c57634e487b7160e01b600052602260045260246000fd5b50919050565b634e487b7160e01b600052604160045260246000fd5b601f82111561025857600081815260208120601f850160051c810160208610156104cf5750805b601f850160051c820191505b818110156104ee578281556001016104db565b505050505050565b815167ffffffffffffffff81111561051057610510610492565b6105248161051e8454610458565b846104a8565b602080601f83116001811461055957600084156105415750858301515b600019600386901b1c1916600185901b1785556104ee565b600085815260208120601f198616915b8281101561058857888601518255948401946001909101908401610569565b50858210156105a65787850151600019600388901b60f8161c191681555b5050505050600190811b0190555056fea26469706673582212207951ca9e4aa1bd21e275f68788984d2d3ebfbbc1a3f7b06f0af2096fd36ce9fa64736f6c63430008130033",
+    "deployedBytecode": "6080604052600436106100295760003560e01c80633b9ba18d1461002e578063d033efc114610064575b600080fd5b34801561003a57600080fd5b5061004e61004936600461033d565b610079565b60405161005b919061035f565b60405180910390f35b610077610072366004610425565b6101a3565b005b6001600160a01b0381166000908152600160209081526040808320805482518185028101850190935280835260609492939192909184015b8282101561019857838290600052602060002090600302016040518060600160405290816000820180546100e490610458565b80601f016020809104026020016040519081016040528092919081815260200182805461011090610458565b801561015d5780601f106101325761010080835404028352916020019161015d565b820191906000526020600020905b81548152906001019060200180831161014057829003601f168201915b50505091835250506001828101546020808401919091526002909301546001600160a01b0316604090920191909152918352920191016100b1565b505050509050919050565b67016345785d8a00006001600160a01b03808316908416036102175760405162461bcd60e51b8152602060048201526024808201527f436f6e7472616374206f776e65722063616e6e6f7420706179207468656d73656044820152636c76657360e01b606482015260840160405180910390fd5b6040516001600160a01b0383169082156108fc029083906000818181858888f1935050505015801561024d573d6000803e3d6000fd5b50610258838261025d565b505050565b61028a6040518060600160405280606081526020016000815260200160006001600160a01b031681525090565b604080518082018252600481526314d95b9960e21b6020808301919091529083528281018490526001600160a01b0385166000908152600180835292812080549384018155815220825183926003029091019081906102e990826104f6565b5060208201516001820155604090910151600290910180546001600160a01b0319166001600160a01b03909216919091179055505050565b80356001600160a01b038116811461033857600080fd5b919050565b60006020828403121561034f57600080fd5b61035882610321565b9392505050565b60006020808301818452808551808352604092508286019150828160051b8701018488016000805b8481101561041657603f198a8503018652825160608151818752805180838901528592505b808310156103ca578183018c015188840160800152918b01916103ac565b608092508583828a0101528b8401518c8901528a84015193506103f78b8901856001600160a01b03169052565b988b0198601f01601f1916969096010194505091870191600101610387565b50919998505050505050505050565b6000806040838503121561043857600080fd5b61044183610321565b915061044f60208401610321565b90509250929050565b600181811c9082168061046c57607f821691505b60208210810361048c57634e487b7160e01b600052602260045260246000fd5b50919050565b634e487b7160e01b600052604160045260246000fd5b601f82111561025857600081815260208120601f850160051c810160208610156104cf5750805b601f850160051c820191505b818110156104ee578281556001016104db565b505050505050565b815167ffffffffffffffff81111561051057610510610492565b6105248161051e8454610458565b846104a8565b602080601f83116001811461055957600084156105415750858301515b600019600386901b1c1916600185901b1785556104ee565b600085815260208120601f198616915b8281101561058857888601518255948401946001909101908401610569565b50858210156105a65787850151600019600388901b60f8161c191681555b5050505050600190811b0190555056fea26469706673582212207951ca9e4aa1bd21e275f68788984d2d3ebfbbc1a3f7b06f0af2096fd36ce9fa64736f6c63430008130033",
+    "sourceMap": "60:1432:0:-:0;;;153:51;;;;;;;;;-1:-1:-1;178:5:0;:18;;-1:-1:-1;;;;;;178:18:0;186:10;178:18;;;60:1432;;;;;;",
+    "deployedSourceMap": "60:1432:0:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;1340:149;;;;;;;;;;-1:-1:-1;1340:149:0;;;;;:::i;:::-;;:::i;:::-;;;;;;;:::i;:::-;;;;;;;;553:398;;;;;;:::i;:::-;;:::i;:::-;;1340:149;-1:-1:-1;;;;;1465:16:0;;;;;;:7;:16;;;;;;;;1458:23;;;;;;;;;;;;;;;;;1432:13;;1458:23;;1465:16;;1458:23;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;;1458:23:0;;;-1:-1:-1;;1458:23:0;;;;;;;;;;;;;;;;;;-1:-1:-1;;;;;1458:23:0;;;;;;;;;;;;;;;;;;;;;;;;;1340:149;;;:::o;553:398::-;692:22;-1:-1:-1;;;;;784:18:0;;;;;;;776:67;;;;-1:-1:-1;;;776:67:0;;2922:2:1;776:67:0;;;2904:21:1;2961:2;2941:18;;;2934:30;3000:34;2980:18;;;2973:62;-1:-1:-1;;;3051:18:1;;;3044:34;3095:19;;776:67:0;;;;;;;;856:33;;-1:-1:-1;;;;;856:26:0;;;:33;;;;;883:5;;856:33;;;;883:5;856:26;:33;;;;;;;;;;;;;;;;;;;;;902:41;929:6;937:5;902:26;:41::i;:::-;634:317;553:398;;:::o;998:276::-;1138:19;-1:-1:-1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1138:19:0;1168:23;;;;;;;;;;;-1:-1:-1;;;1168:23:0;;;;;;;;;;;1202:14;;;:24;;;-1:-1:-1;;;;;1237:15:0;;-1:-1:-1;1237:15:0;;;:7;:15;;;;;;:29;;;;;;;;;;;;1168:7;;1237:29;;;;;;;;;;;;:::i;:::-;-1:-1:-1;1237:29:0;;;;;;;;;;;;;;;;;;;-1:-1:-1;;;;;;1237:29:0;-1:-1:-1;;;;;1237:29:0;;;;;;;;;-1:-1:-1;;;998:276:0:o;14:173:1:-;82:20;;-1:-1:-1;;;;;131:31:1;;121:42;;111:70;;177:1;174;167:12;111:70;14:173;;;:::o;192:186::-;251:6;304:2;292:9;283:7;279:23;275:32;272:52;;;320:1;317;310:12;272:52;343:29;362:9;343:29;:::i;:::-;333:39;192:186;-1:-1:-1;;;192:186:1:o;492:1573::-;674:4;703:2;743;732:9;728:18;773:2;762:9;755:21;796:6;831;825:13;862:6;854;847:22;888:2;878:12;;921:2;910:9;906:18;899:25;;983:2;973:6;970:1;966:14;955:9;951:30;947:39;1021:2;1013:6;1009:15;1042:1;1063;1073:963;1089:6;1084:3;1081:15;1073:963;;;1186:2;1182:7;1170:9;1162:6;1158:22;1154:36;1149:3;1142:49;1220:6;1214:13;1250:4;1293:2;1287:9;1324:2;1316:6;1309:18;1362:12;1356:19;1412:8;1407:2;1399:6;1395:15;1388:33;1445:1;1434:12;;1459:168;1475:8;1470:3;1467:17;1459:168;;;1584:22;;;1580:31;;1574:38;1550:16;;;1568:3;1546:26;1539:74;1494:12;;;;1459:168;;;1650:3;1640:13;;1705:1;1700:2;1689:8;1681:6;1677:21;1673:30;1666:41;1758:2;1754;1750:11;1744:18;1739:2;1731:6;1727:15;1720:43;1812:2;1808;1804:11;1798:18;1776:40;;1829:51;1876:2;1868:6;1864:15;1848:14;-1:-1:-1;;;;;449:31:1;437:44;;383:104;1829:51;2014:12;;;;1946:2;1923:17;-1:-1:-1;;1919:31:1;1907:44;;;;1903:53;;-1:-1:-1;;1979:15:1;;;;1115:1;1106:11;1073:963;;;-1:-1:-1;2053:6:1;;492:1573;-1:-1:-1;;;;;;;;;492:1573:1:o;2070:260::-;2138:6;2146;2199:2;2187:9;2178:7;2174:23;2170:32;2167:52;;;2215:1;2212;2205:12;2167:52;2238:29;2257:9;2238:29;:::i;:::-;2228:39;;2286:38;2320:2;2309:9;2305:18;2286:38;:::i;:::-;2276:48;;2070:260;;;;;:::o;2335:380::-;2414:1;2410:12;;;;2457;;;2478:61;;2532:4;2524:6;2520:17;2510:27;;2478:61;2585:2;2577:6;2574:14;2554:18;2551:38;2548:161;;2631:10;2626:3;2622:20;2619:1;2612:31;2666:4;2663:1;2656:15;2694:4;2691:1;2684:15;2548:161;;2335:380;;;:::o;3125:127::-;3186:10;3181:3;3177:20;3174:1;3167:31;3217:4;3214:1;3207:15;3241:4;3238:1;3231:15;3383:545;3485:2;3480:3;3477:11;3474:448;;;3521:1;3546:5;3542:2;3535:17;3591:4;3587:2;3577:19;3661:2;3649:10;3645:19;3642:1;3638:27;3632:4;3628:38;3697:4;3685:10;3682:20;3679:47;;;-1:-1:-1;3720:4:1;3679:47;3775:2;3770:3;3766:12;3763:1;3759:20;3753:4;3749:31;3739:41;;3830:82;3848:2;3841:5;3838:13;3830:82;;;3893:17;;;3874:1;3863:13;3830:82;;;3834:3;;;3383:545;;;:::o;4104:1352::-;4230:3;4224:10;4257:18;4249:6;4246:30;4243:56;;;4279:18;;:::i;:::-;4308:97;4398:6;4358:38;4390:4;4384:11;4358:38;:::i;:::-;4352:4;4308:97;:::i;:::-;4460:4;;4524:2;4513:14;;4541:1;4536:663;;;;5243:1;5260:6;5257:89;;;-1:-1:-1;5312:19:1;;;5306:26;5257:89;-1:-1:-1;;4061:1:1;4057:11;;;4053:24;4049:29;4039:40;4085:1;4081:11;;;4036:57;5359:81;;4506:944;;4536:663;3330:1;3323:14;;;3367:4;3354:18;;-1:-1:-1;;4572:20:1;;;4690:236;4704:7;4701:1;4698:14;4690:236;;;4793:19;;;4787:26;4772:42;;4885:27;;;;4853:1;4841:14;;;;4720:19;;4690:236;;;4694:3;4954:6;4945:7;4942:19;4939:201;;;5015:19;;;5009:26;-1:-1:-1;;5098:1:1;5094:14;;;5110:3;5090:24;5086:37;5082:42;5067:58;5052:74;;4939:201;-1:-1:-1;;;;;5186:1:1;5170:14;;;5166:22;5153:36;;-1:-1:-1;4104:1352:1:o",
+    "sourcePath": "d:/Tai_lieu_hoc_tap/kanban/smartcontract/contracts/kanban.sol",
+    "compiler": {
+        "name": "solc",
+        "version": "0.8.19+commit.7dd6d404"
+    },
+    "ast": {
+        "absolutePath": "d:/Tai_lieu_hoc_tap/kanban/smartcontract/contracts/kanban.sol",
+        "exportedSymbols": {
+            "Kanban": [
+                109
+            ]
+        },
+        "id": 110,
+        "license": "MIT",
+        "nodeType": "SourceUnit",
+        "nodes": [
+            {
+                "id": 1,
+                "literals": [
+                    "solidity",
+                    "^",
+                    "0.8",
+                    ".9"
+                ],
+                "nodeType": "PragmaDirective",
+                "src": "33:23:0"
+            },
+            {
+                "abstract": false,
+                "baseContracts": [],
+                "canonicalName": "Kanban",
+                "contractDependencies": [],
+                "contractKind": "contract",
+                "fullyImplemented": true,
+                "id": 109,
+                "linearizedBaseContracts": [
+                    109
+                ],
+                "name": "Kanban",
+                "nameLocation": "69:6:0",
+                "nodeType": "ContractDefinition",
+                "nodes": [
+                    {
+                        "constant": false,
+                        "id": 3,
+                        "mutability": "mutable",
+                        "name": "owner",
+                        "nameLocation": "139:5:0",
+                        "nodeType": "VariableDeclaration",
+                        "scope": 109,
+                        "src": "131:13:0",
+                        "stateVariable": true,
+                        "storageLocation": "default",
+                        "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                        },
+                        "typeName": {
+                            "id": 2,
+                            "name": "address",
+                            "nodeType": "ElementaryTypeName",
+                            "src": "131:7:0",
+                            "stateMutability": "nonpayable",
+                            "typeDescriptions": {
+                                "typeIdentifier": "t_address",
+                                "typeString": "address"
+                            }
+                        },
+                        "visibility": "internal"
+                    },
+                    {
+                        "body": {
+                            "id": 11,
+                            "nodeType": "Block",
+                            "src": "167:37:0",
+                            "statements": [
+                                {
+                                    "expression": {
+                                        "id": 9,
+                                        "isConstant": false,
+                                        "isLValue": false,
+                                        "isPure": false,
+                                        "lValueRequested": false,
+                                        "leftHandSide": {
+                                            "id": 6,
+                                            "name": "owner",
+                                            "nodeType": "Identifier",
+                                            "overloadedDeclarations": [],
+                                            "referencedDeclaration": 3,
+                                            "src": "178:5:0",
+                                            "typeDescriptions": {
+                                                "typeIdentifier": "t_address",
+                                                "typeString": "address"
+                                            }
+                                        },
+                                        "nodeType": "Assignment",
+                                        "operator": "=",
+                                        "rightHandSide": {
+                                            "expression": {
+                                                "id": 7,
+                                                "name": "msg",
+                                                "nodeType": "Identifier",
+                                                "overloadedDeclarations": [],
+                                                "referencedDeclaration": 4294967281,
+                                                "src": "186:3:0",
+                                                "typeDescriptions": {
+                                                    "typeIdentifier": "t_magic_message",
+                                                    "typeString": "msg"
+                                                }
+                                            },
+                                            "id": 8,
+                                            "isConstant": false,
+                                            "isLValue": false,
+                                            "isPure": false,
+                                            "lValueRequested": false,
+                                            "memberLocation": "190:6:0",
+                                            "memberName": "sender",
+                                            "nodeType": "MemberAccess",
+                                            "src": "186:10:0",
+                                            "typeDescriptions": {
+                                                "typeIdentifier": "t_address",
+                                                "typeString": "address"
+                                            }
+                                        },
+                                        "src": "178:18:0",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_address",
+                                            "typeString": "address"
+                                        }
+                                    },
+                                    "id": 10,
+                                    "nodeType": "ExpressionStatement",
+                                    "src": "178:18:0"
+                                }
+                            ]
+                        },
+                        "id": 12,
+                        "implemented": true,
+                        "kind": "constructor",
+                        "modifiers": [],
+                        "name": "",
+                        "nameLocation": "-1:-1:-1",
+                        "nodeType": "FunctionDefinition",
+                        "parameters": {
+                            "id": 4,
+                            "nodeType": "ParameterList",
+                            "parameters": [],
+                            "src": "164:2:0"
+                        },
+                        "returnParameters": {
+                            "id": 5,
+                            "nodeType": "ParameterList",
+                            "parameters": [],
+                            "src": "167:0:0"
+                        },
+                        "scope": 109,
+                        "src": "153:51:0",
+                        "stateMutability": "nonpayable",
+                        "virtual": false,
+                        "visibility": "public"
+                    },
+                    {
+                        "canonicalName": "Kanban.user",
+                        "id": 19,
+                        "members": [
+                            {
+                                "constant": false,
+                                "id": 14,
+                                "mutability": "mutable",
+                                "name": "action",
+                                "nameLocation": "310:6:0",
+                                "nodeType": "VariableDeclaration",
+                                "scope": 19,
+                                "src": "303:13:0",
+                                "stateVariable": false,
+                                "storageLocation": "default",
+                                "typeDescriptions": {
+                                    "typeIdentifier": "t_string_storage_ptr",
+                                    "typeString": "string"
+                                },
+                                "typeName": {
+                                    "id": 13,
+                                    "name": "string",
+                                    "nodeType": "ElementaryTypeName",
+                                    "src": "303:6:0",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_string_storage_ptr",
+                                        "typeString": "string"
+                                    }
+                                },
+                                "visibility": "internal"
+                            },
+                            {
+                                "constant": false,
+                                "id": 16,
+                                "mutability": "mutable",
+                                "name": "amount",
+                                "nameLocation": "335:6:0",
+                                "nodeType": "VariableDeclaration",
+                                "scope": 19,
+                                "src": "327:14:0",
+                                "stateVariable": false,
+                                "storageLocation": "default",
+                                "typeDescriptions": {
+                                    "typeIdentifier": "t_uint256",
+                                    "typeString": "uint256"
+                                },
+                                "typeName": {
+                                    "id": 15,
+                                    "name": "uint256",
+                                    "nodeType": "ElementaryTypeName",
+                                    "src": "327:7:0",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_uint256",
+                                        "typeString": "uint256"
+                                    }
+                                },
+                                "visibility": "internal"
+                            },
+                            {
+                                "constant": false,
+                                "id": 18,
+                                "mutability": "mutable",
+                                "name": "userAddressWallet",
+                                "nameLocation": "360:17:0",
+                                "nodeType": "VariableDeclaration",
+                                "scope": 19,
+                                "src": "352:25:0",
+                                "stateVariable": false,
+                                "storageLocation": "default",
+                                "typeDescriptions": {
+                                    "typeIdentifier": "t_address",
+                                    "typeString": "address"
+                                },
+                                "typeName": {
+                                    "id": 17,
+                                    "name": "address",
+                                    "nodeType": "ElementaryTypeName",
+                                    "src": "352:7:0",
+                                    "stateMutability": "nonpayable",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_address",
+                                        "typeString": "address"
+                                    }
+                                },
+                                "visibility": "internal"
+                            }
+                        ],
+                        "name": "user",
+                        "nameLocation": "287:4:0",
+                        "nodeType": "StructDefinition",
+                        "scope": 109,
+                        "src": "280:105:0",
+                        "visibility": "public"
+                    },
+                    {
+                        "constant": false,
+                        "id": 25,
+                        "mutability": "mutable",
+                        "name": "history",
+                        "nameLocation": "468:7:0",
+                        "nodeType": "VariableDeclaration",
+                        "scope": 109,
+                        "src": "441:34:0",
+                        "stateVariable": true,
+                        "storageLocation": "default",
+                        "typeDescriptions": {
+                            "typeIdentifier": "t_mapping$_t_address_$_t_array$_t_struct$_user_$19_storage_$dyn_storage_$",
+                            "typeString": "mapping(address => struct Kanban.user[])"
+                        },
+                        "typeName": {
+                            "id": 24,
+                            "keyName": "",
+                            "keyNameLocation": "-1:-1:-1",
+                            "keyType": {
+                                "id": 20,
+                                "name": "address",
+                                "nodeType": "ElementaryTypeName",
+                                "src": "449:7:0",
+                                "typeDescriptions": {
+                                    "typeIdentifier": "t_address",
+                                    "typeString": "address"
+                                }
+                            },
+                            "nodeType": "Mapping",
+                            "src": "441:26:0",
+                            "typeDescriptions": {
+                                "typeIdentifier": "t_mapping$_t_address_$_t_array$_t_struct$_user_$19_storage_$dyn_storage_$",
+                                "typeString": "mapping(address => struct Kanban.user[])"
+                            },
+                            "valueName": "",
+                            "valueNameLocation": "-1:-1:-1",
+                            "valueType": {
+                                "baseType": {
+                                    "id": 22,
+                                    "nodeType": "UserDefinedTypeName",
+                                    "pathNode": {
+                                        "id": 21,
+                                        "name": "user",
+                                        "nameLocations": [
+                                            "460:4:0"
+                                        ],
+                                        "nodeType": "IdentifierPath",
+                                        "referencedDeclaration": 19,
+                                        "src": "460:4:0"
+                                    },
+                                    "referencedDeclaration": 19,
+                                    "src": "460:4:0",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_struct$_user_$19_storage_ptr",
+                                        "typeString": "struct Kanban.user"
+                                    }
+                                },
+                                "id": 23,
+                                "nodeType": "ArrayTypeName",
+                                "src": "460:6:0",
+                                "typeDescriptions": {
+                                    "typeIdentifier": "t_array$_t_struct$_user_$19_storage_$dyn_storage_ptr",
+                                    "typeString": "struct Kanban.user[]"
+                                }
+                            }
+                        },
+                        "visibility": "internal"
+                    },
+                    {
+                        "constant": false,
+                        "id": 31,
+                        "mutability": "mutable",
+                        "name": "users",
+                        "nameLocation": "509:5:0",
+                        "nodeType": "VariableDeclaration",
+                        "scope": 109,
+                        "src": "482:32:0",
+                        "stateVariable": true,
+                        "storageLocation": "default",
+                        "typeDescriptions": {
+                            "typeIdentifier": "t_mapping$_t_address_$_t_array$_t_struct$_user_$19_storage_$dyn_storage_$",
+                            "typeString": "mapping(address => struct Kanban.user[])"
+                        },
+                        "typeName": {
+                            "id": 30,
+                            "keyName": "",
+                            "keyNameLocation": "-1:-1:-1",
+                            "keyType": {
+                                "id": 26,
+                                "name": "address",
+                                "nodeType": "ElementaryTypeName",
+                                "src": "490:7:0",
+                                "typeDescriptions": {
+                                    "typeIdentifier": "t_address",
+                                    "typeString": "address"
+                                }
+                            },
+                            "nodeType": "Mapping",
+                            "src": "482:26:0",
+                            "typeDescriptions": {
+                                "typeIdentifier": "t_mapping$_t_address_$_t_array$_t_struct$_user_$19_storage_$dyn_storage_$",
+                                "typeString": "mapping(address => struct Kanban.user[])"
+                            },
+                            "valueName": "",
+                            "valueNameLocation": "-1:-1:-1",
+                            "valueType": {
+                                "baseType": {
+                                    "id": 28,
+                                    "nodeType": "UserDefinedTypeName",
+                                    "pathNode": {
+                                        "id": 27,
+                                        "name": "user",
+                                        "nameLocations": [
+                                            "501:4:0"
+                                        ],
+                                        "nodeType": "IdentifierPath",
+                                        "referencedDeclaration": 19,
+                                        "src": "501:4:0"
+                                    },
+                                    "referencedDeclaration": 19,
+                                    "src": "501:4:0",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_struct$_user_$19_storage_ptr",
+                                        "typeString": "struct Kanban.user"
+                                    }
+                                },
+                                "id": 29,
+                                "nodeType": "ArrayTypeName",
+                                "src": "501:6:0",
+                                "typeDescriptions": {
+                                    "typeIdentifier": "t_array$_t_struct$_user_$19_storage_$dyn_storage_ptr",
+                                    "typeString": "struct Kanban.user[]"
+                                }
+                            }
+                        },
+                        "visibility": "internal"
+                    },
+                    {
+                        "body": {
+                            "id": 62,
+                            "nodeType": "Block",
+                            "src": "634:317:0",
+                            "statements": [
+                                {
+                                    "assignments": [
+                                        39
+                                    ],
+                                    "declarations": [
+                                        {
+                                            "constant": false,
+                                            "id": 39,
+                                            "mutability": "mutable",
+                                            "name": "toPay",
+                                            "nameLocation": "684:5:0",
+                                            "nodeType": "VariableDeclaration",
+                                            "scope": 62,
+                                            "src": "676:13:0",
+                                            "stateVariable": false,
+                                            "storageLocation": "default",
+                                            "typeDescriptions": {
+                                                "typeIdentifier": "t_uint256",
+                                                "typeString": "uint256"
+                                            },
+                                            "typeName": {
+                                                "id": 38,
+                                                "name": "uint256",
+                                                "nodeType": "ElementaryTypeName",
+                                                "src": "676:7:0",
+                                                "typeDescriptions": {
+                                                    "typeIdentifier": "t_uint256",
+                                                    "typeString": "uint256"
+                                                }
+                                            },
+                                            "visibility": "internal"
+                                        }
+                                    ],
+                                    "id": 41,
+                                    "initialValue": {
+                                        "hexValue": "313030303030303030303030303030303030",
+                                        "id": 40,
+                                        "isConstant": false,
+                                        "isLValue": false,
+                                        "isPure": true,
+                                        "kind": "number",
+                                        "lValueRequested": false,
+                                        "nodeType": "Literal",
+                                        "src": "692:22:0",
+                                        "subdenomination": "wei",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_rational_100000000000000000_by_1",
+                                            "typeString": "int_const 100000000000000000"
+                                        },
+                                        "value": "100000000000000000"
+                                    },
+                                    "nodeType": "VariableDeclarationStatement",
+                                    "src": "676:38:0"
+                                },
+                                {
+                                    "expression": {
+                                        "arguments": [
+                                            {
+                                                "commonType": {
+                                                    "typeIdentifier": "t_address",
+                                                    "typeString": "address"
+                                                },
+                                                "id": 45,
+                                                "isConstant": false,
+                                                "isLValue": false,
+                                                "isPure": false,
+                                                "lValueRequested": false,
+                                                "leftExpression": {
+                                                    "id": 43,
+                                                    "name": "sender",
+                                                    "nodeType": "Identifier",
+                                                    "overloadedDeclarations": [],
+                                                    "referencedDeclaration": 33,
+                                                    "src": "784:6:0",
+                                                    "typeDescriptions": {
+                                                        "typeIdentifier": "t_address",
+                                                        "typeString": "address"
+                                                    }
+                                                },
+                                                "nodeType": "BinaryOperation",
+                                                "operator": "!=",
+                                                "rightExpression": {
+                                                    "id": 44,
+                                                    "name": "receiver",
+                                                    "nodeType": "Identifier",
+                                                    "overloadedDeclarations": [],
+                                                    "referencedDeclaration": 35,
+                                                    "src": "794:8:0",
+                                                    "typeDescriptions": {
+                                                        "typeIdentifier": "t_address",
+                                                        "typeString": "address"
+                                                    }
+                                                },
+                                                "src": "784:18:0",
+                                                "typeDescriptions": {
+                                                    "typeIdentifier": "t_bool",
+                                                    "typeString": "bool"
+                                                }
+                                            },
+                                            {
+                                                "hexValue": "436f6e7472616374206f776e65722063616e6e6f7420706179207468656d73656c766573",
+                                                "id": 46,
+                                                "isConstant": false,
+                                                "isLValue": false,
+                                                "isPure": true,
+                                                "kind": "string",
+                                                "lValueRequested": false,
+                                                "nodeType": "Literal",
+                                                "src": "804:38:0",
+                                                "typeDescriptions": {
+                                                    "typeIdentifier": "t_stringliteral_24956214456acc3a59813017171fd3cc514e18f7e3fb89d1f15188abd90974a0",
+                                                    "typeString": "literal_string \"Contract owner cannot pay themselves\""
+                                                },
+                                                "value": "Contract owner cannot pay themselves"
+                                            }
+                                        ],
+                                        "expression": {
+                                            "argumentTypes": [
+                                                {
+                                                    "typeIdentifier": "t_bool",
+                                                    "typeString": "bool"
+                                                },
+                                                {
+                                                    "typeIdentifier": "t_stringliteral_24956214456acc3a59813017171fd3cc514e18f7e3fb89d1f15188abd90974a0",
+                                                    "typeString": "literal_string \"Contract owner cannot pay themselves\""
+                                                }
+                                            ],
+                                            "id": 42,
+                                            "name": "require",
+                                            "nodeType": "Identifier",
+                                            "overloadedDeclarations": [
+                                                4294967278,
+                                                4294967278
+                                            ],
+                                            "referencedDeclaration": 4294967278,
+                                            "src": "776:7:0",
+                                            "typeDescriptions": {
+                                                "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
+                                                "typeString": "function (bool,string memory) pure"
+                                            }
+                                        },
+                                        "id": 47,
+                                        "isConstant": false,
+                                        "isLValue": false,
+                                        "isPure": false,
+                                        "kind": "functionCall",
+                                        "lValueRequested": false,
+                                        "nameLocations": [],
+                                        "names": [],
+                                        "nodeType": "FunctionCall",
+                                        "src": "776:67:0",
+                                        "tryCall": false,
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_tuple$__$",
+                                            "typeString": "tuple()"
+                                        }
+                                    },
+                                    "id": 48,
+                                    "nodeType": "ExpressionStatement",
+                                    "src": "776:67:0"
+                                },
+                                {
+                                    "expression": {
+                                        "arguments": [
+                                            {
+                                                "id": 54,
+                                                "name": "toPay",
+                                                "nodeType": "Identifier",
+                                                "overloadedDeclarations": [],
+                                                "referencedDeclaration": 39,
+                                                "src": "883:5:0",
+                                                "typeDescriptions": {
+                                                    "typeIdentifier": "t_uint256",
+                                                    "typeString": "uint256"
+                                                }
+                                            }
+                                        ],
+                                        "expression": {
+                                            "argumentTypes": [
+                                                {
+                                                    "typeIdentifier": "t_uint256",
+                                                    "typeString": "uint256"
+                                                }
+                                            ],
+                                            "expression": {
+                                                "arguments": [
+                                                    {
+                                                        "id": 51,
+                                                        "name": "receiver",
+                                                        "nodeType": "Identifier",
+                                                        "overloadedDeclarations": [],
+                                                        "referencedDeclaration": 35,
+                                                        "src": "864:8:0",
+                                                        "typeDescriptions": {
+                                                            "typeIdentifier": "t_address",
+                                                            "typeString": "address"
+                                                        }
+                                                    }
+                                                ],
+                                                "expression": {
+                                                    "argumentTypes": [
+                                                        {
+                                                            "typeIdentifier": "t_address",
+                                                            "typeString": "address"
+                                                        }
+                                                    ],
+                                                    "id": 50,
+                                                    "isConstant": false,
+                                                    "isLValue": false,
+                                                    "isPure": true,
+                                                    "lValueRequested": false,
+                                                    "nodeType": "ElementaryTypeNameExpression",
+                                                    "src": "856:8:0",
+                                                    "typeDescriptions": {
+                                                        "typeIdentifier": "t_type$_t_address_payable_$",
+                                                        "typeString": "type(address payable)"
+                                                    },
+                                                    "typeName": {
+                                                        "id": 49,
+                                                        "name": "address",
+                                                        "nodeType": "ElementaryTypeName",
+                                                        "src": "856:8:0",
+                                                        "stateMutability": "payable",
+                                                        "typeDescriptions": {}
+                                                    }
+                                                },
+                                                "id": 52,
+                                                "isConstant": false,
+                                                "isLValue": false,
+                                                "isPure": false,
+                                                "kind": "typeConversion",
+                                                "lValueRequested": false,
+                                                "nameLocations": [],
+                                                "names": [],
+                                                "nodeType": "FunctionCall",
+                                                "src": "856:17:0",
+                                                "tryCall": false,
+                                                "typeDescriptions": {
+                                                    "typeIdentifier": "t_address_payable",
+                                                    "typeString": "address payable"
+                                                }
+                                            },
+                                            "id": 53,
+                                            "isConstant": false,
+                                            "isLValue": false,
+                                            "isPure": false,
+                                            "lValueRequested": false,
+                                            "memberLocation": "874:8:0",
+                                            "memberName": "transfer",
+                                            "nodeType": "MemberAccess",
+                                            "src": "856:26:0",
+                                            "typeDescriptions": {
+                                                "typeIdentifier": "t_function_transfer_nonpayable$_t_uint256_$returns$__$",
+                                                "typeString": "function (uint256)"
+                                            }
+                                        },
+                                        "id": 55,
+                                        "isConstant": false,
+                                        "isLValue": false,
+                                        "isPure": false,
+                                        "kind": "functionCall",
+                                        "lValueRequested": false,
+                                        "nameLocations": [],
+                                        "names": [],
+                                        "nodeType": "FunctionCall",
+                                        "src": "856:33:0",
+                                        "tryCall": false,
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_tuple$__$",
+                                            "typeString": "tuple()"
+                                        }
+                                    },
+                                    "id": 56,
+                                    "nodeType": "ExpressionStatement",
+                                    "src": "856:33:0"
+                                },
+                                {
+                                    "expression": {
+                                        "arguments": [
+                                            {
+                                                "id": 58,
+                                                "name": "sender",
+                                                "nodeType": "Identifier",
+                                                "overloadedDeclarations": [],
+                                                "referencedDeclaration": 33,
+                                                "src": "929:6:0",
+                                                "typeDescriptions": {
+                                                    "typeIdentifier": "t_address",
+                                                    "typeString": "address"
+                                                }
+                                            },
+                                            {
+                                                "id": 59,
+                                                "name": "toPay",
+                                                "nodeType": "Identifier",
+                                                "overloadedDeclarations": [],
+                                                "referencedDeclaration": 39,
+                                                "src": "937:5:0",
+                                                "typeDescriptions": {
+                                                    "typeIdentifier": "t_uint256",
+                                                    "typeString": "uint256"
+                                                }
+                                            }
+                                        ],
+                                        "expression": {
+                                            "argumentTypes": [
+                                                {
+                                                    "typeIdentifier": "t_address",
+                                                    "typeString": "address"
+                                                },
+                                                {
+                                                    "typeIdentifier": "t_uint256",
+                                                    "typeString": "uint256"
+                                                }
+                                            ],
+                                            "id": 57,
+                                            "name": "addHistorySubscribePremium",
+                                            "nodeType": "Identifier",
+                                            "overloadedDeclarations": [],
+                                            "referencedDeclaration": 94,
+                                            "src": "902:26:0",
+                                            "typeDescriptions": {
+                                                "typeIdentifier": "t_function_internal_nonpayable$_t_address_$_t_uint256_$returns$__$",
+                                                "typeString": "function (address,uint256)"
+                                            }
+                                        },
+                                        "id": 60,
+                                        "isConstant": false,
+                                        "isLValue": false,
+                                        "isPure": false,
+                                        "kind": "functionCall",
+                                        "lValueRequested": false,
+                                        "nameLocations": [],
+                                        "names": [],
+                                        "nodeType": "FunctionCall",
+                                        "src": "902:41:0",
+                                        "tryCall": false,
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_tuple$__$",
+                                            "typeString": "tuple()"
+                                        }
+                                    },
+                                    "id": 61,
+                                    "nodeType": "ExpressionStatement",
+                                    "src": "902:41:0"
+                                }
+                            ]
+                        },
+                        "functionSelector": "d033efc1",
+                        "id": 63,
+                        "implemented": true,
+                        "kind": "function",
+                        "modifiers": [],
+                        "name": "subscribeRequestPremium",
+                        "nameLocation": "562:23:0",
+                        "nodeType": "FunctionDefinition",
+                        "parameters": {
+                            "id": 36,
+                            "nodeType": "ParameterList",
+                            "parameters": [
+                                {
+                                    "constant": false,
+                                    "id": 33,
+                                    "mutability": "mutable",
+                                    "name": "sender",
+                                    "nameLocation": "594:6:0",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 63,
+                                    "src": "586:14:0",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_address",
+                                        "typeString": "address"
+                                    },
+                                    "typeName": {
+                                        "id": 32,
+                                        "name": "address",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "586:7:0",
+                                        "stateMutability": "nonpayable",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_address",
+                                            "typeString": "address"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                },
+                                {
+                                    "constant": false,
+                                    "id": 35,
+                                    "mutability": "mutable",
+                                    "name": "receiver",
+                                    "nameLocation": "609:8:0",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 63,
+                                    "src": "601:16:0",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_address",
+                                        "typeString": "address"
+                                    },
+                                    "typeName": {
+                                        "id": 34,
+                                        "name": "address",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "601:7:0",
+                                        "stateMutability": "nonpayable",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_address",
+                                            "typeString": "address"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                }
+                            ],
+                            "src": "585:33:0"
+                        },
+                        "returnParameters": {
+                            "id": 37,
+                            "nodeType": "ParameterList",
+                            "parameters": [],
+                            "src": "634:0:0"
+                        },
+                        "scope": 109,
+                        "src": "553:398:0",
+                        "stateMutability": "payable",
+                        "virtual": false,
+                        "visibility": "public"
+                    },
+                    {
+                        "body": {
+                            "id": 93,
+                            "nodeType": "Block",
+                            "src": "1100:174:0",
+                            "statements": [
+                                {
+                                    "assignments": [
+                                        72
+                                    ],
+                                    "declarations": [
+                                        {
+                                            "constant": false,
+                                            "id": 72,
+                                            "mutability": "mutable",
+                                            "name": "newSend",
+                                            "nameLocation": "1150:7:0",
+                                            "nodeType": "VariableDeclaration",
+                                            "scope": 93,
+                                            "src": "1138:19:0",
+                                            "stateVariable": false,
+                                            "storageLocation": "memory",
+                                            "typeDescriptions": {
+                                                "typeIdentifier": "t_struct$_user_$19_memory_ptr",
+                                                "typeString": "struct Kanban.user"
+                                            },
+                                            "typeName": {
+                                                "id": 71,
+                                                "nodeType": "UserDefinedTypeName",
+                                                "pathNode": {
+                                                    "id": 70,
+                                                    "name": "user",
+                                                    "nameLocations": [
+                                                        "1138:4:0"
+                                                    ],
+                                                    "nodeType": "IdentifierPath",
+                                                    "referencedDeclaration": 19,
+                                                    "src": "1138:4:0"
+                                                },
+                                                "referencedDeclaration": 19,
+                                                "src": "1138:4:0",
+                                                "typeDescriptions": {
+                                                    "typeIdentifier": "t_struct$_user_$19_storage_ptr",
+                                                    "typeString": "struct Kanban.user"
+                                                }
+                                            },
+                                            "visibility": "internal"
+                                        }
+                                    ],
+                                    "id": 73,
+                                    "nodeType": "VariableDeclarationStatement",
+                                    "src": "1138:19:0"
+                                },
+                                {
+                                    "expression": {
+                                        "id": 78,
+                                        "isConstant": false,
+                                        "isLValue": false,
+                                        "isPure": false,
+                                        "lValueRequested": false,
+                                        "leftHandSide": {
+                                            "expression": {
+                                                "id": 74,
+                                                "name": "newSend",
+                                                "nodeType": "Identifier",
+                                                "overloadedDeclarations": [],
+                                                "referencedDeclaration": 72,
+                                                "src": "1168:7:0",
+                                                "typeDescriptions": {
+                                                    "typeIdentifier": "t_struct$_user_$19_memory_ptr",
+                                                    "typeString": "struct Kanban.user memory"
+                                                }
+                                            },
+                                            "id": 76,
+                                            "isConstant": false,
+                                            "isLValue": true,
+                                            "isPure": false,
+                                            "lValueRequested": true,
+                                            "memberLocation": "1176:6:0",
+                                            "memberName": "action",
+                                            "nodeType": "MemberAccess",
+                                            "referencedDeclaration": 14,
+                                            "src": "1168:14:0",
+                                            "typeDescriptions": {
+                                                "typeIdentifier": "t_string_memory_ptr",
+                                                "typeString": "string memory"
+                                            }
+                                        },
+                                        "nodeType": "Assignment",
+                                        "operator": "=",
+                                        "rightHandSide": {
+                                            "hexValue": "53656e64",
+                                            "id": 77,
+                                            "isConstant": false,
+                                            "isLValue": false,
+                                            "isPure": true,
+                                            "kind": "string",
+                                            "lValueRequested": false,
+                                            "nodeType": "Literal",
+                                            "src": "1185:6:0",
+                                            "typeDescriptions": {
+                                                "typeIdentifier": "t_stringliteral_a886dd9bf74a23521a7b7ff5d419d5a1c9e53e4b8c030012967fabd9be778219",
+                                                "typeString": "literal_string \"Send\""
+                                            },
+                                            "value": "Send"
+                                        },
+                                        "src": "1168:23:0",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_string_memory_ptr",
+                                            "typeString": "string memory"
+                                        }
+                                    },
+                                    "id": 79,
+                                    "nodeType": "ExpressionStatement",
+                                    "src": "1168:23:0"
+                                },
+                                {
+                                    "expression": {
+                                        "id": 84,
+                                        "isConstant": false,
+                                        "isLValue": false,
+                                        "isPure": false,
+                                        "lValueRequested": false,
+                                        "leftHandSide": {
+                                            "expression": {
+                                                "id": 80,
+                                                "name": "newSend",
+                                                "nodeType": "Identifier",
+                                                "overloadedDeclarations": [],
+                                                "referencedDeclaration": 72,
+                                                "src": "1202:7:0",
+                                                "typeDescriptions": {
+                                                    "typeIdentifier": "t_struct$_user_$19_memory_ptr",
+                                                    "typeString": "struct Kanban.user memory"
+                                                }
+                                            },
+                                            "id": 82,
+                                            "isConstant": false,
+                                            "isLValue": true,
+                                            "isPure": false,
+                                            "lValueRequested": true,
+                                            "memberLocation": "1210:6:0",
+                                            "memberName": "amount",
+                                            "nodeType": "MemberAccess",
+                                            "referencedDeclaration": 16,
+                                            "src": "1202:14:0",
+                                            "typeDescriptions": {
+                                                "typeIdentifier": "t_uint256",
+                                                "typeString": "uint256"
+                                            }
+                                        },
+                                        "nodeType": "Assignment",
+                                        "operator": "=",
+                                        "rightHandSide": {
+                                            "id": 83,
+                                            "name": "_amount",
+                                            "nodeType": "Identifier",
+                                            "overloadedDeclarations": [],
+                                            "referencedDeclaration": 67,
+                                            "src": "1219:7:0",
+                                            "typeDescriptions": {
+                                                "typeIdentifier": "t_uint256",
+                                                "typeString": "uint256"
+                                            }
+                                        },
+                                        "src": "1202:24:0",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_uint256",
+                                            "typeString": "uint256"
+                                        }
+                                    },
+                                    "id": 85,
+                                    "nodeType": "ExpressionStatement",
+                                    "src": "1202:24:0"
+                                },
+                                {
+                                    "expression": {
+                                        "arguments": [
+                                            {
+                                                "id": 90,
+                                                "name": "newSend",
+                                                "nodeType": "Identifier",
+                                                "overloadedDeclarations": [],
+                                                "referencedDeclaration": 72,
+                                                "src": "1258:7:0",
+                                                "typeDescriptions": {
+                                                    "typeIdentifier": "t_struct$_user_$19_memory_ptr",
+                                                    "typeString": "struct Kanban.user memory"
+                                                }
+                                            }
+                                        ],
+                                        "expression": {
+                                            "argumentTypes": [
+                                                {
+                                                    "typeIdentifier": "t_struct$_user_$19_memory_ptr",
+                                                    "typeString": "struct Kanban.user memory"
+                                                }
+                                            ],
+                                            "expression": {
+                                                "baseExpression": {
+                                                    "id": 86,
+                                                    "name": "history",
+                                                    "nodeType": "Identifier",
+                                                    "overloadedDeclarations": [],
+                                                    "referencedDeclaration": 25,
+                                                    "src": "1237:7:0",
+                                                    "typeDescriptions": {
+                                                        "typeIdentifier": "t_mapping$_t_address_$_t_array$_t_struct$_user_$19_storage_$dyn_storage_$",
+                                                        "typeString": "mapping(address => struct Kanban.user storage ref[] storage ref)"
+                                                    }
+                                                },
+                                                "id": 88,
+                                                "indexExpression": {
+                                                    "id": 87,
+                                                    "name": "sender",
+                                                    "nodeType": "Identifier",
+                                                    "overloadedDeclarations": [],
+                                                    "referencedDeclaration": 65,
+                                                    "src": "1245:6:0",
+                                                    "typeDescriptions": {
+                                                        "typeIdentifier": "t_address",
+                                                        "typeString": "address"
+                                                    }
+                                                },
+                                                "isConstant": false,
+                                                "isLValue": true,
+                                                "isPure": false,
+                                                "lValueRequested": false,
+                                                "nodeType": "IndexAccess",
+                                                "src": "1237:15:0",
+                                                "typeDescriptions": {
+                                                    "typeIdentifier": "t_array$_t_struct$_user_$19_storage_$dyn_storage",
+                                                    "typeString": "struct Kanban.user storage ref[] storage ref"
+                                                }
+                                            },
+                                            "id": 89,
+                                            "isConstant": false,
+                                            "isLValue": false,
+                                            "isPure": false,
+                                            "lValueRequested": false,
+                                            "memberLocation": "1253:4:0",
+                                            "memberName": "push",
+                                            "nodeType": "MemberAccess",
+                                            "src": "1237:20:0",
+                                            "typeDescriptions": {
+                                                "typeIdentifier": "t_function_arraypush_nonpayable$_t_array$_t_struct$_user_$19_storage_$dyn_storage_ptr_$_t_struct$_user_$19_storage_$returns$__$attached_to$_t_array$_t_struct$_user_$19_storage_$dyn_storage_ptr_$",
+                                                "typeString": "function (struct Kanban.user storage ref[] storage pointer,struct Kanban.user storage ref)"
+                                            }
+                                        },
+                                        "id": 91,
+                                        "isConstant": false,
+                                        "isLValue": false,
+                                        "isPure": false,
+                                        "kind": "functionCall",
+                                        "lValueRequested": false,
+                                        "nameLocations": [],
+                                        "names": [],
+                                        "nodeType": "FunctionCall",
+                                        "src": "1237:29:0",
+                                        "tryCall": false,
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_tuple$__$",
+                                            "typeString": "tuple()"
+                                        }
+                                    },
+                                    "id": 92,
+                                    "nodeType": "ExpressionStatement",
+                                    "src": "1237:29:0"
+                                }
+                            ]
+                        },
+                        "id": 94,
+                        "implemented": true,
+                        "kind": "function",
+                        "modifiers": [],
+                        "name": "addHistorySubscribePremium",
+                        "nameLocation": "1007:26:0",
+                        "nodeType": "FunctionDefinition",
+                        "parameters": {
+                            "id": 68,
+                            "nodeType": "ParameterList",
+                            "parameters": [
+                                {
+                                    "constant": false,
+                                    "id": 65,
+                                    "mutability": "mutable",
+                                    "name": "sender",
+                                    "nameLocation": "1052:6:0",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 94,
+                                    "src": "1044:14:0",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_address",
+                                        "typeString": "address"
+                                    },
+                                    "typeName": {
+                                        "id": 64,
+                                        "name": "address",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "1044:7:0",
+                                        "stateMutability": "nonpayable",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_address",
+                                            "typeString": "address"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                },
+                                {
+                                    "constant": false,
+                                    "id": 67,
+                                    "mutability": "mutable",
+                                    "name": "_amount",
+                                    "nameLocation": "1077:7:0",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 94,
+                                    "src": "1069:15:0",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_uint256",
+                                        "typeString": "uint256"
+                                    },
+                                    "typeName": {
+                                        "id": 66,
+                                        "name": "uint256",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "1069:7:0",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_uint256",
+                                            "typeString": "uint256"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                }
+                            ],
+                            "src": "1033:58:0"
+                        },
+                        "returnParameters": {
+                            "id": 69,
+                            "nodeType": "ParameterList",
+                            "parameters": [],
+                            "src": "1100:0:0"
+                        },
+                        "scope": 109,
+                        "src": "998:276:0",
+                        "stateMutability": "nonpayable",
+                        "virtual": false,
+                        "visibility": "private"
+                    },
+                    {
+                        "body": {
+                            "id": 107,
+                            "nodeType": "Block",
+                            "src": "1447:42:0",
+                            "statements": [
+                                {
+                                    "expression": {
+                                        "baseExpression": {
+                                            "id": 103,
+                                            "name": "history",
+                                            "nodeType": "Identifier",
+                                            "overloadedDeclarations": [],
+                                            "referencedDeclaration": 25,
+                                            "src": "1465:7:0",
+                                            "typeDescriptions": {
+                                                "typeIdentifier": "t_mapping$_t_address_$_t_array$_t_struct$_user_$19_storage_$dyn_storage_$",
+                                                "typeString": "mapping(address => struct Kanban.user storage ref[] storage ref)"
+                                            }
+                                        },
+                                        "id": 105,
+                                        "indexExpression": {
+                                            "id": 104,
+                                            "name": "_sender",
+                                            "nodeType": "Identifier",
+                                            "overloadedDeclarations": [],
+                                            "referencedDeclaration": 96,
+                                            "src": "1473:7:0",
+                                            "typeDescriptions": {
+                                                "typeIdentifier": "t_address",
+                                                "typeString": "address"
+                                            }
+                                        },
+                                        "isConstant": false,
+                                        "isLValue": true,
+                                        "isPure": false,
+                                        "lValueRequested": false,
+                                        "nodeType": "IndexAccess",
+                                        "src": "1465:16:0",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_array$_t_struct$_user_$19_storage_$dyn_storage",
+                                            "typeString": "struct Kanban.user storage ref[] storage ref"
+                                        }
+                                    },
+                                    "functionReturnParameters": 102,
+                                    "id": 106,
+                                    "nodeType": "Return",
+                                    "src": "1458:23:0"
+                                }
+                            ]
+                        },
+                        "functionSelector": "3b9ba18d",
+                        "id": 108,
+                        "implemented": true,
+                        "kind": "function",
+                        "modifiers": [],
+                        "name": "getMyHistorySubscribePremium",
+                        "nameLocation": "1349:28:0",
+                        "nodeType": "FunctionDefinition",
+                        "parameters": {
+                            "id": 97,
+                            "nodeType": "ParameterList",
+                            "parameters": [
+                                {
+                                    "constant": false,
+                                    "id": 96,
+                                    "mutability": "mutable",
+                                    "name": "_sender",
+                                    "nameLocation": "1396:7:0",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 108,
+                                    "src": "1388:15:0",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_address",
+                                        "typeString": "address"
+                                    },
+                                    "typeName": {
+                                        "id": 95,
+                                        "name": "address",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "1388:7:0",
+                                        "stateMutability": "nonpayable",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_address",
+                                            "typeString": "address"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                }
+                            ],
+                            "src": "1377:33:0"
+                        },
+                        "returnParameters": {
+                            "id": 102,
+                            "nodeType": "ParameterList",
+                            "parameters": [
+                                {
+                                    "constant": false,
+                                    "id": 101,
+                                    "mutability": "mutable",
+                                    "name": "",
+                                    "nameLocation": "-1:-1:-1",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 108,
+                                    "src": "1432:13:0",
+                                    "stateVariable": false,
+                                    "storageLocation": "memory",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_array$_t_struct$_user_$19_memory_ptr_$dyn_memory_ptr",
+                                        "typeString": "struct Kanban.user[]"
+                                    },
+                                    "typeName": {
+                                        "baseType": {
+                                            "id": 99,
+                                            "nodeType": "UserDefinedTypeName",
+                                            "pathNode": {
+                                                "id": 98,
+                                                "name": "user",
+                                                "nameLocations": [
+                                                    "1432:4:0"
+                                                ],
+                                                "nodeType": "IdentifierPath",
+                                                "referencedDeclaration": 19,
+                                                "src": "1432:4:0"
+                                            },
+                                            "referencedDeclaration": 19,
+                                            "src": "1432:4:0",
+                                            "typeDescriptions": {
+                                                "typeIdentifier": "t_struct$_user_$19_storage_ptr",
+                                                "typeString": "struct Kanban.user"
+                                            }
+                                        },
+                                        "id": 100,
+                                        "nodeType": "ArrayTypeName",
+                                        "src": "1432:6:0",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_array$_t_struct$_user_$19_storage_$dyn_storage_ptr",
+                                            "typeString": "struct Kanban.user[]"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                }
+                            ],
+                            "src": "1431:15:0"
+                        },
+                        "scope": 109,
+                        "src": "1340:149:0",
+                        "stateMutability": "view",
+                        "virtual": false,
+                        "visibility": "public"
+                    }
+                ],
+                "scope": 110,
+                "src": "60:1432:0",
+                "usedErrors": []
+            }
+        ],
+        "src": "33:1461:0"
+    },
+    "functionHashes": {
+        "getMyHistorySubscribePremium(address)": "3b9ba18d",
+        "subscribeRequestPremium(address,address)": "d033efc1"
+    },
+    "gasEstimates": {
+        "creation": {
+            "codeDepositCost": "303200",
+            "executionCost": "24578",
+            "totalCost": "327778"
+        },
+        "external": {
+            "getMyHistorySubscribePremium(address)": "infinite",
+            "subscribeRequestPremium(address,address)": "infinite"
+        },
+        "internal": {
+            "addHistorySubscribePremium(address,uint256)": "infinite"
+        }
+    }
+}
