@@ -16,7 +16,7 @@ const databaseResponseTimeHistogram = new client.Histogram({
   labelNames: ["operation", "success"],
 });
 
-function startMetricsServer() {
+const startMetricsServer = () => {
   const collectDefaultMetrics = client.collectDefaultMetrics;
 
   collectDefaultMetrics();
@@ -30,7 +30,7 @@ function startMetricsServer() {
   app.listen(9100, () => {
     log.info("Metrics server started at http://localhost:9100");
   });
-}
+};
 
 module.exports = {
   restResponseTimeHistogram,

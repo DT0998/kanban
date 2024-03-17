@@ -14,7 +14,7 @@ const connectionMysql = mysql.createConnection({
   database: database,
 });
 
-async function connect() {
+const connect = async () => {
   try {
     await connectionMysql.connect();
     logger.info("DB connected");
@@ -22,6 +22,6 @@ async function connect() {
     logger.error("Could not connect to db");
     process.exit(1);
   }
-}
+};
 
 module.exports = { connect, connectionMysql };

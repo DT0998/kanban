@@ -1,6 +1,6 @@
 const { connectionMysql } = require("../utils/connect");
 
-function getUserProfile(req, res) {
+const getUserProfile = (req, res) => {
   const { address } = req.params;
   const querySql = "SELECT * FROM user WHERE address = ? LIMIT 1";
   connectionMysql.query(querySql, [address], function (error, results) {
@@ -18,6 +18,6 @@ function getUserProfile(req, res) {
     });
     res.send({ data: results[0] });
   });
-}
+};
 
 module.exports = { getUserProfile };

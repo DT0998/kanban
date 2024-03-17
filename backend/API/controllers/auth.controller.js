@@ -7,7 +7,7 @@ const {
 let refreshTokens = {}; // tao mot object chua nhung refreshTokens
 
 // Function to handle login
-async function login(req, res) {
+const login = async (req, res) => {
   try {
     const { address } = req.body;
     // Check if the address is empty
@@ -52,7 +52,7 @@ async function login(req, res) {
 }
 
 // Function to check if the user exists in the database
-function checkUserExists(address) {
+const checkUserExists = (address) => {
   return new Promise((resolve, reject) => {
     const checkUserQuery = "SELECT * FROM user WHERE address = ?";
     connectionMysql.query(checkUserQuery, [address], (error, results) => {
@@ -67,7 +67,7 @@ function checkUserExists(address) {
 }
 
 // Function to register a new user
-function register(name, address, dateAdded, premium) {
+const register = (name, address, dateAdded, premium) => {
   return new Promise((resolve, reject) => {
     // Insert user into the database
     const registerQuery =
@@ -89,7 +89,7 @@ function register(name, address, dateAdded, premium) {
   });
 }
 
-function refreshToken(req, res) {
+const refreshToken = (req, res) => {
   const { refreshToken, address } = req.body;
   // if refresh token exists
   if (refreshToken && refreshToken in refreshTokens) {

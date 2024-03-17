@@ -27,7 +27,7 @@ const options = {
 
 const swaggerSpec = swaggerJsdoc(options);
 
-function swaggerDocs(app, port) {
+const swaggerDocs = (app, port) => {
   // Swagger page
   app.use(
     "/swagger",
@@ -42,6 +42,6 @@ function swaggerDocs(app, port) {
   });
 
   log.info(`Docs available at http://localhost:${port}/swagger`);
-}
+};
 
 module.exports = swaggerDocs;

@@ -4,17 +4,15 @@ const ABI = require("../../config/abi/abi.json");
 const adminAddress = config.get("adminAddress");
 const { connectionMysql } = require("../utils/connect");
 
-function payPremium(req, res) {
-    const { address } = req.params;
-    const premium = true;
-}
-
-function getHistory(req, res) {
+const subscribePremium = (req, res) => {
   const { address } = req.params;
-}
+  const premium = true;
+};
 
-function calculatePremium() {
-    
-}
+const getHistory = (req, res) => {
+  const { address } = req.params;
+};
 
-module.exports = { payPremium, getHistory };
+const calculateDatePremium = () => {};
+
+module.exports = { subscribePremium, getHistory };
