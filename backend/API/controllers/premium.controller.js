@@ -11,6 +11,7 @@ const subscribePremium = (req, res) => {
 
 const getHistory = (req, res) => {
   const { address } = req.params;
+  const title = "Subscribe Premium";
 };
 
 const calculateDatePremium = () => {};

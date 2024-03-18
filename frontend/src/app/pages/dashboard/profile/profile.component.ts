@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HttpService } from '../../../shared/services/http/http.service';
 import { ProfileService } from '../../../shared/services/profile/profile.service';
 import { LocalStorageService } from '../../../shared/services/localStorage/localStorage.service';
+import { userInfo } from 'os';
 
 @Component({
   selector: 'app-profile',
@@ -13,6 +14,7 @@ import { LocalStorageService } from '../../../shared/services/localStorage/local
 })
 export class ProfileComponent implements OnInit {
   userAddress!: string;
+  userAccessToken!: string;
   constructor(
     public httpService: HttpService,
     public profileService: ProfileService,
@@ -21,11 +23,14 @@ export class ProfileComponent implements OnInit {
     const userInfo = this.localStorageService.getItem('userInfo') as string;
     const userInfoParse = JSON.parse(userInfo);
     this.userAddress = userInfoParse.address;
+    this.userAccessToken = userInfoParse.accessToken;
   }
   ngOnInit(): void {
     this.getProfile();
   }
   getProfile() {
-    this.profileService.getProfile(this.userAddress);
+    if (this.userAccessToken) {
+      this.profileService.getProfile(this.userAddress);
+    }
   }
 }

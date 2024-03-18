@@ -4,29 +4,35 @@ import {
   disconnect,
   connect,
   configureChains,
+  ConnectResult,
+  PublicClient,
 } from '@wagmi/core';
 import { InjectedConnector } from '@wagmi/core/connectors/injected';
 import { polygonMumbai } from '@wagmi/chains';
-import { publicProvider } from '@wagmi/core/providers/public';
+import { alchemyProvider } from '@wagmi/core/providers/alchemy';
+import { LocalStorageService } from '../localStorage/localStorage.service';
+import { environment } from '../../../../environments/environments';
 
-const { publicClient, webSocketPublicClient } = configureChains(
+const { chains, publicClient, webSocketPublicClient } = configureChains(
   [polygonMumbai],
-  [publicProvider()]
+  // use alchemy as the provider
+  [alchemyProvider({ apiKey: environment.apiKeyAlchemy })]
 );
 
 // initialize the client
 const config = createConfig({
-  autoConnect: false,
+  autoConnect: true,
   publicClient,
   webSocketPublicClient,
+  connectors: [new InjectedConnector({ chains })],
 });
 
 @Injectable({
   providedIn: 'root',
 })
 export class WagmiService {
-  wagmiProvider: any;
-  constructor() {}
+  wagmiProvider!: ConnectResult<PublicClient>;
+  constructor(public localStorageService: LocalStorageService) {}
 
   async connectWallet() {
     try {

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ProfileService } from '../../../shared/services/profile/profile.service';
 import { HttpService } from '../../../shared/services/http/http.service';
 import { LocalStorageService } from '../../../shared/services/localStorage/localStorage.service';
+import { WagmiService } from '../../../shared/services/wagmi/wagmi.service';
 
 @Component({
   selector: 'app-home',
@@ -17,7 +18,8 @@ export class HomeComponent implements OnInit {
   constructor(
     public httpService: HttpService,
     public profileService: ProfileService,
-    public localStorageService: LocalStorageService
+    public localStorageService: LocalStorageService,
+    public wagmiService: WagmiService
   ) {
     const userInfo = this.localStorageService.getItem('userInfo') as string;
     const userInfoParse = JSON.parse(userInfo);
@@ -26,6 +28,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.getProfile();
+    this.wagmiService.connectWallet();
   }
 
   getProfile() {

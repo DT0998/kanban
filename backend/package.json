@@ -14,7 +14,7 @@
     "response-time": "^2.3.2",
     "validator": "^13.11.0"
   },
-  "name": "nodejs-crud",
+  "name": "nodejs-kanban",
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {

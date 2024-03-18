@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { WagmiService } from '../../shared/services/wagmi/wagmi.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { HttpService } from '../../shared/services/http/http.service';
-import { getAccount } from '@wagmi/core';
 import * as fromApp from '../../shared/store/store.reducer';
 import * as AuthActions from '../../shared/store/auth/auth.actions';
 import { Store } from '@ngrx/store';
@@ -57,7 +56,6 @@ export class LoginComponent {
       this.store.dispatch(
         new AuthActions.GetRefreshToken(resLogin.refreshToken)
       );
-      // await this.profileService.getProfile(userAddress);
       this.toastr.success('Login successful');
       this.localStorageService.setItem('userInfo', JSON.stringify(userInfo));
       // Navigate to the dashboard after login is successful
