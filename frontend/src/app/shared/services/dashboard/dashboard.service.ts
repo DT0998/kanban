@@ -2,6 +2,7 @@ import { ElementRef, HostListener, Injectable, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalPremiumComponent } from '../../components/modal-premium/modal-premium.component';
 import { ModalBoardComponent } from '../../components/modal-board/modal-board.component';
+import { ModalConfirmPremiumComponent } from '../../components/modal-confirm-premium/modal-confirm-premium.component';
 
 @Injectable({
   providedIn: 'root',
@@ -44,6 +45,16 @@ export class DashboardService {
       height: this.isSmallScreen ? '100%' : 'auto',
     });
     this.isSidebarMobileOpen = false;
+  }
+
+  openConfirmPremiumModal() {
+    this.isSidebarMobileOpen = false;
+    return this.dialog.open(ModalConfirmPremiumComponent, {
+      width: this.isSmallScreen ? '100vw' : '450px',
+      maxWidth: this.isSmallScreen ? '100vw' : '450px',
+      height: this.isSmallScreen ? '100%' : 'auto',
+      panelClass: 'confirm-premium-modal',
+    });
   }
 
   openBoardModal(modalBoardRef: ElementRef, premium: boolean, index: number) {

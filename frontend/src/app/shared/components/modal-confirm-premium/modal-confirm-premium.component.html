@@ -1,0 +1,30 @@
+<div class="p-[8px]">
+    <!-- premium banner -->
+    <div class="relative">
+        <img src="../../../../assets/images/modal/polygon-bg.jpeg" alt="modal bg" />
+        <button class="absolute top-0 right-0 bg-gray-200 p-[6px] flex rounded-full z-1" (click)="closeModal()">
+            <ng-icon name="ionCloseOutline" size="20" class="text-black md:hidden block"></ng-icon>
+        </button>
+    </div>
+    <div class="flex flex-col items-center p-[25px] gap-4">
+        <!-- modal header -->
+        <div class="flex flex-col items-center text-center text-white">
+            <h3 class="font-bold">
+                If you dont have any matic, you can click the link below to get the matic
+            </h3>
+            <a href="https://www.alchemy.com/faucets/polygon-mumbai"
+                class="underline">https://www.alchemy.com/faucets/polygon-mumbai</a>
+        </div>
+        <!-- modal footer -->
+        <div class="w-full flex flex-row gap-4">
+            <button class="bg-red-600 text-white px-[12px] py-[6px] rounded w-full flex justify-center"
+                (click)="closeModal()">
+                Cancel
+            </button>
+            <button class="bg-blue-600 text-white px-[12px] py-[6px] rounded w-full flex justify-center"
+                (click)="confirmSubscribePremium()">
+                Confirm
+            </button>
+        </div>
+    </div>
+</div>

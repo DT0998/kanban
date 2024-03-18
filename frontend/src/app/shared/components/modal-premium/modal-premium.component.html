@@ -8,7 +8,7 @@
     </div>
     <div class="flex flex-col items-center p-[25px] gap-4">
         <!-- modal header -->
-        <div class="flex flex-col items-center">
+        <div class="flex flex-col items-center text-center">
             <h3 class="font-bold">
                 Try Trello Premium for 1 month/0.1 matic
             </h3>
@@ -28,12 +28,7 @@
         <div class="w-full">
             <button class="bg-blue-600 text-white px-[12px] py-[6px] rounded w-full flex justify-center"
                 (click)="handleSubscribePremium()">
-                <ng-container *ngIf="isLoading; else notIsLoading">
-                    <mat-spinner [diameter]="30" color="accent"></mat-spinner>
-                </ng-container>
-                <ng-template #notIsLoading>
-                    Start Premium
-                </ng-template>
+                Start Premium
             </button>
         </div>
     </div>

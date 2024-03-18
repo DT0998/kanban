@@ -8,8 +8,11 @@ import {
   MatDialogContent,
   MatDialogRef,
 } from '@angular/material/dialog';
+
+import { WagmiService } from '../../services/wagmi/wagmi.service';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ToastrService } from 'ngx-toastr';
 import { DashboardService } from '../../services/dashboard/dashboard.service';
-import { ModalConfirmPremiumComponent } from '../modal-confirm-premium/modal-confirm-premium.component';
 import { ModalConfirmPremiumService } from '../../services/modal-confirm-premium/modal-confirm-premium.service';
 
 @Component({
@@ -21,27 +24,33 @@ import { ModalConfirmPremiumService } from '../../services/modal-confirm-premium
     CommonModule,
     MatDialogTitle,
     MatDialogContent,
+    MatProgressSpinnerModule,
   ],
   providers: [
     provideIcons({
       ionCloseOutline,
     }),
   ],
-  templateUrl: './modal-premium.component.html',
-  styleUrl: './modal-premium.component.scss',
+  templateUrl: './modal-confirm-premium.component.html',
+  styleUrl: './modal-confirm-premium.component.scss',
 })
-export class ModalPremiumComponent {
+export class ModalConfirmPremiumComponent {
   constructor(
-    public dialogRef: MatDialogRef<ModalPremiumComponent>,
-    public confirmDialogRef: MatDialogRef<ModalConfirmPremiumComponent>,
+    public dialogRef: MatDialogRef<ModalConfirmPremiumComponent>,
+    public wagmiService: WagmiService,
+    private toastr: ToastrService,
     private dashboardService: DashboardService,
+    private modalConfirmPremiumService: ModalConfirmPremiumService
   ) {}
+
   closeModal() {
     this.dialogRef.close();
   }
-  async handleSubscribePremium() {
+
+  async confirmSubscribePremium() {
     try {
-      this.confirmDialogRef = this.dashboardService.openConfirmPremiumModal();
+      await this.modalConfirmPremiumService.confirmSubscribePremium();
+      this.toastr.success('Subscription successful');
     } catch (error) {
       console.error(error);
     } finally {
