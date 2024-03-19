@@ -60,7 +60,7 @@ export class LoginComponent {
         JSON.stringify(this.profileService.userInfo)
       );
       // Navigate to the dashboard after login is successful
-      this.router.navigateByUrl('/dashboard');
+      this.router.navigateByUrl('/dashboard/home');
     } catch {
       await this.wagmiService.disconnectWallet();
     } finally {

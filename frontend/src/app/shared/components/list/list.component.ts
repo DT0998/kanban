@@ -22,6 +22,7 @@ import { selectPremium } from '../../store/premium/premium.selector';
 import { selectBoardList } from '../../store/board/board.selector';
 import { Board } from '../../models/board.model';
 import { v4 as uuidv4 } from 'uuid';
+import { LocalStorageService } from '../../services/localStorage/localStorage.service';
 
 @Component({
   selector: 'app-list',
@@ -50,18 +51,22 @@ export class ListComponent implements OnInit, OnDestroy, OnChanges {
   public openCard = false;
   premium!: boolean;
   listsId!: number;
+  userInfo!: string;
 
   constructor(
     public boardService: BoardService,
     private http: HttpClient,
-    public store: Store<fromApp.AppState>
+    public store: Store<fromApp.AppState>,
+    public localStorageService: LocalStorageService
   ) {
     this.listTitle = '';
+    this.userInfo = this.localStorageService.getItem('userInfo') as string;
+    const userInfoParse = JSON.parse(this.userInfo);
+    this.premium = userInfoParse.premium;
   }
 
   ngOnInit(): void {
     this.getList();
-    this.getPremium();
   }
 
   // This lifecycle hook is called when any data-bound property of the component changes
@@ -80,13 +85,6 @@ export class ListComponent implements OnInit, OnDestroy, OnChanges {
     } else {
       this.isFirstListInit = true;
     }
-  }
-
-  getPremium() {
-    // get the premium from the store
-    this.store.select(selectPremium).subscribe((premium: boolean) => {
-      this.premium = premium;
-    });
   }
 
   getList() {
