@@ -20,7 +20,6 @@
   "main": "app.js",
   "scripts": {
     "dev": "nodemon --env-file=.env app.js",
-    "build": "tsc"
   },
   "author": "",
   "license": "ISC",
