@@ -4,14 +4,15 @@ import { HttpService } from '../http/http.service';
 @Injectable({
   providedIn: 'root',
 })
+  
 export class ProfileService {
-  userProfile!: UserProfile;
+  userInfo: UserInfo = {};
   constructor(public httpService: HttpService) {}
   async getProfile(address: string) {
     const res = await this.httpService
       .get(`api/profile/${address}`)
       .toPromise();
-    this.userProfile = await res;
+    return res;
   }
 }
 
@@ -20,4 +21,12 @@ export interface UserProfile {
   address: string;
   dateAdded: Date;
   premium: boolean;
+}
+
+export interface UserInfo {
+  accessToken?: string;
+  refreshToken?: string;
+  address?: string;
+  name?: string;
+  premium?: boolean;
 }

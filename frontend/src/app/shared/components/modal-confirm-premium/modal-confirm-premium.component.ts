@@ -8,11 +8,8 @@ import {
   MatDialogContent,
   MatDialogRef,
 } from '@angular/material/dialog';
-
 import { WagmiService } from '../../services/wagmi/wagmi.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { ToastrService } from 'ngx-toastr';
-import { DashboardService } from '../../services/dashboard/dashboard.service';
 import { ModalConfirmPremiumService } from '../../services/modal-confirm-premium/modal-confirm-premium.service';
 
 @Component({
@@ -38,8 +35,6 @@ export class ModalConfirmPremiumComponent {
   constructor(
     public dialogRef: MatDialogRef<ModalConfirmPremiumComponent>,
     public wagmiService: WagmiService,
-    private toastr: ToastrService,
-    private dashboardService: DashboardService,
     private modalConfirmPremiumService: ModalConfirmPremiumService
   ) {}
 
@@ -50,7 +45,6 @@ export class ModalConfirmPremiumComponent {
   async confirmSubscribePremium() {
     try {
       await this.modalConfirmPremiumService.confirmSubscribePremium();
-      this.toastr.success('Subscription successful');
     } catch (error) {
       console.error(error);
     } finally {

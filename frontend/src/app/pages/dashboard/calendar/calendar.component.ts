@@ -1,4 +1,4 @@
-import { Component, HostListener, ViewChild } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FullCalendarComponent,
@@ -9,6 +9,9 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import { DashboardService } from '../../../shared/services/dashboard/dashboard.service';
+import { LocalStorageService } from '../../../shared/services/localStorage/localStorage.service';
+import { HistoryService } from '../../../shared/services/history/history.service';
+import { HistoryData, HistoryElement } from '../history/history.component';
 
 @Component({
   selector: 'app-calendar',
@@ -17,10 +20,41 @@ import { DashboardService } from '../../../shared/services/dashboard/dashboard.s
   templateUrl: './calendar.component.html',
   styleUrl: './calendar.component.scss',
 })
-export class CalendarComponent {
+export class CalendarComponent implements OnInit {
   initialView!: string;
+  userInfo!: string;
+  userAddress!: string;
+  historyData!: HistoryData;
   @ViewChild('calendar') calendarComponent!: FullCalendarComponent;
-  constructor(public dashboardService: DashboardService) {}
+  constructor(
+    public dashboardService: DashboardService,
+    public localStorageService: LocalStorageService,
+    public historyService: HistoryService
+  ) {
+    this.userInfo = this.localStorageService.getItem('userInfo') as string;
+    const userInfoParse = JSON.parse(this.userInfo);
+    this.userAddress = userInfoParse.address;
+  }
+
+  ngOnInit(): void {
+    this.getHistory();
+  }
+
+  async getHistory() {
+    const res = await this.historyService.getHistory(this.userAddress);
+    this.historyData = res;
+    // add events to calendar
+    this.calendarOptions.events = this.historyData.data.map(
+      (item: HistoryElement) => {
+        const { title, startDate, endDate } = item;
+        return {
+          title,
+          start: startDate,
+          end: endDate,
+        };
+      }
+    );
+  }
 
   @HostListener('window:resize', ['$event'])
   onResize(event: Event): void {
@@ -37,28 +71,11 @@ export class CalendarComponent {
     }
   }
 
-  getLastDayOfMonth(): Date {
-    const now = new Date();
-    const lastDateOfCurrentMonth = new Date(
-      now.getFullYear(),
-      now.getMonth() + 1,
-      0
-    );
-    return lastDateOfCurrentMonth;
-  }
-
   calendarOptions: CalendarOptions = {
     nextDayThreshold: '00:00:00',
     initialView: 'dayGridWeek',
     plugins: [dayGridPlugin, interactionPlugin, timeGridPlugin],
     dateClick: (arg) => this.handleDateClick(arg),
-    events: [
-      {
-        title: 'Subscribe Premium',
-        start: new Date(),
-        end: this.getLastDayOfMonth(),
-      },
-    ],
     headerToolbar: {
       left: 'prev,next',
       center: 'title',

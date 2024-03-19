@@ -2,6 +2,7 @@ const { connectionMysql } = require("../utils/connect");
 const {
   createAccessToken,
   createRefreshToken,
+  checkUserExists,
 } = require("../services/auth.service");
 
 let refreshTokens = {}; // tao mot object chua nhung refreshTokens
@@ -47,24 +48,9 @@ const login = async (req, res) => {
     }
   } catch (error) {
     console.error("Error during login:", error);
-    res.status(500).json({ error: "Internal server error" });
+    res.status(500).json({ message: "Internal server error" });
   }
-}
-
-// Function to check if the user exists in the database
-const checkUserExists = (address) => {
-  return new Promise((resolve, reject) => {
-    const checkUserQuery = "SELECT * FROM user WHERE address = ?";
-    connectionMysql.query(checkUserQuery, [address], (error, results) => {
-      if (error) {
-        reject(error);
-      } else {
-        // Check if any rows were returned
-        resolve(results.length > 0);
-      }
-    });
-  });
-}
+};
 
 // Function to register a new user
 const register = (name, address, dateAdded, premium) => {
@@ -80,28 +66,28 @@ const register = (name, address, dateAdded, premium) => {
           reject(error);
         } else {
           // User inserted successfully, generate JWT and perform login
-          const accessToken = createAccessToken(results.body);
-          const refreshToken = createRefreshToken(results.body);
-          resolve(accessToken, refreshToken);
+          const accessToken = createAccessToken({ address });
+          const refreshToken = createRefreshToken({ address });
+          resolve({ accessToken, refreshToken });
         }
       }
     );
   });
-}
+};
 
 const refreshToken = (req, res) => {
   const { refreshToken, address } = req.body;
   // if refresh token exists
   if (refreshToken && refreshToken in refreshTokens) {
-    const accessToken = createRefreshToken({ address });
+    const accessToken = createAccessToken({ address }); // Use createAccessToken here
     const response = {
       accessToken: accessToken,
     };
     refreshTokens[refreshToken].accessToken = accessToken;
     res.json(response);
   } else {
-    res.status(403).send("Invalid refresh token");
+    res.status(403).send({ message: "Invalid refresh token" });
   }
-}
+};
 
 module.exports = { login, refreshToken };

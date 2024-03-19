@@ -19,16 +19,32 @@
  *           format: date
  */
 
-
 /**
  * @swagger
  * components:
  *   schemas:
- *     Premium:
+ *     PremiumReponse:
  *       type: object
  *       required:
  *         - premium
  *       properties:
  *         premium:
  *           type: boolean
+ */
+
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     PremiumRequest:
+ *       type: object
+ *       required:
+ *         - address
+ *         - name
+ *       properties:
+ *         address:
+ *           type: string
+ *         name:
+ *           type: string
  */

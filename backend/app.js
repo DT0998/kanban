@@ -16,6 +16,7 @@ const {
 } = require("./API/routes/index.routes");
 const Moralis = require("moralis").default;
 const cors = require("cors");
+const { taskPremium } = require("./API/cron/premium.cron");
 
 const port = config.get("port");
 const moralisApiKey = config.get("moralisKey");
@@ -63,6 +64,9 @@ const startServer = async () => {
       startMetricsServer();
 
       swaggerDocs(app, port);
+
+      // cron jobs
+      taskPremium.start();
     });
   } catch (error) {
     logger.error(`Error: ${error}`);

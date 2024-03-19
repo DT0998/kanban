@@ -97,12 +97,19 @@
             </div>
             <!-- button premium -->
             <div class="p-[12px] border-t-2 border-slate-200">
-                <button class="w-full p-[6px] text-white flex items-center rounded"
+                <button class="w-full p-[6px] text-white flex items-center rounded "
                     style="background: linear-gradient(97.78deg, var(--ds-background-accent-purple-bolder, #4423a3) 17.5%, var(--ds-background-accent-magenta-subtle, #aa63cb) 113.39%);"
-                    (click)="openPremiumModal()">
+                    (click)="openPremiumModal()" [disabled]="premium" [ngClass]="{'opacity-50': premium}">
                     <ng-icon name="ionBagCheckOutline" size="20" class="text-white mx-[12px] md:hidden block"></ng-icon>
-                    Try
-                    Premium</button>
+                    <ng-template #nonPremiumButton>
+                        <span>
+                            Try premium
+                        </span>
+                    </ng-template>
+                    <span *ngIf="premium; else nonPremiumButton">
+                        Already subscribe
+                    </span>
+                </button>
             </div>
         </div>
     </div>

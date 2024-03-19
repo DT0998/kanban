@@ -13,6 +13,11 @@ export function premiumReducer(
   action: PremiumActions.PremiumActions
 ): State {
   switch (action.type) {
+    case PremiumActions.GetPremium:
+      return {
+        ...state,
+        premium: action.payload,
+      };
     default:
       return state;
   }

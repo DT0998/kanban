@@ -9,5 +9,6 @@ module.exports = {
   tokenSecret: process.env.TOKEN_SECRET,
   accessTokenLife: process.env.ACCESS_TOKEN_LIFE,
   refreshTokenLife: process.env.REFRESH_TOKEN_LIFE,
-  adminAddress: process.env.ADMIN_ADDRESS,
+  smartcontractAddress: process.env.SMART_CONTRACT_ADDRESS,
+  chainId: process.env.CHAIN_ID,
 };

@@ -73,6 +73,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   boardLists: Board[] = [];
 
   premium!: boolean;
+  userInfo!: string;
 
   constructor(
     public dialog: MatDialog,
@@ -81,24 +82,20 @@ export class DashboardComponent implements OnInit, OnDestroy {
     public localStorageService: LocalStorageService,
     public wagmiService: WagmiService,
     public router: Router
-  ) {}
+  ) {
+    this.userInfo = this.localStorageService.getItem('userInfo') as string;
+    const userInfoParse = JSON.parse(this.userInfo);
+    this.premium = userInfoParse.premium;
+  }
 
   ngOnInit(): void {
     this.getBoardList();
-    this.getPremium();
   }
 
   getBoardList() {
     // get the board list from the store
     this.store.select(selectBoardList).subscribe((boardList: Board[]) => {
       this.boardLists = boardList;
-    });
-  }
-
-  getPremium() {
-    // get the premium from the store
-    this.store.select(selectPremium).subscribe((premium: boolean) => {
-      this.premium = premium;
     });
   }
 

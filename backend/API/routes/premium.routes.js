@@ -1,3 +1,7 @@
+const {
+  getHistoryPremium,
+  subscribeMonthlyPremium,
+} = require("../controllers/premium.controller");
 const verifyToken = require("../middleware/auth");
 
 // User routes
@@ -11,32 +15,31 @@ function routes(app, rootUrl) {
 
   /**
    * @swagger
-   * /api/pay-premium/{address}:
+   * /api/subscribe-premium:
    *   post:
    *     security:
    *     - Authorization: []
-   *     summary: Buy premium
+   *     summary: Subscribe premium
    *     tags: [Premium]
-   *     parameters:
-   *       - in: path
-   *         name: address
-   *         schema:
-   *           type: string
-   *         required: true
-   *         description: Address of the user
+   *     requestBody:
+   *       required: true
+   *       content:
+   *         application/json:
+   *           schema:
+   *             $ref: '#/components/schemas/PremiumRequest'
    *     responses:
    *       200:
    *         description: Get user profile successfully
    *         content:
    *           application/json:
    *             schema:
-   *               $ref: '#/components/schemas/Premium'
+   *               $ref: '#/components/schemas/PremiumReponse'
    *       404:
    *         description: Premium cant buy
    *       500:
    *         description: Internal Server Error
    */
-  app.get(`/${rootUrl}/pay-premium/:address`, verifyToken);
+  app.post(`/${rootUrl}/subscribe-premium`, verifyToken, subscribeMonthlyPremium);
 
   /**
    * @swagger
@@ -65,7 +68,7 @@ function routes(app, rootUrl) {
    *       500:
    *         description: Internal Server Error
    */
-  app.get(`/${rootUrl}/history/:address`, verifyToken);
+  app.get(`/${rootUrl}/history/:address`, verifyToken, getHistoryPremium);
 }
 
 module.exports = routes;

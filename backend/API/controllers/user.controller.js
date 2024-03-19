@@ -6,11 +6,11 @@ const getUserProfile = (req, res) => {
   connectionMysql.query(querySql, [address], function (error, results) {
     if (error) {
       console.error("Error executing SQL query:", error);
-      res.status(500).send({ error: "Internal server error" });
+      res.status(500).send({ message: "Internal server error" });
       return;
     }
     if (results.length === 0) {
-      res.status(404).send({ error: "User not found" });
+      res.status(404).send({ message: "User not found" });
       return;
     }
     results.forEach((result) => {

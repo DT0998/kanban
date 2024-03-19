@@ -10,7 +10,6 @@ import {
 } from '@angular/material/dialog';
 import { DashboardService } from '../../services/dashboard/dashboard.service';
 import { ModalConfirmPremiumComponent } from '../modal-confirm-premium/modal-confirm-premium.component';
-import { ModalConfirmPremiumService } from '../../services/modal-confirm-premium/modal-confirm-premium.service';
 
 @Component({
   selector: 'app-modal',
