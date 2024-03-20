@@ -1,0 +1,72 @@
+<!-- side bar -->
+<aside id="logo-sidebar"
+    class="fixed top-0 left-0 z-40 md:w-[250px] pt-16 h-screen w-full transition-transform shadow-xl bg-white border-r border-gray-200"
+    [ngClass]="{'translate-y-0' :dashboardService.isSidebarMobileOpen, '-translate-x-full': !dashboardService.isSidebarMobileOpen && dashboardService.isSmallScreen}"
+    aria-label="Sidebar">
+    <div class="h-full overflow-y-auto bg-white">
+        <div class="flex h-full flex-col justify-between">
+            <div>
+                <a routerLink="/dashboard/home" routerLinkActive="active">
+                    <div class="md:px-0 py-[12px] menu-container flex items-center">
+                        <ng-icon name="ionHomeOutline" size="20" class="text-black mx-[12px] md:ml-3 h-full"></ng-icon>
+                        <span>Boards</span>
+                    </div>
+                </a>
+                <div class="md:px-0 py-[12px]">
+                    <span class="font-bold mx-[12px]">Workspace views</span>
+                </div>
+                <a routerLink="/dashboard/calendar" routerLinkActive="active">
+                    <div class="md:px-0 py-[12px] menu-container flex items-center ">
+                        <ng-icon name="ionCalendarClearOutline" size="20"
+                            class="text-black mx-[12px] md:ml-3 h-full"></ng-icon>
+                        <span>Calendar</span>
+                    </div>
+                </a>
+                <a routerLink="/dashboard/history" routerLinkActive="active">
+                    <div class="md:px-0 py-[12px] menu-container flex items-center ">
+                        <ng-icon name="ionReceiptOutline" size="20"
+                            class="text-black mx-[12px] md:ml-3 h-full"></ng-icon>
+                        <span>History</span>
+                    </div>
+                </a>
+                <div class="md:px-0 py-[12px] flex justify-between">
+                    <span class="font-bold mx-[12px]">Your boards</span>
+                    <div #modalBoard>
+                        <button (click)="openBoardModal()">
+                            <ng-icon name="ionAddOutline" size="20"
+                                class="text-black mx-[12px] md:mr-3 h-full"></ng-icon>
+                        </button>
+                    </div>
+                </div>
+                <!-- board list -->
+                <div *ngFor="let board of boardLists;index as i">
+                    <a [routerLink]="'/dashboard/board/' + board.background.id" routerLinkActive="active"
+                        (click)="navigateBoardDetail(board,i)">
+                        <div class="md:px-0 py-[12px] menu-container flex items-center">
+                            <div class="board-img mx-[12px] md:ml-3"
+                                [style.background-image]="'url(' + board.background.icon + ')'">
+                            </div>
+                            <span class="line-clamp-1">{{ board.title }}</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <!-- button premium -->
+            <div class="p-[12px] border-t-2 border-slate-200">
+                <button class="w-full p-[6px] text-white flex items-center rounded "
+                    style="background: linear-gradient(97.78deg, var(--ds-background-accent-purple-bolder, #4423a3) 17.5%, var(--ds-background-accent-magenta-subtle, #aa63cb) 113.39%);"
+                    (click)="openPremiumModal()" [disabled]="premium" [ngClass]="{'opacity-50': premium}">
+                    <ng-icon name="ionBagCheckOutline" size="20" class="text-white mx-[12px] md:hidden block"></ng-icon>
+                    <ng-template #nonPremiumButton>
+                        <span>
+                            Try premium
+                        </span>
+                    </ng-template>
+                    <span *ngIf="premium; else nonPremiumButton">
+                        Already subscribe
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+</aside>

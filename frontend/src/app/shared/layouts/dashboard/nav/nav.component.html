@@ -1,0 +1,43 @@
+<!-- nav -->
+<nav class="fixed top-0 z-50 w-full border-slate-200 dark:bg-gray-800 dark:border-gray-700 sidebar-container">
+    <div class="flex flex-row h-16 justify-between">
+        <div class="flex items-center md:border-r-[1px] border-gray-200 md:w-[250px]">
+            <div class="flex-grow">
+                <a routerLink="/dashboard/home">
+                    <ng-icon name="ionHomeOutline" size="20" class="text-white mx-[12px] md:ml-3 h-full"></ng-icon>
+                </a>
+            </div>
+            <div class="flex items-center border-x md:border-x-0 border-gray-400 h-full">
+                <ng-icon name="ionSettingsOutline" size="20"
+                    class="text-white mx-[12px] md:mx-0 h-full md:mr-3"></ng-icon>
+            </div>
+            <button (click)="toggleSidebarMobile()" *ngIf="dashboardService.isSmallScreen">
+                <ng-icon name="ionReorderThreeOutline" size="20" class="text-white mx-[12px] md:hidden block"></ng-icon>
+            </button>
+        </div>
+        <!-- avatar -->
+        <div class="h-full flex items-center">
+            <button mat-button [matMenuTriggerFor]="menu" class="md:mr-3 md:mx-0 mx-[12px]">
+                <ng-icon name="ionPersonCircleOutline" size="20"
+                    class="text-white mx-[12px] md:hidden block"></ng-icon></button>
+        </div>
+        <!-- menu dropdown -->
+        <mat-menu #menu="matMenu">
+            <div class="px-[11px] py-[15px]">
+                <ng-container *ngIf="premium; else nonPremium">
+                    <span class="py-[5px] px-[5px] text-white rounded"
+                        style="background: linear-gradient(97.78deg, var(--ds-background-accent-purple-bolder, #4423a3) 17.5%, var(--ds-background-accent-magenta-subtle, #aa63cb) 113.39%);">Premium</span>
+                </ng-container>
+                <ng-template #nonPremium>
+                    <span class="py-[5px] px-[5px] bg-slate-300 rounded">Non-premium</span>
+                </ng-template>
+            </div>
+            <a routerLink="/dashboard/profile">
+                <button mat-menu-item>
+                    Edit profile
+                </button>
+            </a>
+            <button mat-menu-item (click)="handleLogout()">Logout</button>
+        </mat-menu>
+    </div>
+</nav>
