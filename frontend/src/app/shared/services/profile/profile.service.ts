@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from '../http/http.service';
+import { delay } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
-  
 export class ProfileService {
   userInfo: UserInfo = {};
   constructor(public httpService: HttpService) {}
   async getProfile(address: string) {
     const res = await this.httpService
       .get(`api/profile/${address}`)
+      .pipe(delay(2000))
       .toPromise();
     return res;
   }
