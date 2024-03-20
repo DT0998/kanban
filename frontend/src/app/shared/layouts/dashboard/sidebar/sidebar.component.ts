@@ -1,7 +1,6 @@
 import {
   Component,
   ElementRef,
-  HostListener,
   Input,
   OnDestroy,
   OnInit,
@@ -10,9 +9,6 @@ import {
 import { CommonModule } from '@angular/common';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import {
-  ionHomeOutline,
-  ionSettingsOutline,
-  ionReorderThreeOutline,
   ionCalendarClearOutline,
   ionAddOutline,
   ionBagCheckOutline,
