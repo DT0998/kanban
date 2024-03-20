@@ -8,13 +8,13 @@ import { delay } from 'rxjs';
 export class ProfileService {
   userInfo: UserInfo = {};
   constructor(public httpService: HttpService) {}
-  async getProfile(address: string) {
+  getProfile = async (address: string) => {
     const res = await this.httpService
       .get(`api/profile/${address}`)
       .pipe(delay(2000))
       .toPromise();
     return res;
-  }
+  };
 }
 
 export interface UserProfile {

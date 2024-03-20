@@ -80,12 +80,12 @@ export class SidebarComponent implements OnInit, OnDestroy {
     this.getBoardList();
   }
 
-  getBoardList() {
+  getBoardList = () => {
     // get the board list from the store
     this.store.select(selectBoardList).subscribe((boardList: Board[]) => {
       this.boardLists = boardList;
     });
-  }
+  };
 
   openPremiumModal = () => {
     this.dashboardService.openPremiumModal();

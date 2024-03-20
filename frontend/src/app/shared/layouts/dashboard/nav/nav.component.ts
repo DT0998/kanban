@@ -56,9 +56,9 @@ export class NavbarComponent implements OnInit {
     this.dashboardService.toggleSidebarMobile();
   };
 
-  async handleLogout() {
+  handleLogout = async () => {
     await this.wagmiService.disconnectWallet();
     this.localStorageService.removeItem('userInfo');
     this.router.navigateByUrl('/login');
-  }
+  };
 }

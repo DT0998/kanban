@@ -28,9 +28,9 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.getProfile();
   }
-  getProfile() {
+  getProfile = () => {
     if (this.userAccessToken) {
       this.profileService.getProfile(this.userAddress);
     }
-  }
+  };
 }

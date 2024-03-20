@@ -33,12 +33,14 @@ export class ModalPremiumComponent {
   constructor(
     public dialogRef: MatDialogRef<ModalPremiumComponent>,
     public confirmDialogRef: MatDialogRef<ModalConfirmPremiumComponent>,
-    private dashboardService: DashboardService,
-  ) {}
-  closeModal() {
+    private dashboardService: DashboardService
+  ) { }
+  
+  closeModal = () => {
     this.dialogRef.close();
-  }
-  async handleSubscribePremium() {
+  };
+
+  handleSubscribePremium = async () => {
     try {
       this.confirmDialogRef = this.dashboardService.openConfirmPremiumModal();
     } catch (error) {
@@ -46,5 +48,5 @@ export class ModalPremiumComponent {
     } finally {
       this.dialogRef.close();
     }
-  }
+  };
 }

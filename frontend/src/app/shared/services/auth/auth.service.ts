@@ -28,7 +28,7 @@ export class AuthService {
     }
   }
 
-  addAuthorizationHeader(request: HttpRequest<any>): HttpRequest<any> {
+  addAuthorizationHeader = (request: HttpRequest<any>): HttpRequest<any> => {
     // Get the access token from the AuthService
     let accessToken;
     if (this.userInfoAuth) {
@@ -47,7 +47,7 @@ export class AuthService {
       requestAuth = request;
     }
     return requestAuth;
-  }
+  };
 
   refreshTokenAndRetry(request: HttpRequest<any>, next: any): Observable<any> {
     const payload = {

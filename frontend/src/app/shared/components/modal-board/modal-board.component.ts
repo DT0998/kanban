@@ -64,7 +64,7 @@ export class ModalBoardComponent implements OnInit {
     this.boardFormInit();
   }
 
-  boardFormInit() {
+  boardFormInit = () => {
     // init create board form
     this.boardForm = new FormGroup({
       title: new FormControl('', [
@@ -72,7 +72,7 @@ export class ModalBoardComponent implements OnInit {
         Validators.minLength(3),
       ]),
     });
-  }
+  };
 
   ngOnInit(): void {
     this.updatePositionModal();
@@ -80,21 +80,21 @@ export class ModalBoardComponent implements OnInit {
     this.selectedBackground = this.modalBackgroundPhotos[0];
   }
 
-  updatePositionModal() {
+  updatePositionModal = () => {
     // Update position of the modal
     this.positionData = this.data;
     this.dialogRef.updatePosition({
       top: `${this.positionData.top - 180}px`,
       left: `${this.positionData.right}px`,
     });
-  }
+  };
 
   closeModal() {
     this.dialogRef.close();
   }
 
   // Select background
-  selectBackground(background: ListBackground) {
+  selectBackground = (background: ListBackground) => {
     if (this.isSelected(background)) {
       // If already selected, deselect it
       this.selectedBackground = null;
@@ -102,14 +102,14 @@ export class ModalBoardComponent implements OnInit {
       // If not selected, select it and clear any previous selection
       this.selectedBackground = background;
     }
-  }
+  };
 
   // Check if background is selected
-  isSelected(background: ListBackground): boolean {
+  isSelected = (background: ListBackground): boolean => {
     return this.selectedBackground === background;
-  }
+  };
 
-  handleCreateBoard() {
+  handleCreateBoard = () => {
     if (this.boardForm.valid && this.selectedBackground) {
       const title = this.boardForm.get('title')?.value;
       // Create a deep copy of the selectedBackground object
@@ -130,5 +130,5 @@ export class ModalBoardComponent implements OnInit {
     }
     // close the modal dialog after finish
     this.dialogRef.close();
-  }
+  };
 }

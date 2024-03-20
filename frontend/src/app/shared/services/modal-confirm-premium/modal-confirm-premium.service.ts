@@ -33,7 +33,7 @@ export class ModalConfirmPremiumService {
     this.userName = userInfoParse.name;
   }
 
-  async confirmSubscribePremium() {
+  confirmSubscribePremium = async () => {
     try {
       await writeContract({
         chainId: polygonMumbai.id,
@@ -66,5 +66,5 @@ export class ModalConfirmPremiumService {
       this.toastr.success('Subscription unsuccessful');
       console.error(error);
     }
-  }
+  };
 }

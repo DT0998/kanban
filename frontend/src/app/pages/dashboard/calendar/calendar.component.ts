@@ -40,7 +40,7 @@ export class CalendarComponent implements OnInit {
     this.getHistory();
   }
 
-  async getHistory() {
+  getHistory = async () => {
     const res = await this.historyService.getHistory(this.userAddress);
     this.historyData = res;
     // add events to calendar
@@ -63,7 +63,7 @@ export class CalendarComponent implements OnInit {
   }
 
   // change view when window resize
-  updateCalendarView() {
+  updateCalendarView = () => {
     if (this.dashboardService.isLaptopSmallScreen) {
       this.calendarComponent.getApi().changeView('dayGridDay');
     } else {

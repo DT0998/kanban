@@ -34,7 +34,7 @@ export class WagmiService {
   wagmiProvider!: ConnectResult<PublicClient>;
   constructor(public localStorageService: LocalStorageService) {}
 
-  async connectWallet() {
+  connectWallet = async () => {
     try {
       this.wagmiProvider = await connect({
         connector: new InjectedConnector({
@@ -44,13 +44,13 @@ export class WagmiService {
     } catch (error) {
       console.error(error);
     }
-  }
+  };
 
-  async disconnectWallet() {
+  disconnectWallet = async () => {
     try {
       await disconnect();
     } catch (error) {
       console.error(error);
     }
-  }
+  };
 }

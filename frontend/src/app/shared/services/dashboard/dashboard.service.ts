@@ -21,14 +21,14 @@ export class DashboardService {
   }
 
   // detect window resize
-  onResize(event: Event): void {
+  onResize = (event: Event): void => {
     this.isSmallScreen = window.innerWidth <= 426;
     this.isLaptopSmallScreen = window.innerWidth <= 1025;
     // change sidebar when desktop
     if (!this.isSmallScreen) {
       this.isSidebarMobileOpen = false;
     }
-  }
+  };
 
   toggleSidebarMobile = () => {
     if (!this.isSmallScreen) {
@@ -38,16 +38,16 @@ export class DashboardService {
     }
   };
 
-  openPremiumModal() {
+  openPremiumModal = () => {
     this.dialog.open(ModalPremiumComponent, {
       width: this.isSmallScreen ? '100vw' : '450px',
       maxWidth: this.isSmallScreen ? '100vw' : '450px',
       height: this.isSmallScreen ? '100%' : 'auto',
     });
     this.isSidebarMobileOpen = false;
-  }
+  };
 
-  openConfirmPremiumModal() {
+  openConfirmPremiumModal = () => {
     this.isSidebarMobileOpen = false;
     return this.dialog.open(ModalConfirmPremiumComponent, {
       width: this.isSmallScreen ? '100vw' : '450px',
@@ -55,9 +55,13 @@ export class DashboardService {
       height: this.isSmallScreen ? '100%' : 'auto',
       panelClass: 'confirm-premium-modal',
     });
-  }
+  };
 
-  openBoardModal(modalBoardRef: ElementRef, premium: boolean, index: number) {
+  openBoardModal = (
+    modalBoardRef: ElementRef,
+    premium: boolean,
+    index: number
+  ) => {
     if (premium || index <= 4) {
       if (this.isModalBoardOpen) {
         // If the modal is open, close it
@@ -88,5 +92,5 @@ export class DashboardService {
       // Show a message or perform an action to indicate that the user cannot open the modal because they are not a premium user and the index is greater than or equal to 4
       this.openPremiumModal();
     }
-  }
+  };
 }

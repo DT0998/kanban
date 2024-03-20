@@ -78,16 +78,16 @@ export class ListComponent implements OnInit, OnDestroy, OnChanges {
     }
   }
 
-  getIsFirstListInit() {
+  getIsFirstListInit = () => {
     // check if the list is empty
     if (this.lists.length > 0) {
       this.isFirstListInit = false;
     } else {
       this.isFirstListInit = true;
     }
-  }
+  };
 
-  getList() {
+  getList = () => {
     this.store.select(selectBoardList).subscribe((boardLists: Board[]) => {
       // find the board by id
       const board = boardLists.find(
@@ -95,9 +95,9 @@ export class ListComponent implements OnInit, OnDestroy, OnChanges {
       );
       this.lists = board ? board.lists : [];
     });
-  }
+  };
 
-  addList() {
+  addList = () => {
     const newList: List = {
       id: uuidv4(),
       title: this.listTitle,
@@ -109,31 +109,29 @@ export class ListComponent implements OnInit, OnDestroy, OnChanges {
     );
     this.listTitle = '';
     this.boardService.handleCloseOverlayAndIcon();
-  }
+  };
 
-  updateList() {
+  updateList = () => {
     console.log('update List');
-  }
+  };
 
-  handleList() {
+  handleList = () => {
     if (this.listTitle.trim()) {
       this.addList();
     }
-  }
+  };
 
-  handleAddListOpen(event: Event) {
+  handleAddListOpen = (event: Event) => {
     event.stopPropagation();
     if (this.lists.length >= 0) {
       this.boardService.handleOpenList(this.lists.length, this.premium);
     }
-  }
+  };
 
-  
-
-  handleCloseOverlayAndIcon(event: Event) {
+  handleCloseOverlayAndIcon = (event: Event) => {
     event.stopPropagation();
     this.boardService.handleCloseOverlayAndIcon();
-  }
+  };
 
   ngOnDestroy(): void {}
 }

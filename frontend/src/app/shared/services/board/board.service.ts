@@ -12,15 +12,15 @@ export class BoardService {
     this.openCardIndex = null;
   }
 
-  handleOpenList(index: number, premium: boolean) {
+  handleOpenList = (index: number, premium: boolean) => {
     this.openList = premium || index <= 4;
     // limit the number of open cards for non-premium users
     if (!premium && index > 4) {
       this.dashboardService.openPremiumModal();
     }
-  }
+  };
 
-  handleOpenCard(listId: string, listIndex: number, premium: boolean) {
+  handleOpenCard = (listId: string, listIndex: number, premium: boolean) => {
     // open card for non-premium users
     if (!premium) {
       if (listIndex <= 4) {
@@ -34,14 +34,14 @@ export class BoardService {
     if (premium) {
       this.openCardIndex = listId;
     }
-  }
+  };
 
-  handleCloseCard() {
+  handleCloseCard = () => {
     this.openCardIndex = null;
-  }
+  };
 
-  handleCloseOverlayAndIcon() {
+  handleCloseOverlayAndIcon = () => {
     this.openList = false;
     this.openCardIndex = null;
-  }
+  };
 }

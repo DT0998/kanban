@@ -30,7 +30,7 @@ export class HistoryComponent implements OnInit, AfterViewInit {
     this.getHistory();
   }
 
-  async getHistory() {
+  getHistory = async () => {
     const res = await this.historyService.getHistory(this.userAddress);
     this.historyData = res;
     // add events to calendar

@@ -34,7 +34,7 @@ export class LoginComponent {
     this.isLoading = false;
   }
 
-  async handleLogin() {
+  handleLogin = async () => {
     try {
       this.isLoading = true;
       await this.wagmiService.connectWallet();
@@ -66,5 +66,5 @@ export class LoginComponent {
     } finally {
       this.isLoading = false;
     }
-  }
+  };
 }

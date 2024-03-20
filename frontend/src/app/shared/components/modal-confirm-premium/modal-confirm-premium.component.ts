@@ -38,11 +38,11 @@ export class ModalConfirmPremiumComponent {
     private modalConfirmPremiumService: ModalConfirmPremiumService
   ) {}
 
-  closeModal() {
+  closeModal = () => {
     this.dialogRef.close();
   }
 
-  async confirmSubscribePremium() {
+  confirmSubscribePremium = async () => {
     try {
       await this.modalConfirmPremiumService.confirmSubscribePremium();
     } catch (error) {

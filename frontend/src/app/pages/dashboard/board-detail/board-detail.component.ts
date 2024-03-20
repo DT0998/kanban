@@ -38,7 +38,7 @@ export class BoardDetailComponent implements OnInit {
     this.getBoardDetail();
   }
 
-  getBoardDetail() {
+  getBoardDetail = () => {
     // get the board list from the store
     this.store.select(selectBoardList).subscribe((boardLists: Board[]) => {
       // find the board by id
@@ -50,10 +50,10 @@ export class BoardDetailComponent implements OnInit {
         );
       });
     });
-  }
+  };
 
-  handleCloseOverlayAndIcon(event: Event) {
+  handleCloseOverlayAndIcon = (event: Event) => {
     event.stopPropagation();
     this.boardService.handleCloseOverlayAndIcon();
-  }
+  };
 }

@@ -6,7 +6,7 @@ import { HttpService } from '../http/http.service';
 })
 export class HistoryService {
   constructor(private httpService: HttpService) {}
-  async getHistory(address: string) {
+  getHistory = async (address: string) => {
     const res = await this.httpService
       .get(`api/history/${address}`)
       .toPromise();

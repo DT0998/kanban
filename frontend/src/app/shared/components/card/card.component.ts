@@ -40,7 +40,7 @@ export class CardComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  addCard() {
+  addCard = () => {
     const newCard: Card = {
       id: uuidv4(), // Generate ID for the new card
       title: this.cardTitle,
@@ -50,34 +50,34 @@ export class CardComponent implements OnInit {
       new BoardActions.AddCard({ listId: this.listId, card: newCard })
     );
     this.cardTitle = '';
-  }
+  };
 
-  updateCard() {
+  updateCard = () => {
     console.log('update card');
-  }
+  };
 
-  handleCloseOverlayAndIcon(event: Event) {
+  handleCloseOverlayAndIcon = (event: Event) => {
     event.stopPropagation();
     this.boardService.handleCloseOverlayAndIcon();
-  }
+  };
 
-  handleCard() {
+  handleCard = () => {
     if (this.cardTitle.trim()) {
       this.addCard();
     }
-  }
+  };
 
-  handleAddCardOpen(event: Event, listId: string) {
+  handleAddCardOpen = (event: Event, listId: string) => {
     event.stopPropagation();
     if (this.boardService.openCardIndex === listId) {
       this.boardService.handleCloseCard();
     } else {
       this.boardService.handleOpenCard(listId, this.listIndex, this.premium);
     }
-  }
+  };
 
   // Drag and Drop card item
-  drop(event: CdkDragDrop<Card[]>) {
+  drop = (event: CdkDragDrop<Card[]>) => {
     const newEvent = { ...event };
     const {
       currentIndex: currentIndexCard,
@@ -112,5 +112,5 @@ export class CardComponent implements OnInit {
         })
       );
     }
-  }
+  };
 }

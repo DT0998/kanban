@@ -35,7 +35,7 @@ export class HomeComponent implements OnInit {
     this.getProfile();
   }
 
-  async getProfile() {
+  getProfile = async () => {
     // Attempt to get the profile data
     try {
       const res = await this.profileService.getProfile(this.userAddress);
