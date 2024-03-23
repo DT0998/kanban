@@ -15,7 +15,7 @@ import {
 import Moralis from "moralis";
 import cors from "cors";
 import { taskPremium } from "./api/crons/premium/premium.crons.js";
-import { renderViews } from "./views/index.js";
+import welcomeRouter from "./views/index.js";
 
 const app = express();
 
@@ -28,8 +28,6 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-
-renderViews(app);
 
 app.use(
   responseTime((req, res, time) => {
@@ -45,6 +43,8 @@ app.use(
     }
   })
 );
+
+app.use("/", welcomeRouter);
 
 const startServer = async () => {
   try {
