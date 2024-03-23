@@ -4,7 +4,6 @@ const path = require("path");
 const config = require("config");
 const pinoLogLevel = config.get("pinoLogLevel");
 const nodeEnv = config.get("nodeEnv");
-console.log("nodeEnv", nodeEnv);
 const logsPath = path.resolve("api", "logs");
 
 const transport = logger.transport({
