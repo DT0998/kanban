@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "notebook-app": {
+    "kanban-app": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@ngx-env/builder:application",
           "options": {
-            "outputPath": "dist/notebook-app",
+            "outputPath": "dist/kanban-app",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -62,10 +62,10 @@
           "builder": "@ngx-env/builder:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "notebook-app:build:production"
+              "buildTarget": "kanban-app:build:production"
             },
             "development": {
-              "buildTarget": "notebook-app:build:development"
+              "buildTarget": "kanban-app:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -73,7 +73,7 @@
         "extract-i18n": {
           "builder": "@ngx-env/builder:extract-i18n",
           "options": {
-            "buildTarget": "notebook-app:build"
+            "buildTarget": "kanban-app:build"
           }
         },
         "test": {
