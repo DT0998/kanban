@@ -1,20 +1,31 @@
 const logger = require("pino");
 const dayjs = require("dayjs");
 
-const transport = logger.transport({
-  targets: [
-    {
-      target: "pino/file",
-      level: "info",
-    },
-    process.env.NODE_ENV === "development" && {
-      target: "pino-pretty",
-      options: {
-        colorize: true,
+let transport;
+
+if (process.env.NODE_ENV === "production") {
+  transport = logger.transport({
+    targets: [
+      {
+        target: "pino/file",
+        level: "info",
       },
-    },
-  ],
-});
+    ],
+  });
+}
+
+if (process.env.NODE_ENV === "development") {
+  transport = logger.transport({
+    targets: [
+      {
+        target: "pino-pretty",
+        options: {
+          colorize: true,
+        },
+      },
+    ],
+  });
+}
 
 const log = logger(
   {
