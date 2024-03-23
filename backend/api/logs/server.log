@@ -1,0 +1,12 @@
+{"level":30,"time":"2024-03-23T16:54:51+07:00","pid":6268,"hostname":"DESKTOP-N8KCN3F","msg":"App is running at http://localhost:3000/swagger"}
+{"level":30,"time":"2024-03-23T16:54:51+07:00","pid":6268,"hostname":"DESKTOP-N8KCN3F","msg":"DB connected"}
+{"level":30,"time":"2024-03-23T16:54:51+07:00","pid":6268,"hostname":"DESKTOP-N8KCN3F","msg":"Docs available at http://localhost:3000/swagger"}
+{"level":30,"time":"2024-03-23T16:54:51+07:00","pid":6268,"hostname":"DESKTOP-N8KCN3F","msg":"Metrics server started at http://localhost:9100"}
+{"level":30,"time":"2024-03-23T16:54:54+07:00","pid":10704,"hostname":"DESKTOP-N8KCN3F","msg":"App is running at http://localhost:3000/swagger"}
+{"level":30,"time":"2024-03-23T16:54:54+07:00","pid":10704,"hostname":"DESKTOP-N8KCN3F","msg":"DB connected"}
+{"level":30,"time":"2024-03-23T16:54:54+07:00","pid":10704,"hostname":"DESKTOP-N8KCN3F","msg":"Docs available at http://localhost:3000/swagger"}
+{"level":30,"time":"2024-03-23T16:54:54+07:00","pid":10704,"hostname":"DESKTOP-N8KCN3F","msg":"Metrics server started at http://localhost:9100"}
+{"level":30,"time":"2024-03-23T16:55:10+07:00","pid":19704,"hostname":"DESKTOP-N8KCN3F","msg":"App is running at http://localhost:3000/swagger"}
+{"level":30,"time":"2024-03-23T16:55:10+07:00","pid":19704,"hostname":"DESKTOP-N8KCN3F","msg":"DB connected"}
+{"level":30,"time":"2024-03-23T16:55:10+07:00","pid":19704,"hostname":"DESKTOP-N8KCN3F","msg":"Docs available at http://localhost:3000/swagger"}
+{"level":30,"time":"2024-03-23T16:55:10+07:00","pid":19704,"hostname":"DESKTOP-N8KCN3F","msg":"Metrics server started at http://localhost:9100"}

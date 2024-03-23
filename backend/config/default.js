@@ -11,6 +11,5 @@ module.exports = {
   refreshTokenLife: process.env.REFRESH_TOKEN_LIFE,
   smartcontractAddress: process.env.SMART_CONTRACT_ADDRESS,
   chainId: process.env.CHAIN_ID,
-  pinoLogLevel: process.env.PINO_LOG_LEVEL,
   nodeEnv: process.env.NODE_ENV,
 };
