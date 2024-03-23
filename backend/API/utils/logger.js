@@ -11,12 +11,12 @@ const transport = logger.transport({
       level: process.env.PINO_LOG_LEVEL || "info",
     },
     //@ts-ignore
-    ...(process.env.NODE_ENV !== "production" && {
+    process.env.NODE_ENV !== "production" && {
       target: "pino-pretty",
       options: {
         colorize: true,
       },
-    }),
+    },
   ],
 });
 
