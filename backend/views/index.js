@@ -1,6 +1,7 @@
 import path from "path";
 import express from "express";
 import { fileURLToPath } from "url";
+import ejs from "ejs";
 
 const renderViews = (app) => {
   // render pages
