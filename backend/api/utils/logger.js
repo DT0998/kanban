@@ -1,13 +1,12 @@
 const logger = require("pino");
 const dayjs = require("dayjs");
 const path = require("path");
-const logsPath = path.resolve("api", "logs");
 
 const transport = logger.transport({
   targets: [
     {
       target: "pino/file",
-      options: { destination: `${logsPath}/server.log` },
+      options: { destination: `api/logs/server.log` },
       level: "info",
     },
     process.env.NODE_ENV === "development" && {
