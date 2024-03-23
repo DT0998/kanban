@@ -1,11 +1,12 @@
 import path from "path";
 import express from "express";
 import { fileURLToPath } from "url";
+import ejs from "ejs";
 
 const renderViews = (app) => {
   // render pages
   app.set("view engine", "ejs");
-  app.engine("ejs", require("ejs").__express);
+  app.engine("ejs", ejs);
   // This was we can keep everything inside our src folder!!
   const __dirname = path.dirname(fileURLToPath(import.meta.url));
   app.set("views", path.join(__dirname, "views"));
