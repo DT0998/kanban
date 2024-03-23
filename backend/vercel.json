@@ -14,7 +14,7 @@
   ],
   "crons": [
     {
-      "path": "/API/crons/premium",
+      "path": "/api/crons/premium",
       "schedule": "0 0 * * *"
     }
   ]
