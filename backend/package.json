@@ -13,6 +13,7 @@
     "prom-client": "^15.1.0",
     "response-time": "^2.3.2",
     "rimraf": "^5.0.5",
+    "swagger-jsdoc": "^6.2.8",
     "validator": "^13.11.0"
   },
   "name": "nodejs-kanban",
@@ -30,7 +31,6 @@
   "devDependencies": {
     "nodemon": "^2.0.22",
     "pino-pretty": "^10.3.1",
-    "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.0"
   }
 }
