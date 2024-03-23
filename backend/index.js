@@ -7,7 +7,6 @@ const {
 const swaggerDocs = require("./api/utils/swagger");
 const logger = require("./api/utils/logger");
 const { connect } = require("./api/utils/connect");
-const config = require("config");
 const responseTime = require("response-time");
 const {
   userRoutes,
@@ -18,7 +17,6 @@ const Moralis = require("moralis").default;
 const cors = require("cors");
 const { taskPremium } = require("./api/crons/premium/premium.crons");
 
-const port = config.get("port");
 const app = express();
 
 app.use(express.json());
@@ -51,8 +49,8 @@ const startServer = async () => {
       apiKey: process.env.MORALIS_KEY,
     });
     // server listerning
-    app.listen(port, async () => {
-      logger.info(`App is running at http://localhost:${port}/swagger`);
+    app.listen(3000, async () => {
+      logger.info(`App is running at http://localhost:3000/swagger`);
 
       await connect();
 
@@ -63,7 +61,7 @@ const startServer = async () => {
 
       startMetricsServer();
 
-      swaggerDocs(app, port);
+      swaggerDocs(app, 3000);
 
       // cron jobs
       taskPremium.start();

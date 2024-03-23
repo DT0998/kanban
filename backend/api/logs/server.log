@@ -138,3 +138,15 @@
 {"level":30,"time":"2024-03-23T17:08:22+07:00","pid":17572,"hostname":"DESKTOP-N8KCN3F","msg":"DB connected"}
 {"level":30,"time":"2024-03-23T17:08:22+07:00","pid":17572,"hostname":"DESKTOP-N8KCN3F","msg":"Docs available at http://localhost:3000/swagger"}
 {"level":30,"time":"2024-03-23T17:08:22+07:00","pid":17572,"hostname":"DESKTOP-N8KCN3F","msg":"Metrics server started at http://localhost:9100"}
+{"level":30,"time":"2024-03-23T17:10:53+07:00","pid":7196,"hostname":"DESKTOP-N8KCN3F","msg":"App is running at http://localhost:3000/swagger"}
+{"level":30,"time":"2024-03-23T17:10:53+07:00","pid":7196,"hostname":"DESKTOP-N8KCN3F","msg":"DB connected"}
+{"level":30,"time":"2024-03-23T17:10:53+07:00","pid":7196,"hostname":"DESKTOP-N8KCN3F","msg":"Docs available at http://localhost:3000/swagger"}
+{"level":30,"time":"2024-03-23T17:10:53+07:00","pid":7196,"hostname":"DESKTOP-N8KCN3F","msg":"Metrics server started at http://localhost:9100"}
+{"level":30,"time":"2024-03-23T17:11:30+07:00","pid":22128,"hostname":"DESKTOP-N8KCN3F","msg":"App is running at http://localhost:3000/swagger"}
+{"level":30,"time":"2024-03-23T17:11:30+07:00","pid":22128,"hostname":"DESKTOP-N8KCN3F","msg":"DB connected"}
+{"level":30,"time":"2024-03-23T17:11:30+07:00","pid":22128,"hostname":"DESKTOP-N8KCN3F","msg":"Docs available at http://localhost:3000/swagger"}
+{"level":30,"time":"2024-03-23T17:11:30+07:00","pid":22128,"hostname":"DESKTOP-N8KCN3F","msg":"Metrics server started at http://localhost:9100"}
+{"level":30,"time":"2024-03-23T17:11:36+07:00","pid":9224,"hostname":"DESKTOP-N8KCN3F","msg":"App is running at http://localhost:3000/swagger"}
+{"level":30,"time":"2024-03-23T17:11:36+07:00","pid":9224,"hostname":"DESKTOP-N8KCN3F","msg":"DB connected"}
+{"level":30,"time":"2024-03-23T17:11:36+07:00","pid":9224,"hostname":"DESKTOP-N8KCN3F","msg":"Docs available at http://localhost:3000/swagger"}
+{"level":30,"time":"2024-03-23T17:11:36+07:00","pid":9224,"hostname":"DESKTOP-N8KCN3F","msg":"Metrics server started at http://localhost:9100"}
