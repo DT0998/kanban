@@ -13,7 +13,7 @@ const renderViews = (app) => {
   // This is to read css
   app.use(express.static(path.join(__dirname, "pages")));
   app.get("/", (_req, res) => {
-    res.render(path.join(__dirname, "pages", "index.ejs"), { title: "Home" });
+    res.render(path.join(__dirname, "pages", "index"), { title: "Home" });
   });
 };
 
