@@ -13,7 +13,7 @@ const databaseResponseTimeHistogram = new client.Histogram({
   labelNames: ["operation", "success"],
 });
 
-const startMetricsServer = (app) => {
+const startMetricsServer = (app,port) => {
   const collectDefaultMetrics = client.collectDefaultMetrics;
 
   collectDefaultMetrics();
@@ -25,7 +25,7 @@ const startMetricsServer = (app) => {
   });
 
   app.listen(9100, () => {
-    logger.info("Metrics server started at http://localhost:9100");
+    logger.info(`Metrics server started at ${port}`);
   });
 };
 

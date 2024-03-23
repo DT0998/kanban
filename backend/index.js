@@ -18,6 +18,7 @@ import { taskPremium } from "./api/crons/premium/premium.crons.js";
 import welcomeRouter from "./views/index.js";
 
 const app = express();
+const PORT = process.env.PORT || 3030;
 
 app.use(express.json());
 
@@ -44,7 +45,6 @@ app.use(
   })
 );
 
-
 const startServer = async () => {
   try {
     await Moralis.start({
@@ -52,16 +52,16 @@ const startServer = async () => {
     });
     app.use("/", welcomeRouter);
     // server listerning
-    app.listen(3000, async () => {
-      logger.info(`App is running at http://localhost:3000/swagger`);
+    app.listen(PORT, async () => {
+      logger.info(`App is running at ${PORT}`);
       // routes
       userRoutes(app, "api");
       authRoutes(app, "api");
       premiumRoutes(app, "api");
 
-      startMetricsServer(app);
+      startMetricsServer(app, PORT);
 
-      swaggerDocs(app, 3000);
+      swaggerDocs(app, PORT);
 
       // cron jobs
       taskPremium.start();
