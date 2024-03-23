@@ -1,5 +1,5 @@
-const cron = require("node-cron");
-const { connectionMysql } = require("../../utils/connect");
+import cron from "node-cron";
+import { connectionMysql } from "../../utils/connect.js";
 
 // Schedule a job to run every day at midnight
 const taskPremium = cron.schedule("0 0 * * *", async () => {
@@ -24,4 +24,4 @@ const taskPremium = cron.schedule("0 0 * * *", async () => {
   }
 });
 
-module.exports = { taskPremium };
+export { taskPremium };

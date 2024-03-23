@@ -1,4 +1,4 @@
-const { login, refreshToken } = require("../controllers/auth.controller");
+import { login, refreshToken } from '../controllers/auth.controller.js';
 
 // User routes
 function routes(app, rootUrl) {
@@ -58,4 +58,5 @@ function routes(app, rootUrl) {
   app.post(`/${rootUrl}/token`, refreshToken);
 }
 
-module.exports = routes;
+export default routes;
+

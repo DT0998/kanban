@@ -1,7 +1,5 @@
-const express = require("express");
-const client = require("prom-client");
-const app = express();
-const log = require("./logger");
+import client from "prom-client";
+import logger from "./logger.js";
 
 const restResponseTimeHistogram = new client.Histogram({
   name: "rest_response_time_duration_seconds",
@@ -15,7 +13,7 @@ const databaseResponseTimeHistogram = new client.Histogram({
   labelNames: ["operation", "success"],
 });
 
-const startMetricsServer = () => {
+const startMetricsServer = (app) => {
   const collectDefaultMetrics = client.collectDefaultMetrics;
 
   collectDefaultMetrics();
@@ -27,11 +25,11 @@ const startMetricsServer = () => {
   });
 
   app.listen(9100, () => {
-    log.info("Metrics server started at http://localhost:9100");
+    logger.info("Metrics server started at http://localhost:9100");
   });
 };
 
-module.exports = {
+export {
   restResponseTimeHistogram,
   databaseResponseTimeHistogram,
   startMetricsServer,

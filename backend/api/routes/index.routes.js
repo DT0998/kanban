@@ -1,9 +1,5 @@
-const userRoutes = require("./user.routes");
-const authRoutes = require("./auth.routes");
-const premiumRoutes = require("./premium.routes");
+import userRoutes from "./user.routes.js";
+import authRoutes from "./auth.routes.js";
+import premiumRoutes from "./premium.routes.js";
 
-module.exports = {
-  userRoutes,
-  authRoutes,
-  premiumRoutes,
-};
+export { userRoutes, authRoutes, premiumRoutes };

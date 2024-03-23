@@ -1,6 +1,8 @@
-const swaggerJsdoc = require("swagger-jsdoc");
-const swaggerUi = require("swagger-ui-express");
-const log = require("./logger");
+import swaggerJsdoc from "swagger-jsdoc";
+import swaggerUi from "swagger-ui-express";
+import logger from "./logger.js";
+const CSS_URL =
+  "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui.min.css";
 
 const options = {
   definition: {
@@ -32,7 +34,7 @@ const swaggerDocs = (app, port) => {
   app.use(
     "/swagger",
     swaggerUi.serve,
-    swaggerUi.setup(swaggerSpec, { explorer: true })
+    swaggerUi.setup(swaggerSpec, { customCssUrl: CSS_URL }, { explorer: true })
   );
 
   // Docs in JSON format
@@ -41,7 +43,7 @@ const swaggerDocs = (app, port) => {
     res.send(swaggerSpec);
   });
 
-  log.info(`Docs available at http://localhost:${port}/swagger`);
+  logger.info(`Docs available at http://localhost:${port}/swagger`);
 };
 
-module.exports = swaggerDocs;
+export default swaggerDocs;

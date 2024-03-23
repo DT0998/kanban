@@ -1,4 +1,4 @@
-const { connectionMysql } = require("../utils/connect");
+import { connectionMysql } from "../utils/connect.js";
 
 const getUserProfile = (req, res) => {
   const { address } = req.params;
@@ -20,4 +20,4 @@ const getUserProfile = (req, res) => {
   });
 };
 
-module.exports = { getUserProfile };
+export { getUserProfile };

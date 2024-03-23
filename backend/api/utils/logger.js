@@ -1,5 +1,5 @@
-const logger = require("pino");
-const dayjs = require("dayjs");
+import logger from "pino";
+import dayjs from "dayjs";
 
 let transport;
 
@@ -34,4 +34,4 @@ const log = logger(
   transport
 );
 
-module.exports = log;
+export default log;

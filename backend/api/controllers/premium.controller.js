@@ -1,5 +1,5 @@
-const { connectionMysql } = require("../utils/connect");
-const { checkUserExists } = require("../services/auth.service");
+import { connectionMysql } from "../utils/connect.js";
+import { checkUserExists } from "../services/auth.service.js";
 
 const subscribeMonthlyPremium = async (req, res) => {
   try {
@@ -96,4 +96,4 @@ const calculateMonthlyPremium = () => {
   return { startDate, endDate };
 };
 
-module.exports = { subscribeMonthlyPremium, getHistoryPremium, updatePremium };
+export { subscribeMonthlyPremium, getHistoryPremium, updatePremium}

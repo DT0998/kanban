@@ -1,8 +1,8 @@
-const {
+import {
   getHistoryPremium,
   subscribeMonthlyPremium,
-} = require("../controllers/premium.controller");
-const verifyToken = require("../middleware/auth");
+} from "../controllers/premium.controller.js";
+import verifyToken from "../middleware/auth.js";
 
 // User routes
 function routes(app, rootUrl) {
@@ -39,7 +39,11 @@ function routes(app, rootUrl) {
    *       500:
    *         description: Internal Server Error
    */
-  app.post(`/${rootUrl}/subscribe-premium`, verifyToken, subscribeMonthlyPremium);
+  app.post(
+    `/${rootUrl}/subscribe-premium`,
+    verifyToken,
+    subscribeMonthlyPremium
+  );
 
   /**
    * @swagger
@@ -71,4 +75,4 @@ function routes(app, rootUrl) {
   app.get(`/${rootUrl}/history/:address`, verifyToken, getHistoryPremium);
 }
 
-module.exports = routes;
+export default routes;

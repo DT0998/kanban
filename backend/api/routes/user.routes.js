@@ -1,5 +1,5 @@
-const { getUserProfile } = require("../controllers/user.controller");
-const verifyToken = require("../middleware/auth");
+import { getUserProfile } from "../controllers/user.controller.js";
+import verifyToken from "../middleware/auth.js";
 
 // User routes
 function routes(app, rootUrl) {
@@ -40,4 +40,4 @@ function routes(app, rootUrl) {
   app.get(`/${rootUrl}/profile/:address`, verifyToken, getUserProfile);
 }
 
-module.exports = routes;
+export default routes;

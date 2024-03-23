@@ -1,6 +1,5 @@
-const jwt = require("jsonwebtoken");
-const { connectionMysql } = require("../utils/connect");
-
+import jwt from "jsonwebtoken";
+import { connectionMysql } from "../utils/connect.js";
 
 function createAccessToken({ address }) {
   // Create access token
@@ -33,4 +32,4 @@ const checkUserExists = (address) => {
   });
 };
 
-module.exports = { createAccessToken, createRefreshToken, checkUserExists };
+export { createAccessToken, createRefreshToken, checkUserExists };

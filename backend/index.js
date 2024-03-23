@@ -1,24 +1,26 @@
 // use express module
-const express = require("express");
-const {
+import express from "express";
+import {
   startMetricsServer,
   restResponseTimeHistogram,
-} = require("./api/utils/mettrics");
-const swaggerDocs = require("./api/utils/swagger");
-const logger = require("./api/utils/logger");
-const responseTime = require("response-time");
-const {
+} from "./api/utils/mettrics.js";
+import swaggerDocs from "./api/utils/swagger.js";
+import logger from "./api/utils/logger.js";
+import responseTime from "response-time";
+import {
   userRoutes,
   authRoutes,
   premiumRoutes,
-} = require("./api/routes/index.routes");
-const Moralis = require("moralis").default;
-const cors = require("cors");
-const { taskPremium } = require("./api/crons/premium/premium.crons");
+} from "./api/routes/index.routes.js";
+import Moralis from "moralis";
+import cors from "cors";
+import { taskPremium } from "./api/crons/premium/premium.crons.js";
+import { renderViews } from "./views/index.js";
 
 const app = express();
 
 app.use(express.json());
+
 // config cors
 const corsOptions = {
   origin: ["http://localhost:3000", "https://kanban-api-mocha.vercel.app"],
@@ -26,6 +28,8 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
+
+renderViews(app);
 
 app.use(
   responseTime((req, res, time) => {
@@ -50,13 +54,12 @@ const startServer = async () => {
     // server listerning
     app.listen(3000, async () => {
       logger.info(`App is running at http://localhost:3000/swagger`);
-
       // routes
       userRoutes(app, "api");
       authRoutes(app, "api");
       premiumRoutes(app, "api");
 
-      startMetricsServer();
+      startMetricsServer(app);
 
       swaggerDocs(app, 3000);
 

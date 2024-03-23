@@ -1,9 +1,6 @@
-const { connectionMysql } = require("../utils/connect");
-const {
-  createAccessToken,
-  createRefreshToken,
-  checkUserExists,
-} = require("../services/auth.service");
+import { connectionMysql } from "../utils/connect.js"; 
+import { createAccessToken, createRefreshToken, checkUserExists } from "../services/auth.service.js";
+
 
 let refreshTokens = {}; // tao mot object chua nhung refreshTokens
 
@@ -90,4 +87,4 @@ const refreshToken = (req, res) => {
   }
 };
 
-module.exports = { login, refreshToken };
+export { login, refreshToken };

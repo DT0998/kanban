@@ -3,6 +3,7 @@
     "chalk": "^4.1.2",
     "cors": "^2.8.5",
     "dayjs": "^1.11.10",
+    "ejs": "^3.1.9",
     "express": "^4.17.1",
     "jsonwebtoken": "^9.0.2",
     "moralis": "^2.25.0",
@@ -17,6 +18,7 @@
   "name": "nodejs-kanban",
   "version": "1.0.0",
   "main": "app.js",
+  "type": "module",
   "scripts": {
     "dev": "nodemon --env-file=.env index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
