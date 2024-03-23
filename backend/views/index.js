@@ -8,10 +8,10 @@ const renderViews = (app) => {
   app.set("view engine", "ejs");
   // This was we can keep everything inside our src folder!!
   const __dirname = path.dirname(fileURLToPath(import.meta.url));
-  app.set("views", path.join(__dirname, "views"));
+  app.set("views", path.join(__dirname));
   app.set('view engine', 'ejs');
   // This is to read css
-  app.use(express.static(path.join(__dirname, "views/pages")));
+  app.use(express.static(path.join(__dirname, "pages")));
   app.get("/", (_req, res) => {
     res.render(path.join(__dirname, "pages", "index.ejs"), { title: "Home" });
   });
