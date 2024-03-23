@@ -9,16 +9,22 @@ const connectionMysql = mysql.createPool({
   connectionLimit: 10,
   waitForConnections: true,
   queueLimit: 0,
+}).promise();
+
+connectionMysql.getConnection((err, connection) => { 
+  if (err) {
+    if (err.code === "PROTOCOL_CONNECTION_LOST") {
+      logger.error("Database connection was closed.");
+    }
+    if (err.code === "ER_CON_COUNT_ERROR") {
+      logger.error("Database has too many connections.");
+    }
+    if (err.code === "ECONNREFUSED") {
+      logger.error("Database connection was refused.");
+    }
+  }
+  if (connection) connection.release();
+  return;
 });
 
-const connect = async () => {
-  try {
-    await connectionMysql.connect();
-    logger.info("DB connected");
-  } catch (error) {
-    logger.error("Could not connect to db");
-    process.exit(1);
-  }
-};
-
-module.exports = { connect, connectionMysql };
+module.exports = { connectionMysql };

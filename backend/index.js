@@ -6,7 +6,6 @@ const {
 } = require("./api/utils/mettrics");
 const swaggerDocs = require("./api/utils/swagger");
 const logger = require("./api/utils/logger");
-const { connect } = require("./api/utils/connect");
 const responseTime = require("response-time");
 const {
   userRoutes,
@@ -22,7 +21,7 @@ const app = express();
 app.use(express.json());
 // config cors
 const corsOptions = {
-  origin: `*`,
+  origin: ["http://localhost:3000", "https://kanban-api-mocha.vercel.app"],
   optionsSuccessStatus: 200,
 };
 
@@ -51,8 +50,6 @@ const startServer = async () => {
     // server listerning
     app.listen(3000, async () => {
       logger.info(`App is running at http://localhost:3000/swagger`);
-
-      await connect();
 
       // routes
       userRoutes(app, "api");
