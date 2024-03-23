@@ -2,8 +2,9 @@ const logger = require("pino");
 const dayjs = require("dayjs");
 const path = require("path");
 const config = require("config");
-const logLevel = config.get("pinoLogLevel");
+const pinoLogLevel = config.get("pinoLogLevel");
 const nodeEnv = config.get("nodeEnv");
+console.log("nodeEnv", nodeEnv);
 const logsPath = path.resolve("api", "logs");
 
 const transport = logger.transport({
@@ -11,10 +12,9 @@ const transport = logger.transport({
     {
       target: "pino/file",
       options: { destination: `${logsPath}/server.log` },
-      level: logLevel || "info",
+      level: pinoLogLevel || "info",
     },
-    //@ts-ignore
-    nodeEnv !== "production" && {
+    nodeEnv === "development" && {
       target: "pino-pretty",
       options: {
         colorize: true,
@@ -25,7 +25,6 @@ const transport = logger.transport({
 
 const log = logger(
   {
-    level: logLevel || "info",
     timestamp: () => `,"time":"${dayjs().format()}"`,
   },
   transport

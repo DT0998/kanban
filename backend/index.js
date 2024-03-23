@@ -3,20 +3,20 @@ const express = require("express");
 const {
   startMetricsServer,
   restResponseTimeHistogram,
-} = require("./API/utils/mettrics");
-const swaggerDocs = require("./API/utils/swagger");
-const logger = require("./API/utils/logger");
-const { connect } = require("./API/utils/connect");
+} = require("./api/utils/mettrics");
+const swaggerDocs = require("./api/utils/swagger");
+const logger = require("./api/utils/logger");
+const { connect } = require("./api/utils/connect");
 const config = require("config");
 const responseTime = require("response-time");
 const {
   userRoutes,
   authRoutes,
   premiumRoutes,
-} = require("./API/routes/index.routes");
+} = require("./api/routes/index.routes");
 const Moralis = require("moralis").default;
 const cors = require("cors");
-const { taskPremium } = require("./API/crons/premium/premium.crons");
+const { taskPremium } = require("./api/crons/premium/premium.crons");
 
 const port = config.get("port");
 const moralisApiKey = config.get("moralisKey");
@@ -28,6 +28,7 @@ const corsOptions = {
   origin: `*`,
   optionsSuccessStatus: 200,
 };
+
 app.use(cors(corsOptions));
 
 app.use(
