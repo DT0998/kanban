@@ -5,7 +5,6 @@ const transport = logger.transport({
   targets: [
     {
       target: "pino/file",
-      options: { destination: `api/logs/server.log` },
       level: "info",
     },
     process.env.NODE_ENV === "development" && {
