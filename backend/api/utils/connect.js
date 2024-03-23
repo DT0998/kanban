@@ -1,5 +1,4 @@
 const logger = require("./logger");
-const config = require("config");
 const mysql = require("mysql2");
 
 const connectionMysql = mysql.createConnection({

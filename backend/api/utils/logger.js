@@ -1,7 +1,6 @@
 const logger = require("pino");
 const dayjs = require("dayjs");
 const path = require("path");
-const config = require("config");
 const logsPath = path.resolve("api", "logs");
 
 const transport = logger.transport({

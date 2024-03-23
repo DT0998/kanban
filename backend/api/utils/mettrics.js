@@ -1,8 +1,7 @@
 const express = require("express");
 const client = require("prom-client");
-const log = require("./logger");
-
 const app = express();
+const log = require("./logger");
 
 const restResponseTimeHistogram = new client.Histogram({
   name: "rest_response_time_duration_seconds",
