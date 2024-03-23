@@ -2,16 +2,11 @@ const logger = require("./logger");
 const config = require("config");
 const mysql = require("mysql2");
 
-const host = config.get("host");
-const user = config.get("user");
-const password = config.get("password");
-const database = config.get("database");
-
 const connectionMysql = mysql.createConnection({
-  host: host,
-  user: user,
-  password: password,
-  database: database,
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_DATABASE,
 });
 
 const connect = async () => {

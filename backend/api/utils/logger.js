@@ -2,7 +2,6 @@ const logger = require("pino");
 const dayjs = require("dayjs");
 const path = require("path");
 const config = require("config");
-const nodeEnv = config.get("nodeEnv");
 const logsPath = path.resolve("api", "logs");
 
 const transport = logger.transport({
@@ -12,7 +11,7 @@ const transport = logger.transport({
       options: { destination: `${logsPath}/server.log` },
       level: "info",
     },
-    nodeEnv === "development" && {
+    process.env.NODE_ENV === "development" && {
       target: "pino-pretty",
       options: {
         colorize: true,

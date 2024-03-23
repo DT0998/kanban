@@ -1,6 +1,5 @@
 const config = require("config");
 const jwt = require("jsonwebtoken");
-const tokenSecret = config.get("tokenSecret");
 
 const verifyToken = async (req, res, next) => {
   try {
@@ -18,7 +17,7 @@ const verifyToken = async (req, res, next) => {
 
     const token = authorizationHeader.replace("Bearer ", "");
     if (!token) return res.status(401).send({ message: "Token not found" });
-    jwt.verify(token, tokenSecret);
+    jwt.verify(token, process.env.TOKEN_SECRET);
     next();
   } catch (error) {
     // Handle the error

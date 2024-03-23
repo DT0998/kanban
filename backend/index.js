@@ -19,7 +19,6 @@ const cors = require("cors");
 const { taskPremium } = require("./api/crons/premium/premium.crons");
 
 const port = config.get("port");
-const moralisApiKey = config.get("moralisKey");
 const app = express();
 
 app.use(express.json());
@@ -49,7 +48,7 @@ app.use(
 const startServer = async () => {
   try {
     await Moralis.start({
-      apiKey: moralisApiKey,
+      apiKey: process.env.MORALIS_KEY,
     });
     // server listerning
     app.listen(port, async () => {

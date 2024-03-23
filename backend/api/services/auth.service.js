@@ -2,22 +2,19 @@ const config = require("config");
 const jwt = require("jsonwebtoken");
 const { connectionMysql } = require("../utils/connect");
 
-const tokenSecret = config.get("tokenSecret");
-const accessTokenLife = config.get("accessTokenLife");
-const refreshTokenLife = config.get("refreshTokenLife");
 
 function createAccessToken({ address }) {
   // Create access token
-  const accessToken = jwt.sign({ address }, tokenSecret, {
-    expiresIn: accessTokenLife,
+  const accessToken = jwt.sign({ address }, process.env.TOKEN_SECRET, {
+    expiresIn: process.env.ACCESS_TOKEN_LIFE,
   });
   return accessToken;
 }
 
 function createRefreshToken({ address }) {
   // create refresh token
-  const refreshToken = jwt.sign({ address }, tokenSecret, {
-    expiresIn: refreshTokenLife,
+  const refreshToken = jwt.sign({ address }, process.env.TOKEN_SECRET, {
+    expiresIn: process.env.REFRESH_TOKEN_LIFE,
   });
   return refreshToken;
 }
