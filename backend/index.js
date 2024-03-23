@@ -50,7 +50,7 @@ const startServer = async () => {
     await Moralis.start({
       apiKey: process.env.MORALIS_KEY,
     });
-    // app.use("/", welcomeRouter);
+    app.use("/", welcomeRouter);
     // server listerning
     app.listen(3000, async () => {
       logger.info(`App is running at http://localhost:3000/swagger`);
