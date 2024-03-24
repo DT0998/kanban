@@ -22,13 +22,17 @@ const PORT = process.env.PORT || 3030;
 
 app.use(express.json());
 
-// config cors
-const corsOptions = {
-  origin: ["*"],
-  optionsSuccessStatus: 200,
-};
+app.use(
+  cors({
+    origin: [
+      `http://localhost:${PORT}`,
+      "https://kanban-api-uez5.onrender.com",
+      "http://localhost:4200",
+      "https://kanban-chi-azure.vercel.app",
+    ],
+  })
+);
 
-app.use(cors(corsOptions));
 
 app.use(
   responseTime((req, res, time) => {

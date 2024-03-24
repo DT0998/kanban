@@ -7,7 +7,7 @@ const setEnv = () => {
   });
   // `environment.ts` file structure
   const envConfigFile = `export const environment = {
-    production: true,
+    production: false,
     domainUrl: '${process.env['NG_APP_DOMAIN_URL']}',
     contractAddress: '${process.env['NG_APP_CONTRACT_ADDRESS']}',
     adminAddress: '${process.env['NG_APP_ADMIN_ADDRESS']}',

@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken";
-import { connectionMysql } from "../utils/connect.js";
+import { getConnect } from "../utils/connect.js";
+import logger from "../utils/logger.js";
 
 function createAccessToken({ address }) {
   // Create access token
@@ -18,17 +19,21 @@ function createRefreshToken({ address }) {
 }
 
 // Function to check if the user exists in the database
-const checkUserExists = (address) => {
-  return new Promise((resolve, reject) => {
-    const checkUserQuery = "SELECT * FROM user WHERE address = ?";
-    connectionMysql.query(checkUserQuery, [address], (error, results) => {
-      if (error) {
-        reject(error);
-      } else {
-        // Check if any rows were returned
-        resolve(results.length > 0);
-      }
-    });
+const checkUserExists = async (address) => {
+  const query = "SELECT * FROM user WHERE address = ?";
+  return new Promise(async (resolve, reject) => {
+    try {
+      const connectionMysql = await getConnect();
+      await connectionMysql.query(query, [address], (error, rows) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(rows.length > 0);
+        }
+      });
+    } catch (error) {
+      logger.error("Error during check user exists:", error);
+    }
   });
 };
 

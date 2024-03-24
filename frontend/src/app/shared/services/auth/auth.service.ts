@@ -20,12 +20,17 @@ export class AuthService {
     private toastr: ToastrService
   ) {
     const userInfo = this.localStorageService.getItem('userInfo') as string;
+    const signinCount = this.localStorageService.getItem(
+      'signinCount'
+    ) as string;
+    const signinCountParse = JSON.parse(signinCount);
     const userInfoParse = JSON.parse(userInfo);
     if (userInfoParse) {
       this.userInfoAuth = userInfoParse;
-      if (!userInfoParse.initialLogin) {
-        this.toastr.error('Please refresh the page and try again');
-      }
+    }
+    // If the user has signed in before, increment the signin count and clear the user info
+    if (signinCountParse.signInCount >= 1 && !userInfoParse) {
+      this.toastr.error('Please refresh the page and try again');
     }
   }
 

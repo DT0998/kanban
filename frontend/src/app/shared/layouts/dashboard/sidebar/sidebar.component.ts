@@ -12,7 +12,6 @@ import {
   ionCalendarClearOutline,
   ionAddOutline,
   ionBagCheckOutline,
-  ionPersonCircleOutline,
   ionReceiptOutline,
 } from '@ng-icons/ionicons';
 import {
@@ -49,7 +48,6 @@ import { WagmiService } from '../../../services/wagmi/wagmi.service';
       ionCalendarClearOutline,
       ionAddOutline,
       ionBagCheckOutline,
-      ionPersonCircleOutline,
       ionReceiptOutline,
     }),
   ],

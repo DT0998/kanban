@@ -7,11 +7,12 @@ import { delay } from 'rxjs';
 })
 export class ProfileService {
   userInfo: UserInfo = {};
+  SignIn: SignIn = {};
   constructor(public httpService: HttpService) {}
   getProfile = async (address: string) => {
     const res = await this.httpService
       .get(`api/profile/${address}`)
-      .pipe(delay(2000))
+      .pipe(delay(5000))
       .toPromise();
     return res;
   };
@@ -24,11 +25,14 @@ export interface UserProfile {
   premium: boolean;
 }
 
+export interface SignIn {
+  signInCount?: number;
+}
+
 export interface UserInfo {
   accessToken?: string;
   refreshToken?: string;
   address?: string;
   name?: string;
   premium?: boolean;
-  initialLogin?: boolean;
 }

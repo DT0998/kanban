@@ -23,7 +23,7 @@
   "type": "module",
   "scripts": {
     "start": "node index.js",
-    "dev": "npx nodemon --env-file=.env index.js",
+    "dev": "nodemon --env-file=.env index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "TD0998",

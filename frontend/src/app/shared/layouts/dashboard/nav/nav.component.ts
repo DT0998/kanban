@@ -5,6 +5,7 @@ import {
   ionHomeOutline,
   ionSettingsOutline,
   ionReorderThreeOutline,
+  ionPersonCircleOutline,
 } from '@ng-icons/ionicons';
 import {
   Router,
@@ -35,6 +36,7 @@ import { WagmiService } from '../../../services/wagmi/wagmi.service';
       ionHomeOutline,
       ionSettingsOutline,
       ionReorderThreeOutline,
+      ionPersonCircleOutline  
     }),
   ],
   templateUrl: './nav.component.html',

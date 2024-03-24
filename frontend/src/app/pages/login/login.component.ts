@@ -35,14 +35,20 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.setInitialUserLogin();
+    this.setSignInCount();
   }
 
-  setInitialUserLogin = () => {
-    this.profileService.userInfo.initialLogin = true;
+  setSignInCount = () => {
+    if (
+      this.profileService.SignIn.signInCount &&
+      this.profileService.SignIn.signInCount >= 1
+    ) {
+      return;
+    }
+    this.profileService.SignIn.signInCount = 0;
     this.localStorageService.setItem(
-      'userInfo',
-      JSON.stringify(this.profileService.userInfo)
+      'signinCount',
+      JSON.stringify(this.profileService.SignIn)
     );
   };
 
@@ -59,10 +65,15 @@ export class LoginComponent implements OnInit {
         .post('api/login', payload)
         .toPromise();
       // Store the access token object in local storage
+      if (
+        this.profileService.SignIn.signInCount !== undefined &&
+        this.profileService.SignIn.signInCount >= 0
+      ) {
+        this.profileService.SignIn.signInCount += 1;
+      }
       this.profileService.userInfo.refreshToken = resLogin.refreshToken;
       this.profileService.userInfo.accessToken = resLogin.accessToken;
       this.profileService.userInfo.address = userAddress;
-      this.profileService.userInfo.initialLogin = false;
       this.store.dispatch(new AuthActions.GetAccessToken(resLogin.accessToken));
       this.store.dispatch(
         new AuthActions.GetRefreshToken(resLogin.refreshToken)
@@ -71,6 +82,10 @@ export class LoginComponent implements OnInit {
       this.localStorageService.setItem(
         'userInfo',
         JSON.stringify(this.profileService.userInfo)
+      );
+      this.localStorageService.setItem(
+        'signinCount',
+        JSON.stringify(this.profileService.SignIn)
       );
       // Navigate to the dashboard after login is successful
       this.router.navigateByUrl('/dashboard/home');

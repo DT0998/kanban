@@ -1,6 +1,10 @@
-import { connectionMysql } from "../utils/connect.js"; 
-import { createAccessToken, createRefreshToken, checkUserExists } from "../services/auth.service.js";
-
+import { getConnect } from "../utils/connect.js";
+import {
+  createAccessToken,
+  createRefreshToken,
+  checkUserExists,
+} from "../services/auth.service.js";
+import logger from "../utils/logger.js";
 
 let refreshTokens = {}; // tao mot object chua nhung refreshTokens
 
@@ -51,24 +55,29 @@ const login = async (req, res) => {
 
 // Function to register a new user
 const register = (name, address, dateAdded, premium) => {
-  return new Promise((resolve, reject) => {
+  return new Promise(async (resolve, reject) => {
     // Insert user into the database
     const registerQuery =
       "INSERT INTO user (name, address, dateAdded, premium) VALUES (?, ?, ?, ?)";
-    connectionMysql.query(
-      registerQuery,
-      [name, address, dateAdded, premium],
-      (error, results) => {
-        if (error) {
-          reject(error);
-        } else {
-          // User inserted successfully, generate JWT and perform login
-          const accessToken = createAccessToken({ address });
-          const refreshToken = createRefreshToken({ address });
-          resolve({ accessToken, refreshToken });
+    try {
+      const connectionMysql = await getConnect();
+      await connectionMysql.query(
+        registerQuery,
+        [name, address, dateAdded, premium],
+        (error, results) => {
+          if (error) {
+            reject(error);
+          } else {
+            // User inserted successfully, generate JWT and perform login
+            const accessToken = createAccessToken({ address });
+            const refreshToken = createRefreshToken({ address });
+            resolve({ accessToken, refreshToken });
+          }
         }
-      }
-    );
+      );
+    } catch (error) {
+      logger.error("Error during registration:", error);
+    }
   });
 };
 
