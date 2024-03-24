@@ -3,7 +3,7 @@ import logger from "../utils/logger.js";
 
 const getUserProfile = async (req, res) => {
   const { address } = req.params;
-  const querySql = "SELECT * FROM user WHERE address = ? LIMIT 1";
+  const querySql = "SELECT * FROM User WHERE address = ? LIMIT 1";
   try {
     const connectionMysql = await getConnect();
     await connectionMysql.query(querySql, [address], function (error, results) {

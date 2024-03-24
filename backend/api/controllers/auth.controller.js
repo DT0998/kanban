@@ -58,7 +58,7 @@ const register = (name, address, dateAdded, premium) => {
   return new Promise(async (resolve, reject) => {
     // Insert user into the database
     const registerQuery =
-      "INSERT INTO user (name, address, dateAdded, premium) VALUES (?, ?, ?, ?)";
+      "INSERT INTO User (name, address, dateAdded, premium) VALUES (?, ?, ?, ?)";
     try {
       const connectionMysql = await getConnect();
       await connectionMysql.query(

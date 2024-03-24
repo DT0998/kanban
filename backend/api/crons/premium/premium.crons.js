@@ -4,10 +4,10 @@ import { getConnect } from "../../utils/connect.js";
 // Schedule a job to run every day at midnight
 const taskPremium = cron.schedule("0 0 * * *", async () => {
   const query = `
-      UPDATE user
-      SET premium = 0
+      UPDATE User
+      SET Premium = 0
       WHERE address IN (
-        SELECT address FROM premium WHERE endDate < NOW()
+        SELECT address FROM Premium WHERE endDate < NOW()
       )
     `;
   try {
