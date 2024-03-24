@@ -30,4 +30,5 @@ export interface UserInfo {
   address?: string;
   name?: string;
   premium?: boolean;
+  initialLogin?: boolean;
 }

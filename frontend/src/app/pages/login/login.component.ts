@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { WagmiService } from '../../shared/services/wagmi/wagmi.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -19,7 +19,7 @@ import { AuthService } from '../../shared/services/auth/auth.service';
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit{
   isLoading: boolean;
   constructor(
     public wagmiService: WagmiService,
@@ -32,6 +32,18 @@ export class LoginComponent {
     public authService: AuthService
   ) {
     this.isLoading = false;
+  }
+
+  ngOnInit(): void {
+      this.setInitialUserLogin();
+  }
+
+  setInitialUserLogin = () => {
+    this.profileService.userInfo.initialLogin = false;
+    this.localStorageService.setItem(
+      'userInfo',
+      JSON.stringify(this.profileService.userInfo)
+    );
   }
 
   handleLogin = async () => {
@@ -50,6 +62,7 @@ export class LoginComponent {
       this.profileService.userInfo.refreshToken = resLogin.refreshToken;
       this.profileService.userInfo.accessToken = resLogin.accessToken;
       this.profileService.userInfo.address = userAddress;
+      this.profileService.userInfo.initialLogin = true;
       this.store.dispatch(new AuthActions.GetAccessToken(resLogin.accessToken));
       this.store.dispatch(
         new AuthActions.GetRefreshToken(resLogin.refreshToken)
