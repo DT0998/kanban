@@ -7,39 +7,45 @@ import * as fromApp from '../../../shared/store/store.reducer';
 import { Store } from '@ngrx/store';
 import { Observable, catchError, switchMap, throwError } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import { ProfileService } from '../profile/profile.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  userInfoAuth!: string | any;
+  userInfoAuth: string = '';
+  userInfo: string = '';
+  userInfoParse: any;
   constructor(
     public httpService: HttpService,
     public localStorageService: LocalStorageService,
     public store: Store<fromApp.AppState>,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private profileService: ProfileService
   ) {
-    const userInfo = this.localStorageService.getItem('userInfo') as string;
+    this.userInfo = this.localStorageService.getItem('userInfo') as string;
     const signinCount = this.localStorageService.getItem(
       'signinCount'
     ) as string;
     const signinCountParse = JSON.parse(signinCount);
-    const userInfoParse = JSON.parse(userInfo);
-    if (userInfoParse) {
-      this.userInfoAuth = userInfoParse;
+    this.userInfoParse = JSON.parse(this.userInfo);
+    if (this.userInfoParse) {
+      this.userInfoAuth = this.userInfoParse;
     }
     // If the user has signed in before, increment the signin count and clear the user info
-    if (signinCountParse.signInCount >= 1 && !userInfoParse) {
-      this.toastr.error('Please refresh the page and try again');
+    if (signinCountParse) {
+      if (signinCountParse.signInCount >= 1 && !this.userInfoParse) {
+        this.toastr.error('Please refresh the page and try again');
+      }
     }
   }
 
   addAuthorizationHeader = (request: HttpRequest<any>): HttpRequest<any> => {
     // Get the access token from the AuthService
     let accessToken;
-    if (this.userInfoAuth) {
-      accessToken = this.userInfoAuth.accessToken;
-    }
+    accessToken = this.userInfoParse
+      ? this.userInfoParse.accessToken
+      : this.profileService.userInfo.accessToken;
     let requestAuth;
     // If the token exists, add it to the request header
     if (accessToken) {
@@ -57,15 +63,15 @@ export class AuthService {
 
   refreshTokenAndRetry(request: HttpRequest<any>, next: any): Observable<any> {
     const payload = {
-      address: this.userInfoAuth.address,
-      refreshToken: this.userInfoAuth.refreshToken,
+      address: this.userInfoParse.address,
+      refreshToken: this.userInfoParse.refreshToken,
     };
     return this.httpService.post('api/token', payload).pipe(
       switchMap((res) => {
         // Update the access token in local storage and in the application state
         const userInfo = {
-          address: this.userInfoAuth.address,
-          refreshToken: this.userInfoAuth.refreshToken,
+          address: this.userInfoParse.address,
+          refreshToken: this.userInfoParse.refreshToken,
           accessToken: res.accessToken,
         };
         this.localStorageService.setItem('userInfo', JSON.stringify(userInfo));

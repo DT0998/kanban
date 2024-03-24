@@ -59,7 +59,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   boardLists: Board[] = [];
 
-  @Input() premium!: boolean;
+  @Input() premium!: boolean | undefined;
 
   constructor(
     public dialog: MatDialog,

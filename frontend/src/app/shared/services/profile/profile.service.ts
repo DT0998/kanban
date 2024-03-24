@@ -12,7 +12,6 @@ export class ProfileService {
   getProfile = async (address: string) => {
     const res = await this.httpService
       .get(`api/profile/${address}`)
-      .pipe(delay(5000))
       .toPromise();
     return res;
   };

@@ -59,7 +59,7 @@ export class DashboardService {
 
   openBoardModal = (
     modalBoardRef: ElementRef,
-    premium: boolean,
+    premium: boolean | undefined,
     index: number
   ) => {
     if (premium || index <= 4) {

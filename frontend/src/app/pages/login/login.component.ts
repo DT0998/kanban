@@ -78,7 +78,6 @@ export class LoginComponent implements OnInit {
       this.store.dispatch(
         new AuthActions.GetRefreshToken(resLogin.refreshToken)
       );
-      this.toastr.success('Login successful');
       this.localStorageService.setItem(
         'userInfo',
         JSON.stringify(this.profileService.userInfo)
@@ -87,8 +86,9 @@ export class LoginComponent implements OnInit {
         'signinCount',
         JSON.stringify(this.profileService.SignIn)
       );
+      this.toastr.success('Login successful');
       // Navigate to the dashboard after login is successful
-      this.router.navigateByUrl('/dashboard/home');
+      this.router.navigateByUrl('/dashboard');
     } catch {
       await this.wagmiService.disconnectWallet();
     } finally {

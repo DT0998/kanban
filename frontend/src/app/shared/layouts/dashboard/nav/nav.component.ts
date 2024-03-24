@@ -43,7 +43,7 @@ import { WagmiService } from '../../../services/wagmi/wagmi.service';
   styleUrl: './nav.component.scss',
 })
 export class NavbarComponent implements OnInit {
-  @Input() premium!: boolean;
+  @Input() premium!: boolean | undefined;
 
   constructor(
     public dashboardService: DashboardService,
