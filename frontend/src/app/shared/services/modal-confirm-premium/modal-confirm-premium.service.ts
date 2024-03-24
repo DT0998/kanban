@@ -37,7 +37,7 @@ export class ModalConfirmPremiumService {
     try {
       await writeContract({
         chainId: polygonMumbai.id,
-        address: environment.contractAddress,
+        address: `0x${environment.contractAddress}`,
         abi: KANBANABI,
         functionName: 'subscribeRequestPremium',
         args: [

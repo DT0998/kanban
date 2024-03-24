@@ -6,7 +6,7 @@
     "start": "ng serve",
     "start:development": "NODE_ENV=development ng serve",
     "start:production": "NODE_ENV=production ng serve",
-    "build": "NODE_ENV=production ng build"
+    "build": "node src/environments/generateEnv.ts && ng build"
   },
   "private": true,
   "dependencies": {
@@ -45,7 +45,6 @@
     "@angular-devkit/build-angular": "^17.0.6",
     "@angular/cli": "^17.0.6",
     "@angular/compiler-cli": "^17.0.0",
-    "@ngx-env/builder": "^17.2.3",
     "@types/jasmine": "~5.1.0",
     "@types/node": "^20.11.25",
     "@types/uuid": "^9.0.8",
