@@ -4,8 +4,6 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "start:development": "NODE_ENV=development ng serve",
-    "start:production": "NODE_ENV=production ng serve",
     "build": "node src/environments/generateEnv.ts && ng build"
   },
   "private": true,
