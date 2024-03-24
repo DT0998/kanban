@@ -13,11 +13,6 @@ const options = {
       description:
         "This is a simple CRUD API application made with Express and documented with Swagger",
     },
-    servers: [
-      {
-        url: "http://localhost:3000",
-      },
-    ],
     components: {
       securitySchemes: {
         Authorization: {
