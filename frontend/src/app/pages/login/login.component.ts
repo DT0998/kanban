@@ -19,7 +19,7 @@ import { AuthService } from '../../shared/services/auth/auth.service';
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
-export class LoginComponent implements OnInit{
+export class LoginComponent implements OnInit {
   isLoading: boolean;
   constructor(
     public wagmiService: WagmiService,
@@ -35,16 +35,16 @@ export class LoginComponent implements OnInit{
   }
 
   ngOnInit(): void {
-      this.setInitialUserLogin();
+    this.setInitialUserLogin();
   }
 
   setInitialUserLogin = () => {
-    this.profileService.userInfo.initialLogin = false;
+    this.profileService.userInfo.initialLogin = true;
     this.localStorageService.setItem(
       'userInfo',
       JSON.stringify(this.profileService.userInfo)
     );
-  }
+  };
 
   handleLogin = async () => {
     try {
@@ -62,7 +62,7 @@ export class LoginComponent implements OnInit{
       this.profileService.userInfo.refreshToken = resLogin.refreshToken;
       this.profileService.userInfo.accessToken = resLogin.accessToken;
       this.profileService.userInfo.address = userAddress;
-      this.profileService.userInfo.initialLogin = true;
+      this.profileService.userInfo.initialLogin = false;
       this.store.dispatch(new AuthActions.GetAccessToken(resLogin.accessToken));
       this.store.dispatch(
         new AuthActions.GetRefreshToken(resLogin.refreshToken)
