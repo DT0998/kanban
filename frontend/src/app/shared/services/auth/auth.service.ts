@@ -21,10 +21,9 @@ export class AuthService {
   ) {
     const userInfo = this.localStorageService.getItem('userInfo') as string;
     const userInfoParse = JSON.parse(userInfo);
-    const userInitialLogin = userInfoParse.initialLogin;
     if (userInfoParse) {
       this.userInfoAuth = userInfoParse;
-      if (!userInitialLogin) {
+      if (!userInfoParse.initialLogin) {
         this.toastr.error('Please refresh the page and try again');
       }
     }
