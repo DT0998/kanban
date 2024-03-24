@@ -24,7 +24,7 @@ app.use(express.json());
 
 // config cors
 const corsOptions = {
-  origin: ["http://localhost:3030", "https://kanban-api-uez5.onrender.com"],
+  origin: ["*"],
   optionsSuccessStatus: 200,
 };
 
