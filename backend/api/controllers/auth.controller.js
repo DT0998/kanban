@@ -3,10 +3,10 @@ import {
   createAccessToken,
   createRefreshToken,
   checkUserExists,
+  addRefreshToken,
+  getRefreshToken,
 } from "../services/auth.service.js";
 import logger from "../utils/logger.js";
-
-let refreshTokens = {}; // tao mot object chua nhung refreshTokens
 
 // Function to handle login
 const login = async (req, res) => {
@@ -34,7 +34,7 @@ const login = async (req, res) => {
         accessToken: accessToken,
         refreshToken: refreshToken,
       };
-      refreshTokens[refreshToken] = response;
+      addRefreshToken(refreshToken, response);
       res.json(response);
     } else {
       // User exists, generate JWT and perform login
@@ -44,7 +44,7 @@ const login = async (req, res) => {
         accessToken: accessToken,
         refreshToken: refreshToken,
       };
-      refreshTokens[refreshToken] = response;
+      addRefreshToken(refreshToken, response);
       res.json(response);
     }
   } catch (error) {
@@ -83,14 +83,12 @@ const register = (name, address, dateAdded, premium) => {
 
 const refreshToken = (req, res) => {
   const { refreshToken, address } = req.body;
-  // if refresh token exists
-  if (refreshToken && refreshToken in refreshTokens) {
-    const accessToken = createAccessToken({ address }); // Use createAccessToken here
-    const response = {
-      accessToken: accessToken,
-    };
-    refreshTokens[refreshToken].accessToken = accessToken;
-    res.json(response);
+  // Check if the refresh token exists
+  const tokenDetails = getRefreshToken(refreshToken);
+  if (tokenDetails) {
+    const accessToken = createAccessToken({ address });
+    tokenDetails.accessToken = accessToken;
+    res.json({ accessToken });
   } else {
     res.status(403).send({ message: "Invalid refresh token" });
   }

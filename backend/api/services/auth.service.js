@@ -37,4 +37,20 @@ const checkUserExists = async (address) => {
   });
 };
 
-export { createAccessToken, createRefreshToken, checkUserExists };
+const refreshTokens = {};
+
+const addRefreshToken = (refreshToken, response) => {
+  refreshTokens[refreshToken] = response;
+};
+
+const getRefreshToken = (refreshToken) => {
+  return refreshTokens[refreshToken];
+};
+
+export {
+  createAccessToken,
+  createRefreshToken,
+  checkUserExists,
+  addRefreshToken,
+  getRefreshToken,
+};
