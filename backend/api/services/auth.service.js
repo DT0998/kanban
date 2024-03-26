@@ -20,7 +20,7 @@ function createRefreshToken({ address }) {
 
 // Function to check if the user exists in the database
 const checkUserExists = async (address) => {
-  const query = "SELECT * FROM User WHERE address = ?";
+  const query = "SELECT * FROM user WHERE address = ?";
   return new Promise(async (resolve, reject) => {
     try {
       const connectionMysql = await getConnect();
