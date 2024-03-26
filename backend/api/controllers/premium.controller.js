@@ -27,7 +27,7 @@ const subscribeMonthlyPremium = async (req, res) => {
 
 const updatePremium = async (address, premium) => {
   return new Promise(async (resolve, reject) => {
-    const query = "UPDATE user SET Premium = ? WHERE address = ?";
+    const query = "UPDATE user SET premium = ? WHERE address = ?";
     try {
       const connectionMysql = await getConnect();
       await connectionMysql.query(
@@ -51,7 +51,7 @@ const updatePremium = async (address, premium) => {
 const updateHistoryPremium = async (address, name) => {
   return new Promise(async (resolve, reject) => {
     const query =
-      "INSERT INTO Premium (name, address, startDate, endDate) VALUES (?, ?, ?, ?)";
+      "INSERT INTO premium (name, address, startDate, endDate) VALUES (?, ?, ?, ?)";
     const { startDate, endDate } = calculateMonthlyPremium();
     try {
       const connectionMysql = await getConnect();
@@ -77,7 +77,7 @@ const getHistoryPremium = async (req, res) => {
   const { address } = req.params;
   console.log("address", address);
   const title = "Subscribe Premium";
-  const query = "SELECT * FROM Premium WHERE address = ?";
+  const query = "SELECT * FROM premium WHERE address = ?";
   try {
     const userExists = await checkUserExists(address);
     console.log("userExists", userExists);

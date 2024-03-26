@@ -7,7 +7,7 @@ const taskPremium = cron.schedule("0 0 * * *", async () => {
       UPDATE User
       SET Premium = 0
       WHERE address IN (
-        SELECT address FROM Premium WHERE endDate < NOW()
+        SELECT address FROM premium WHERE endDate < NOW()
       )
     `;
   try {
