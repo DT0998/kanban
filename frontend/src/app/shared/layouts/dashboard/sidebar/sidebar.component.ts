@@ -13,6 +13,7 @@ import {
   ionAddOutline,
   ionBagCheckOutline,
   ionReceiptOutline,
+  ionHomeOutline
 } from '@ng-icons/ionicons';
 import {
   Router,
@@ -49,6 +50,7 @@ import { WagmiService } from '../../../services/wagmi/wagmi.service';
       ionAddOutline,
       ionBagCheckOutline,
       ionReceiptOutline,
+      ionHomeOutline
     }),
   ],
   templateUrl: './sidebar.component.html',

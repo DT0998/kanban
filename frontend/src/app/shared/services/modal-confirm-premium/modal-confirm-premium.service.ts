@@ -63,7 +63,7 @@ export class ModalConfirmPremiumService {
       );
       this.toastr.success('Subscription successful');
     } catch (error) {
-      this.toastr.success('Subscription unsuccessful');
+      this.toastr.error('Subscription unsuccessful');
       console.error(error);
     }
   };
