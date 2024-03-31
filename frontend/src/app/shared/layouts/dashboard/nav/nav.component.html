@@ -1,25 +1,25 @@
 <!-- nav -->
-<nav class="fixed top-0 z-50 w-full border-slate-200 dark:bg-gray-800 dark:border-gray-700 sidebar-container">
+<nav class="fixed top-0 z-50 w-full border-slate-200 sidebar-container bg-white border-b-[1px] md:border-b-0">
     <div class="flex flex-row h-16 justify-between">
-        <div class="flex items-center md:border-r-[1px] border-gray-200 md:w-[250px]">
+        <div class="flex items-center md:border-r-0 border-r-[1px] md:w-[250px]">
             <div class="flex-grow">
                 <a routerLink="/dashboard/home">
-                    <ng-icon name="ionHomeOutline" size="20" class="text-white mx-[12px] md:ml-3 h-full"></ng-icon>
+                    <ng-icon name="ionHomeOutline" size="20" class="text-black mx-[12px] md:ml-3 h-full"></ng-icon>
                 </a>
             </div>
-            <div class="flex items-center border-x md:border-x-0 border-gray-400 h-full">
+            <div class="flex items-center border-x md:border-x-0 border-slate-200 h-full">
                 <ng-icon name="ionSettingsOutline" size="20"
-                    class="text-white mx-[12px] md:mx-0 h-full md:mr-3"></ng-icon>
+                    class="text-black mx-[12px] md:mx-0 h-full md:mr-3"></ng-icon>
             </div>
             <button (click)="toggleSidebarMobile()" *ngIf="dashboardService.isSmallScreen">
-                <ng-icon name="ionReorderThreeOutline" size="20" class="text-white mx-[12px] md:hidden block"></ng-icon>
+                <ng-icon name="ionReorderThreeOutline" size="20" class="text-black mx-[12px] md:hidden block"></ng-icon>
             </button>
         </div>
         <!-- avatar -->
-        <div class="h-full flex items-center">
+        <div class="h-full flex items-center md:w-[calc(100%-250px)] justify-end border-gray-200 md:border-b-[1px] avatar bg-white">
             <button mat-button [matMenuTriggerFor]="menu" class="md:mr-3 md:mx-0 mx-[12px]">
                 <ng-icon name="ionPersonCircleOutline" size="20"
-                    class="text-white mx-[12px] md:hidden block"></ng-icon></button>
+                    class="text-black mx-[12px] md:hidden block"></ng-icon></button>
         </div>
         <!-- menu dropdown -->
         <mat-menu #menu="matMenu">

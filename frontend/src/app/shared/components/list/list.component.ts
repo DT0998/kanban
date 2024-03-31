@@ -62,7 +62,9 @@ export class ListComponent implements OnInit, OnDestroy, OnChanges {
     this.listTitle = '';
     this.userInfo = this.localStorageService.getItem('userInfo') as string;
     const userInfoParse = JSON.parse(this.userInfo);
-    this.premium = userInfoParse.premium;
+    if (userInfoParse) {
+      this.premium = userInfoParse.premium;
+    }
   }
 
   ngOnInit(): void {

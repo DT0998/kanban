@@ -87,6 +87,10 @@ export class SidebarComponent implements OnInit, OnDestroy {
     this.dashboardService.openPremiumModal();
   };
 
+  closeSidebarMobile = () => {
+    this.dashboardService.toggleSidebarMobile();
+  }
+
   openBoardModal = () => {
     this.dashboardService.openBoardModal(
       this.modalBoard,
@@ -106,6 +110,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
       ]);
       this.dashboardService.openPremiumModal();
     }
+    this.dashboardService.toggleSidebarMobile();
   };
 
   ngOnDestroy(): void {

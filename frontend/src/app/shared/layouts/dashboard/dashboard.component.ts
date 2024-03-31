@@ -38,7 +38,9 @@ export class DashboardComponent implements OnInit {
   ) {
     this.userInfo = this.localStorageService.getItem('userInfo') as string;
     const userInfoParse = JSON.parse(this.userInfo);
-    this.userAddress = userInfoParse.address;
+    if (userInfoParse) {
+      this.userAddress = userInfoParse.address;
+    }
   }
 
   ngOnInit(): void {
