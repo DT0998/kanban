@@ -1,8 +1,8 @@
-<div class="flex flex-row md:px-[20px] overflow-x-auto h-full list">
+<div class="flex flex-row md:px-[20px] h-auto list">
     <!-- render list -->
-    <div class="flex h-full" cdkDropListGroup>
+    <div class="flex h-auto" cdkDropListGroup>
         <div class="py-[20px] px-[10px]" *ngFor="let listItem of lists;index as i">
-            <div class="md:p-4 p-4 text-white flex flex-col rounded-xl cursor-pointer w-[272px] mt-14 bg-neutral-100">
+            <div class="md:p-4 p-4 text-white flex flex-col rounded-xl cursor-pointer w-[272px] my-14 bg-neutral-100">
                 <div class="flex flex-row">
                     <!-- have premium -->
                     <ng-container *ngIf="premium || i <= 4; else readOnlyList">
@@ -25,7 +25,7 @@
 
     <div class="py-[20px] px-[10px]">
         <!-- open add list -->
-        <div class="md:p-4 p-4 text-white flex flex-col rounded-xl cursor-pointer w-[272px] mt-14"
+        <div class="md:p-4 p-4 text-white flex flex-col rounded-xl cursor-pointer w-[272px] my-14"
             (click)="handleAddListOpen($event)" [ngClass]="{
             'btn-container': !this.boardService.openList,
             'bg-neutral-100': this.boardService.openList
