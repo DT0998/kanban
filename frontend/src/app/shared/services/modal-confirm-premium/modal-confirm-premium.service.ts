@@ -30,7 +30,9 @@ export class ModalConfirmPremiumService {
   ) {
     this.userInfo = this.localStorageService.getItem('userInfo') as string;
     const userInfoParse = JSON.parse(this.userInfo);
-    this.userName = userInfoParse.name;
+    if (userInfoParse) {
+      this.userName = userInfoParse.name;
+    }
   }
 
   confirmSubscribePremium = async () => {
