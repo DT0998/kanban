@@ -4,7 +4,7 @@ import { polygonMumbai } from '@wagmi/chains';
 import { environment } from '../../../../environments/environments';
 import { KANBANABI } from '../../abi/abi';
 import { parseEther } from 'viem';
-import { WagmiService } from '../wagmi/wagmi.service';
+import { WagmiService, config } from '../wagmi/wagmi.service';
 import { HttpService } from '../http/http.service';
 import { LocalStorageService } from '../localStorage/localStorage.service';
 import { ToastrService } from 'ngx-toastr';
@@ -33,25 +33,26 @@ export class ModalConfirmPremiumService {
     if (userInfoParse) {
       this.userName = userInfoParse.name;
     }
+    console.log(environment.contractAddress)
   }
 
   confirmSubscribePremium = async () => {
     try {
-      await writeContract({
+      await writeContract(config, {
         chainId: polygonMumbai.id,
         address: `0x${environment.contractAddress}`,
         abi: KANBANABI,
         functionName: 'subscribeRequestPremium',
         args: [
-          this.wagmiService.wagmiProvider.account,
+          this.wagmiService.wagmiProvider?.accounts[0],
           environment.adminAddress,
         ],
-        account: this.wagmiService.wagmiProvider.account,
+        account: this.wagmiService.wagmiProvider?.accounts[0],
         value: parseEther('0.1'),
       });
       const resSubscribe = await this.httpService
         .post('api/subscribe-premium', {
-          address: this.wagmiService.wagmiProvider.account,
+          address: this.wagmiService.wagmiProvider?.accounts[0],
           name: this.userName,
         })
         .toPromise();

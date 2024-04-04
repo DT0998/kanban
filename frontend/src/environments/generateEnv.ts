@@ -12,6 +12,7 @@ const setEnv = () => {
     contractAddress: '${process.env['NG_APP_CONTRACT_ADDRESS']}',
     adminAddress: '${process.env['NG_APP_ADMIN_ADDRESS']}',
     apiKeyAlchemy: '${process.env['NG_APP_API_KEY_ALCHEMY']}',
+    projectId: '${process.env['NG_APP_PROJECT_ID']}',
     };
     `;
   writeFile(targetPath, envConfigFile, (err) => {

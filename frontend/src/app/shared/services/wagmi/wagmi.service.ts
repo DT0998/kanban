@@ -3,43 +3,40 @@ import {
   createConfig,
   disconnect,
   connect,
-  configureChains,
-  ConnectResult,
-  PublicClient,
+  http,
+  ConnectReturnType,
 } from '@wagmi/core';
-import { InjectedConnector } from '@wagmi/core/connectors/injected';
 import { polygonMumbai } from '@wagmi/chains';
-import { alchemyProvider } from '@wagmi/core/providers/alchemy';
 import { LocalStorageService } from '../localStorage/localStorage.service';
 import { environment } from '../../../../environments/environments';
+import { walletConnect } from '@wagmi/connectors';
+import { injected } from '@wagmi/connectors';
 
-const { chains, publicClient, webSocketPublicClient } = configureChains(
-  [polygonMumbai],
-  // use alchemy as the provider
-  [alchemyProvider({ apiKey: environment.apiKeyAlchemy })]
-);
+// [alchemyProvider({ apiKey: environment.apiKeyAlchemy })]
+const projectId = environment.projectId;
 
 // initialize the client
-const config = createConfig({
-  autoConnect: true,
-  publicClient,
-  webSocketPublicClient,
-  connectors: [new InjectedConnector({ chains })],
+export const config = createConfig({
+  chains: [polygonMumbai],
+  transports: {
+    [polygonMumbai.id]: http(
+      `${polygonMumbai.rpcUrls.alchemy.http[0]}/${environment.apiKeyAlchemy}`
+    ),
+  },
+  connectors: [walletConnect({ projectId }), injected()],
 });
 
 @Injectable({
   providedIn: 'root',
 })
 export class WagmiService {
-  wagmiProvider!: ConnectResult<PublicClient>;
+  wagmiProvider!: ConnectReturnType<typeof config>;
   constructor(public localStorageService: LocalStorageService) {}
 
   connectWallet = async () => {
     try {
-      this.wagmiProvider = await connect({
-        connector: new InjectedConnector({
-          chains: [polygonMumbai],
-        }),
+      this.wagmiProvider = await connect(config, {
+        connector: injected(),
       });
     } catch (error) {
       console.error(error);
@@ -48,7 +45,7 @@ export class WagmiService {
 
   disconnectWallet = async () => {
     try {
-      await disconnect();
+      await disconnect(config);
     } catch (error) {
       console.error(error);
     }

@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
     try {
       this.isLoading = true;
       await this.wagmiService.connectWallet();
-      const userAddress = this.wagmiService.wagmiProvider.account;
+      const userAddress = this.wagmiService.wagmiProvider.accounts[0];
       const payload = {
         address: userAddress,
       };
