@@ -11,4 +11,9 @@ import { RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
   title = 'notebook-app';
+
+  constructor() {
+    // Resize the window to fit the content
+    window.dispatchEvent(new Event('resize'));
+  }
 }
