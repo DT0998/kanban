@@ -9,10 +9,8 @@ import {
 import { polygonMumbai } from '@wagmi/chains';
 import { LocalStorageService } from '../localStorage/localStorage.service';
 import { environment } from '../../../../environments/environments';
-import { walletConnect } from '@wagmi/connectors';
 import { injected } from '@wagmi/connectors';
 
-// [alchemyProvider({ apiKey: environment.apiKeyAlchemy })]
 const projectId = environment.projectId;
 
 // initialize the client
@@ -23,7 +21,7 @@ export const config = createConfig({
       `${polygonMumbai.rpcUrls.alchemy.http[0]}/${environment.apiKeyAlchemy}`
     ),
   },
-  connectors: [walletConnect({ projectId }), injected()],
+  connectors: [injected()],
 });
 
 @Injectable({
