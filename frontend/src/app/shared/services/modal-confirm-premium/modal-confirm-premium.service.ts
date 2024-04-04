@@ -33,7 +33,6 @@ export class ModalConfirmPremiumService {
     if (userInfoParse) {
       this.userName = userInfoParse.name;
     }
-    console.log(environment.contractAddress)
   }
 
   confirmSubscribePremium = async () => {

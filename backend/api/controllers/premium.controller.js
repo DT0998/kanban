@@ -75,12 +75,10 @@ const updateHistoryPremium = async (address, name) => {
 
 const getHistoryPremium = async (req, res) => {
   const { address } = req.params;
-  console.log("address", address);
   const title = "Subscribe Premium";
   const query = "SELECT * FROM premium WHERE address = ?";
   try {
     const userExists = await checkUserExists(address);
-    console.log("userExists", userExists);
     if (!userExists) {
       return res.status(404).json({ message: "User not found" });
     }
@@ -90,7 +88,6 @@ const getHistoryPremium = async (req, res) => {
         console.error("Error during get history:", error);
         return res.status(500).json({ message: "Internal server error" });
       }
-      console.log(error);
       if (results.length === 0) {
         return res.json({ data: [] });
       }

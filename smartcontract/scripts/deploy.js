@@ -4,7 +4,6 @@ async function main() {
   const Kanban = await hre.ethers.getContractFactory("Kanban");
   const kanban = await Kanban.deploy();
   await kanban.deployed();
-  console.log("Kanban deployed to:", kanban.address);
 }
 
 // We recommend this pattern to be able to use async/await everywhere

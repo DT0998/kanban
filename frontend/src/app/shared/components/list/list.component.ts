@@ -114,7 +114,6 @@ export class ListComponent implements OnInit, OnDestroy, OnChanges {
   };
 
   updateList = () => {
-    console.log('update List');
   };
 
   handleList = () => {

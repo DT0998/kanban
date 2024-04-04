@@ -53,7 +53,6 @@ export class CardComponent implements OnInit {
   };
 
   updateCard = () => {
-    console.log('update card');
   };
 
   handleCloseOverlayAndIcon = (event: Event) => {
