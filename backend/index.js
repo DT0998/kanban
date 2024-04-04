@@ -28,7 +28,7 @@ app.use(
       `http://localhost:${PORT}`,
       "https://kanban-api-uez5.onrender.com",
       "http://localhost:4200",
-      "https://kanban-chi-azure.vercel.app",
+      "https://kanban-dapp.vercel.app",
     ],
   })
 );
