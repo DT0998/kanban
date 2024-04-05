@@ -20,10 +20,13 @@ export class DashboardService {
     this.isLaptopSmallScreen = false;
   }
 
-  // detect window resize
-  onResize = (event: Event): void => {
+  updateScreenSize() {
     this.isSmallScreen = window.innerWidth <= 426;
     this.isLaptopSmallScreen = window.innerWidth <= 1025;
+  }
+
+  // detect window resize
+  onResize = (event: Event): void => {
     // change sidebar when desktop
     if (!this.isSmallScreen) {
       this.isSidebarMobileOpen = false;

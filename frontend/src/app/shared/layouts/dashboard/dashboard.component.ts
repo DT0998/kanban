@@ -42,6 +42,11 @@ export class DashboardComponent implements OnInit {
       this.userAddress = userInfoParse.address;
     }
   }
+  // detect window resize
+  @HostListener('window:resize', ['$event'])
+  onResize = (event: Event): void => {
+    this.dashboardService.onResize(event);
+  };
 
   ngOnInit(): void {
     this.getProfile();
@@ -68,10 +73,4 @@ export class DashboardComponent implements OnInit {
       console.error('Error fetching profile data:', error);
     }
   };
-
-  // detect window resize
-  @HostListener('window:resize', ['$event'])
-  onResize(event: Event): void {
-    this.dashboardService.onResize(event);
-  }
 }

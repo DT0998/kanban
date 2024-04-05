@@ -22,8 +22,10 @@ export class ProfileComponent implements OnInit {
   ) {
     const userInfo = this.localStorageService.getItem('userInfo') as string;
     const userInfoParse = JSON.parse(userInfo);
-    this.userAddress = userInfoParse.address;
-    this.userAccessToken = userInfoParse.accessToken;
+    if (userInfoParse) {
+      this.userAddress = userInfoParse.address;
+      this.userAccessToken = userInfoParse.accessToken;
+    }
   }
   ngOnInit(): void {
     this.getProfile();

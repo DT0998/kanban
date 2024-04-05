@@ -1,4 +1,10 @@
-import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  HostListener,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FullCalendarComponent,
@@ -20,7 +26,7 @@ import { HistoryData, HistoryElement } from '../history/history.component';
   templateUrl: './calendar.component.html',
   styleUrl: './calendar.component.scss',
 })
-export class CalendarComponent implements OnInit {
+export class CalendarComponent implements OnInit, AfterViewInit {
   initialView!: string;
   userInfo!: string;
   userAddress!: string;
@@ -38,8 +44,18 @@ export class CalendarComponent implements OnInit {
     }
   }
 
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event): void {
+    this.dashboardService.onResize(event);
+    this.updateCalendarView();
+  }
+
   ngOnInit(): void {
     this.getHistory();
+  }
+  ngAfterViewInit(): void {
+    // change calendar view when window resize
+    this.updateCalendarView();
   }
 
   getHistory = async () => {
@@ -56,22 +72,16 @@ export class CalendarComponent implements OnInit {
         };
       }
     );
-  }
+  };
 
-  @HostListener('window:resize', ['$event'])
-  onResize(event: Event): void {
-    this.dashboardService.onResize(event);
-    this.updateCalendarView();
-  }
-
-  // change view when window resize
+  // change calendar view when window resize
   updateCalendarView = () => {
     if (this.dashboardService.isLaptopSmallScreen) {
       this.calendarComponent.getApi().changeView('dayGridDay');
     } else {
       this.calendarComponent.getApi().changeView('dayGridWeek');
     }
-  }
+  };
 
   calendarOptions: CalendarOptions = {
     nextDayThreshold: '00:00:00',

@@ -1,19 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
+import { DashboardService } from './shared/services/dashboard/dashboard.service';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [CommonModule, RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
 })
-export class AppComponent {
-  title = 'notebook-app';
+export class AppComponent implements OnInit {
+  title = 'kanban-dapp';
 
-  constructor() {
-    // Resize the window to fit the content
-    window.dispatchEvent(new Event('resize'));
+  constructor(private dashboardService: DashboardService) {}
+
+  ngOnInit(): void {
+    // update screen size
+    this.dashboardService.updateScreenSize();
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event): void {
+    // update screen size
+    this.dashboardService.updateScreenSize();
   }
 }
