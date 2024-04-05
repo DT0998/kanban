@@ -27,8 +27,8 @@ import * as PremiumActions from '../../../shared/store/premium/premium.actions';
 })
 export class DashboardComponent implements OnInit {
   premium!: boolean | undefined;
-  userInfo!: string;
-  userAddress!: string;
+  userInfo!: string | null;
+  userAddress!: string | null;
 
   constructor(
     public dashboardService: DashboardService,
@@ -36,10 +36,11 @@ export class DashboardComponent implements OnInit {
     private profileService: ProfileService,
     public store: Store<fromApp.AppState>
   ) {
-    this.userInfo = this.localStorageService.getItem('userInfo') as string;
-    const userInfoParse = JSON.parse(this.userInfo);
+    this.userInfo = this.localStorageService.getItem('userInfo');
+    const userInfoParse = JSON.parse(this.userInfo ?? '{}');
     if (userInfoParse) {
       this.userAddress = userInfoParse.address;
+      this.premium = userInfoParse.premium;
     }
   }
   // detect window resize
@@ -55,11 +56,11 @@ export class DashboardComponent implements OnInit {
   getProfile = async () => {
     // Attempt to get the profile data
     try {
-      const res = await this.profileService.getProfile(this.userAddress);
+      const res = await this.profileService.getProfile(this.userAddress ?? '');
       // Update the user info in the local storage
       this.profileService.userInfo.name = res.data.name;
       this.profileService.userInfo.premium = res.data.premium;
-      const userInfoParse = JSON.parse(this.userInfo);
+      const userInfoParse = JSON.parse(this.userInfo ?? '{}');
       userInfoParse.name = res.data.name;
       userInfoParse.premium = res.data.premium;
       this.premium = res.data.premium;

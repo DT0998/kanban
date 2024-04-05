@@ -64,6 +64,7 @@ export class ModalConfirmPremiumService {
         JSON.stringify(userInfoParse)
       );
       this.toastr.success('Subscription successful');
+      window.location.reload();
     } catch (error) {
       this.toastr.error('Subscription unsuccessful');
       console.error(error);
