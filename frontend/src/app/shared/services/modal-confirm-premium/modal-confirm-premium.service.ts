@@ -5,13 +5,13 @@ import { environment } from '../../../../environments/environments';
 import { KANBANABI } from '../../abi/abi';
 import { parseEther } from 'viem';
 import { WagmiService, config } from '../wagmi/wagmi.service';
-import { HttpService } from '../http/http.service';
 import { LocalStorageService } from '../localStorage/localStorage.service';
 import { ToastrService } from 'ngx-toastr';
 import { ProfileService } from '../profile/profile.service';
 import * as fromApp from '../../../shared/store/store.reducer';
 import * as PremiumActions from '../../../shared/store/premium/premium.actions';
 import { Store } from '@ngrx/store';
+import { PremiumApiService } from '../api/premium/premium-api.service';
 
 @Injectable({
   providedIn: 'root',
@@ -22,11 +22,11 @@ export class ModalConfirmPremiumService {
   userInfo!: string;
   constructor(
     private wagmiService: WagmiService,
-    private httpService: HttpService,
     private localStorageService: LocalStorageService,
     private toastr: ToastrService,
     private profileService: ProfileService,
-    public store: Store<fromApp.AppState>
+    public store: Store<fromApp.AppState>,
+    public premiumApiService: PremiumApiService,
   ) {
     this.userInfo = this.localStorageService.getItem('userInfo') as string;
     const userInfoParse = JSON.parse(this.userInfo);
@@ -49,16 +49,11 @@ export class ModalConfirmPremiumService {
         account: this.wagmiService.wagmiProvider?.accounts[0],
         value: parseEther('0.1'),
       });
-      const resSubscribe = await this.httpService
-        .post('api/subscribe-premium', {
-          address: this.wagmiService.wagmiProvider?.accounts[0],
-          name: this.userName,
-        })
-        .toPromise();
-      this.profileService.userInfo.premium = resSubscribe.premium;
+      const resSubPre = await this.premiumApiService.postSubPremium(this.wagmiService.wagmiProvider?.accounts[0], this.userName);
+      this.profileService.userInfo.premium = resSubPre.premium;
       const userInfoParse = JSON.parse(this.userInfo);
-      userInfoParse.premium = resSubscribe.premium;
-      this.store.dispatch(new PremiumActions.GetPremium(resSubscribe.premium));
+      userInfoParse.premium = resSubPre.premium;
+      this.store.dispatch(new PremiumActions.GetPremium(resSubPre.premium));
       this.localStorageService.setItem(
         'userInfo',
         JSON.stringify(userInfoParse)
@@ -67,7 +62,6 @@ export class ModalConfirmPremiumService {
       window.location.reload();
     } catch (error) {
       this.toastr.error('Subscription unsuccessful');
-      console.error(error);
     }
   };
 }

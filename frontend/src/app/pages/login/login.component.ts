@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { WagmiService } from '../../shared/services/wagmi/wagmi.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { HttpService } from '../../shared/services/http/http.service';
 import * as fromApp from '../../shared/store/store.reducer';
 import * as AuthActions from '../../shared/store/auth/auth.actions';
 import { Store } from '@ngrx/store';
@@ -11,6 +10,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ProfileService } from '../../shared/services/profile/profile.service';
 import { AuthService } from '../../shared/services/auth/auth.service';
+import { AuthApiService } from '../../shared/services/api/auth/auth-api.service';
 
 @Component({
   selector: 'app-login',
@@ -23,13 +23,13 @@ export class LoginComponent implements OnInit {
   isLoading: boolean;
   constructor(
     public wagmiService: WagmiService,
-    public httpService: HttpService,
     public localStorageService: LocalStorageService,
     public store: Store<fromApp.AppState>,
     public router: Router,
     private toastr: ToastrService,
     public profileService: ProfileService,
-    public authService: AuthService
+    public authService: AuthService,
+    private authApiService: AuthApiService
   ) {
     this.isLoading = false;
   }
@@ -61,9 +61,7 @@ export class LoginComponent implements OnInit {
         address: userAddress,
       };
       // Make the login request and convert the observable to a promise
-      const resLogin = await this.httpService
-        .post('api/login', payload)
-        .toPromise();
+      const resLogin = await this.authApiService.postLogin(payload);
       // Store the access token object in local storage
       if (
         this.profileService.SignIn.signInCount !== undefined &&

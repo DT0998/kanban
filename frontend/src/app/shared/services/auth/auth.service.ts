@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpService } from '../http/http.service';
-import { HttpRequest } from '@angular/common/http';
+import { HttpErrorResponse, HttpRequest } from '@angular/common/http';
 import { LocalStorageService } from '../localStorage/localStorage.service';
 import * as AuthActions from '../../../shared/store/auth/auth.actions';
 import * as fromApp from '../../../shared/store/store.reducer';
@@ -8,6 +7,7 @@ import { Store } from '@ngrx/store';
 import { Observable, catchError, switchMap, throwError } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { ProfileService } from '../profile/profile.service';
+import { AuthApiService } from '../api/auth/auth-api.service';
 
 @Injectable({
   providedIn: 'root',
@@ -17,11 +17,11 @@ export class AuthService {
   userInfo: string = '';
   userInfoParse: any;
   constructor(
-    public httpService: HttpService,
     public localStorageService: LocalStorageService,
     public store: Store<fromApp.AppState>,
     private toastr: ToastrService,
-    private profileService: ProfileService
+    private profileService: ProfileService,
+    private authApiService: AuthApiService
   ) {
     this.userInfo = this.localStorageService.getItem('userInfo') as string;
     const signinCount = this.localStorageService.getItem(
@@ -66,7 +66,7 @@ export class AuthService {
       address: this.userInfoParse.address,
       refreshToken: this.userInfoParse.refreshToken,
     };
-    return this.httpService.post('api/token', payload).pipe(
+    return this.authApiService.postRefreshToken(payload).pipe(
       switchMap((res) => {
         // Update the access token in local storage and in the application state
         const userInfo = {
@@ -91,5 +91,14 @@ export class AuthService {
         return throwError(error);
       })
     );
+  }
+
+  handleError(error: HttpErrorResponse, request: HttpRequest<any>, next: any) {
+    // If the error is due to token expiration
+    if (error.error.message === 'Token Expired') {
+      // Attempt to refresh token and retry the request
+      return this.refreshTokenAndRetry(request, next);
+    }
+    return throwError(error);
   }
 }

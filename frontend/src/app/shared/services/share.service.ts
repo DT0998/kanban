@@ -1,3 +1,7 @@
+import { AuthApiService } from './api/auth/auth-api.service';
+import { HistoryApiService } from './api/history/history-api.service';
+import { PremiumApiService } from './api/premium/premium-api.service';
+import { ProfileApiService } from './api/profile/profile-api.service';
 import { AuthService } from './auth/auth.service';
 import { BoardService } from './board/board.service';
 import { DashboardService } from './dashboard/dashboard.service';
@@ -18,4 +22,8 @@ export const ShareService = [
   ProfileService,
   ModalConfirmPremiumService,
   HistoryService,
+  PremiumApiService,
+  HistoryApiService,
+  ProfileApiService,
+  AuthApiService,
 ];

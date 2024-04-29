@@ -1,15 +1,13 @@
 import { Injectable } from '@angular/core';
-import { HttpService } from '../http/http.service';
+import { HistoryApiService } from '../api/history/history-api.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class HistoryService {
-  constructor(private httpService: HttpService) {}
+  constructor(private historyApiService: HistoryApiService) { }
   getHistory = async (address: string) => {
-    const res = await this.httpService
-      .get(`api/history/${address}`)
-      .toPromise();
+    const res = await this.historyApiService.getHistory(address);
     return res;
   }
 }

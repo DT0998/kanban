@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpService } from '../../../shared/services/http/http.service';
 import { ProfileService } from '../../../shared/services/profile/profile.service';
 import { LocalStorageService } from '../../../shared/services/localStorage/localStorage.service';
-import { userInfo } from 'os';
 
 @Component({
   selector: 'app-profile',
@@ -16,7 +14,6 @@ export class ProfileComponent implements OnInit {
   userAddress!: string;
   userAccessToken!: string;
   constructor(
-    public httpService: HttpService,
     public profileService: ProfileService,
     public localStorageService: LocalStorageService
   ) {

@@ -55,23 +55,18 @@ export class DashboardComponent implements OnInit {
 
   getProfile = async () => {
     // Attempt to get the profile data
-    try {
-      const res = await this.profileService.getProfile(this.userAddress ?? '');
-      // Update the user info in the local storage
-      this.profileService.userInfo.name = res.data.name;
-      this.profileService.userInfo.premium = res.data.premium;
-      const userInfoParse = JSON.parse(this.userInfo ?? '{}');
-      userInfoParse.name = res.data.name;
-      userInfoParse.premium = res.data.premium;
-      this.premium = res.data.premium;
-      this.store.dispatch(new PremiumActions.GetPremium(res.data.premium));
-      this.localStorageService.setItem(
-        'userInfo',
-        JSON.stringify(userInfoParse)
-      );
-    } catch (error) {
-      // Handle the error
-      console.error('Error fetching profile data:', error);
-    }
+    const res = await this.profileService.getProfile(this.userAddress ?? '');
+    // Update the user info in the local storage
+    this.profileService.userInfo.name = res.data.name;
+    this.profileService.userInfo.premium = res.data.premium;
+    const userInfoParse = JSON.parse(this.userInfo ?? '{}');
+    userInfoParse.name = res.data.name;
+    userInfoParse.premium = res.data.premium;
+    this.premium = res.data.premium;
+    this.store.dispatch(new PremiumActions.GetPremium(res.data.premium));
+    this.localStorageService.setItem(
+      'userInfo',
+      JSON.stringify(userInfoParse)
+    );
   };
 }
