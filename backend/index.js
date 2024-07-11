@@ -55,9 +55,9 @@ const startServer = () => {
     app.listen(PORT, async () => {
       logger.info(`App is running at ${PORT}`);
       // routes
-          await Moralis.start({
+      await Moralis.start({
       apiKey: process.env.MORALIS_KEY,
-    });
+      });
       app.use("/", welcomeRouter);
       userRoutes(app, "api");
       authRoutes(app, "api");
