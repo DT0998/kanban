@@ -49,7 +49,7 @@ app.use(
   })
 );
 
-const startServer = async () => {
+const startServer = () => {
   try {
     // server listerning
     app.listen(PORT, async () => {
